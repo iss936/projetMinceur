@@ -16,7 +16,7 @@ I] Update ou récupération de la dernière version
 
 Par précautions et pour éviter des conflits il faut toujours faire un "update"
 
-1) Pour récupérer un projet sur git faire git clone https://github.com/iss936 (clé ssh de mon git)
+1) Pour récupérer un projet sur git faire git clone git@github.com:iss936/projetMinceur.git (clé ssh de mon git)
 Attention!!!!!!!!!! cette ce commande ce fait une seule fois afin de récupérer l'ensemble du projet
 2) Une fois qu'on a récupérer le projet on fera simplement git pull
 
