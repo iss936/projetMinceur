@@ -6,7 +6,7 @@
 		<label class="alignLabel required">Votre poids </label>
 		<input name="poids" type="text" id="poids" /> <br> <br>
 		
-		<label class="alignLabel required">Votre taille :</label>
+		<label class="alignLabel required">Votre taille </label>
 		<input name="taille" type="text" id="taille" /> <br> <br>
 		
 		<label class="alignLabel required">Evenement :</label><br/>
