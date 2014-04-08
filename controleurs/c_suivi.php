@@ -7,70 +7,75 @@ switch($action)
 		if(estConnecte())
 		{
 			$titre = "Mon suivi";
+			$date = null;
+			$poids = null;
+			$taille = null;
+			$evenement = null;
 			include $_CONFIG['DIR_View']."v_headTitre.php";
 			include $_CONFIG['DIR_View']."v_frmSuivi.php";
 		}
 		else include $_CONFIG['DIR_View']."i_retourConnexion.php";
 		break;
 	}
-	case 'frmConnexion': 
-	{	
-		if(estConnecte()) include $_CONFIG['DIR_View']."v_accueil.php";
-		else include $_CONFIG['DIR_View']."i_retourConnexion.php";
-		break;
-	}
-	case 'vdConnexion': 
-	{	
-		if(estConnecte()) include $_CONFIG['DIR_View']."v_accueil.php";
-		else
-		{
-			//Variables
-			$titre = "Authentification";
-			
-			$id = getRequest('idUtilisateur');
-			$pass = getRequest('PassUser');
-			$okConnect = authentification($id, $pass);
-			
-			//Test d'authentification
-			if($okConnect)
-			{
-				redirection(1, null, "En cours de connexion ...", "BAR");
-			}
-			else
-			{
-				$msgErreurs[] = "Erreur d'authentification!";
-				$lesUtilisateurs = getLesUtilisateurs(null,null,1,1);
-				$id = isset($_COOKIE['idUtilisateur']) ? $_COOKIE['idUtilisateur'] : getRequest('idUtilisateur');
-				include $_CONFIG['DIR_View']."v_headTitre.php";
-				include $_CONFIG['DIR_View']."v_msgErreurs.php";
-				include $_CONFIG['DIR_View']."v_frmConnexion.php";
-			}
-		}
-		break;
-	}
-	case 'frmModifCompte':
+	case 'vdSuivi':
 	{
 		if(estConnecte())
 		{
-			$titre = "Modification du compte";
-			$urlFrm = 'index.php?uc=identif&action=vdModifCompte';
-			$idUtilisateur = $_SESSION['idUtilisateur'];
-			$modifEnseignement = false;
-			$user = getUnUtilisateur($idUtilisateur);
-			$abrg_utilisateur = $user['abrg_utilisateur'];
-			$nom_utilisateur = $user['nom_utilisateur'];
-			$tel_utilisateur = $user['tel_utilisateur'];
-			$fax_utilisateur = $user['fax_utilisateur'];
-			$xMail = explode(";", $user['mail_utilisateur']);
-			$adresse_ecole = $user['adresse_ecole'];
-			$lieu_chargement = $user['lieu_chargement'];
-			$nom_directeur = $user['nom_directeur'];
-			$nb_classe = $user['nb_classe'];
-			$actif = $user['actif'];
+			$titre = "Mon suivi";
+			$date = getRequest('date');
+			$poids = getRequest('poids');
+			$taille = getRequest('taille');
+			$evenement = getRequest('evenement');
+			$msgErreurs = addSuivi($date, $poids, $taille, $evenement);
+			
+			//Titre
 			include $_CONFIG['DIR_View']."v_headTitre.php";
-			include $_CONFIG['DIR_View']."v_frmModifCompte.php";
+			
+			//Message d'erreurs ou de confirmation
+			if($msgErreurs)
+			{
+				include $_CONFIG['DIR_View']."v_msgErreurs.php";
+				include $_CONFIG['DIR_View']."v_frmSuivi.php";
+			}
+			else
+			{
+				$msgConfirmation[] = "Fiche suivi ajouté avec succès!";
+				include $_CONFIG['DIR_View']."v_msgConfirmation.php";
+				redirection(2, "index.php?uc=identif&action=frmConnexion", "Redirection vers l'accueil ...", "POINT");
+			}
 		}
 		else include $_CONFIG['DIR_View']."i_retourConnexion.php";
+		break;
+	}
+	case 'lstSuivi':
+	{
+		if(estConnecte())
+		{
+			//------------
+			// Variables
+			//------------
+			
+			$titre = "Mes fiches de suivi";
+			$nbPagesNull = 0; 
+			
+			//------------
+			// Vues
+			//------------
+			
+			//En-tête
+			include $_CONFIG['DIR_View']."v_headTitre.php";
+			
+			//Récupération des écoles
+			$lesSuivis = getLesSuivis($_SESSION['idUtilisateur']);
+			if($lesSuivis)
+				include $_CONFIG['DIR_View']."v_lstSuivi.php";
+			else "<fieldset style='width:95%:'> Aucune fiche de suivi n'a été trouvée. </fieldset>";
+		}
+		else
+		{
+			$msgErreurs[] = "Vous n'êtes pas autorisé à accéder à cette page!";
+			include $_CONFIG['DIR_View']."v_msgErreurs.php";
+		}
 		break;
 	}
 	case 'vdModifCompte':

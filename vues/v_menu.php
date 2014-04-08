@@ -32,7 +32,10 @@
 			<?php if(estConnecte()) { ?>
 			<li> <a href="index.php?uc=suivi&action=frmSuivi"> Mon suivi </a>
 				<ul class="sousMenu">
-				
+					<li> <a href="index.php?uc=suivi&action=frmSuivi"> Ajouter une fiche de suivi </a></li>
+					<li> <a href="index.php?uc=suivi&action=lstSuivi"> Voir mes fiches de suivi </a></li>
+					<li> <a href="index.php?uc=suivi&action="> Voir courbe </a></li>
+					<li> <a href="index.php?uc=suivi&action="> Calculer IMC </a></li>
 				</ul>
 			</li>
 			<?php } ?>
