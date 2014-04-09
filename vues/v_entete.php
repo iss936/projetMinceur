@@ -5,9 +5,9 @@
 
 <!-- Mentions d'entête -->
 <head>
-	<title> Gestion des réservations de cars </title>
+	<title> MyDietFit </title>
 	<meta name="robots" content="noindex, nofollow">
-	<meta name="author" content="Jacqueline JOSEPH, Mairie d'Aubervilliers">
+	<meta name="author" content="Soumare Issa">
 	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8">
 	<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
 	<link rel="icon" type="image/ico" href="<?php echo $_CONFIG['DIR_Image']; ?>favicon.ico">

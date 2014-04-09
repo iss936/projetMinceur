@@ -82,7 +82,7 @@ fieldset legend{
 	width: 1000px;
 	height: 106px;
 	margin: 0px auto;
-	background: url(<?php echo $_VARCSS['DirImg']; ?>bgHeader.gif) no-repeat left top;
+	/*background: url(<?php echo $_VARCSS['DirImg']; ?>bgHeader.gif) no-repeat left top;*/
 }
 
 /*** Titre de l'application ***/

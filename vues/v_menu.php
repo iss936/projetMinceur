@@ -5,7 +5,9 @@
 			<?php if(estConnecte()) { ?>
 			<li> <a href=""> Exercices </a>
 				<ul class="sousMenu">
-				
+				<li> <a href=""> Abdominaux </a></li>
+				<li> <li> <a href=""> biceps </a></li>
+				<li> <a href=""> Dos</a></li>
 				</ul>
 			</li>
 			<?php } ?>
@@ -14,7 +16,9 @@
 			<?php if(estConnecte()) { ?>
 			<li> <a href=""> Nutrition </a>
 				<ul class="sousMenu">
-				
+				<li> <li> <a href=""> les lipides </a></li>
+				<li> <li> <a href=""> les protéines </a></li>
+				<li> <li> <a href=""> le sucre </a></li>
 				</ul>
 			</li>
 			<?php } ?>
@@ -53,7 +57,7 @@
 			</li>
 			
 			<!-- Demandes -->
-			<?php if(estConnecte()) { ?>
+			<!--<?php /*if(estConnecte()) { ?>
 			<li> <a href="index.php?uc=consult&action=frmRecherche"><img src="<?php echo $_CONFIG['DIR_Image']; ?>menuUserInfo.png"> Demandes </a>
 				<ul class="sousMenu">
 					<li> <a href="index.php?uc=gestion&action=frmAjout"><img src="<?php echo $_CONFIG['DIR_Image']; ?>menuAdd.png"> Faire une demande </a> </li>
@@ -68,20 +72,20 @@
 					<li> <a href="index.php?uc=consult&action=frmRecherche"><img src="<?php echo $_CONFIG['DIR_Image']; ?>menuSearch.png"> Rechercher des demandes </a> </li>
 				</ul>
 			</li>
-			<?php } ?>
+			<?php } */?>-->
 			
 			<!-- Statistiques -->
 			<?php if(estConnecte() && estUtilisateur()) { ?>
 			<li> <a href="index.php?uc=stat&action=frmStat"><img src="<?php echo $_CONFIG['DIR_Image']; ?>menuStat.png"> Statistiques</a>
 				<ul class="sousMenu">
-					<li><a href="index.php?uc=stat&action=frmStat"><img src="<?php echo $_CONFIG['DIR_Image']; ?>menuStat.png"> Nombre de réservations / mois</a></li>
-					<li><a href="index.php?uc=stat&action=frmDestiRecu"><img src="<?php echo $_CONFIG['DIR_Image']; ?>menuStat.png"> Destinations récurrentes / écoles</a></li>
+					<!--<li><a href="index.php?uc=stat&action=frmStat"><img src="<?php echo $_CONFIG['DIR_Image']; ?>menuStat.png"> Nombre de réservations / mois</a></li>
+					<li><a href="index.php?uc=stat&action=frmDestiRecu"><img src="<?php echo $_CONFIG['DIR_Image']; ?>menuStat.png"> Destinations récurrentes / écoles</a></li>-->
 				</ul>
 			</li>
 			<?php } ?>
 			
 			<!-- Paramètre -->
-			<?php if(estConnecte() && $_SESSION['idUtilisateur']<4) { ?>
+		<!-- 	<?php /*if(estConnecte() && $_SESSION['idUtilisateur']<4) { ?>
 			<li> <a href="index.php?uc=param&action=lstParamUtilisateur"><img src="<?php echo $_CONFIG['DIR_Image']; ?>menuPrm.png"> Paramétrage </a>
 				<ul class="sousMenu">
 					<li> <a href="index.php?uc=param&action=lstParamUtilisateur"><img src="<?php echo $_CONFIG['DIR_Image']; ?>menuEcole.png"> Gestion des écoles </a> </li>
@@ -91,7 +95,7 @@
 					<li> <a href="index.php?uc=param&action=lstParamConduc"><img src="<?php echo $_CONFIG['DIR_Image']; ?>menuConducteur.png"> Gestion des conducteurs </a> </li>
 				</ul>
 			</li>
-			<?php } ?>
+			<?php } */?> --!>
 			
 			<!-- Aide -->
 			<li> <a href="index.php?uc=identif&action=contact"><img src="<?php echo $_CONFIG['DIR_Image']; ?>menuAide.png"> Aide </a>
