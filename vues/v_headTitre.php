@@ -1,1 +1,0 @@
-<h2> <?php echo $titre; ?> </h2> <br>
