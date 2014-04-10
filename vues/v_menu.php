@@ -25,7 +25,7 @@
 			
 			<!-- Localisation -->
 			<?php if(estConnecte()) { ?>
-			<li> <a href=""> Localisation </a>
+			<li> <a href="index.php?uc=localisation&action=frmLocalisation"> Localisation </a>
 				<ul class="sousMenu">
 				
 				</ul>

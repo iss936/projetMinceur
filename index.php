@@ -30,6 +30,12 @@ switch($uc)
 		else include $_CONFIG['DIR_View']."i_retourConnexion.php";
 		break;
 	}
+	case 'localisation':
+	{
+		if(estConnecte()) include $_CONFIG['DIR_Control']."c_localisation.php";
+		else include $_CONFIG['DIR_View']."i_retourConnexion.php";
+		break;
+	}
 	case 'consult':
 	{
 		if(estConnecte()) include $_CONFIG['DIR_Control']."c_voirReservation.php";
