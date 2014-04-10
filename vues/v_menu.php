@@ -17,7 +17,7 @@
 			<li> <a href=""> Nutrition </a>
 				<ul class="sousMenu">
 				<li> <li> <a href=""> les lipides </a></li>
-				<li> <li> <a href=""> les protéines </a></li>
+				<li> <li> <a href="index.php?uc=nutrition&action=proteines"> les protéines </a></li>
 				<li> <li> <a href=""> le sucre </a></li>
 				</ul>
 			</li>
