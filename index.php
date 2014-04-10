@@ -82,6 +82,12 @@ switch($uc)
 		else include $_CONFIG['DIR_View']."i_retourConnexion.php";
 		break;
 	}
+	case 'nutrition':
+	{
+		 include $_CONFIG['DIR_Control']."c_nutrition.php";
+		break;
+	}
+	
 	default:
 	{
 		echo "Cas d'utilisation inconnu!";
