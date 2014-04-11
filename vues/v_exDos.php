@@ -4,7 +4,7 @@
 <h2 align="center">Les exercices pour muscler le dos</h2>
 
 <br><br>
-
+<video height="400" width="400" src="https://www.youtube.com/watch?v=y7iuW-ksXYQ" controls width="400" height="315"></video> 
 <img height="400" width="400" src="ressources/images/dos.jpg"/>
 
 <br><br>
@@ -44,4 +44,3 @@ Moderniser un classique peut donner des résultats mitigés : ainsi, certains term
 Cet exercice sollicite les muscles grands dorsaux, le grand rond, les rhomboïdes et le faisceau moyen du trapèze.
 </p>
 <br><br><br><br><br><br>
-<a href=""> recette</a>

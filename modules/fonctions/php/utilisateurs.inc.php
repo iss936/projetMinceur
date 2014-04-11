@@ -4,11 +4,11 @@
 //------------------------------------------------------------------------------------------------------------------
 
 //Récupère un utilisateur
-function getUnUtilisateur($id_utilisateur, $nomChamp = null)
+function getUnUtilisateur($idUtilisateur, $nomChamp = null)
 {
 	//Requête
-	if(!$id_utilisateur) $id_utilisateur = 0;
-	$req = "SELECT * FROM utilisateurs WHERE id_utilisateur = ".getMySqlString($id_utilisateur);
+	if(!$idUtilisateur) $idUtilisateur = 0;
+	$req = "SELECT * FROM utilisateurs WHERE idUtilisateur = ".getMySqlString($idUtilisateur);
 	
 	//Exécution
 	$conx = connexion();

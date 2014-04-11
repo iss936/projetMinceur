@@ -46,16 +46,11 @@ switch($action)
 			$idUtilisateur = $_SESSION['idUtilisateur'];
 			$modifEnseignement = false;
 			$user = getUnUtilisateur($idUtilisateur);
-			$abrg_utilisateur = $user['abrg_utilisateur'];
-			$nom_utilisateur = $user['nom_utilisateur'];
-			$tel_utilisateur = $user['tel_utilisateur'];
-			$fax_utilisateur = $user['fax_utilisateur'];
-			$xMail = explode(";", $user['mail_utilisateur']);
-			$adresse_ecole = $user['adresse_ecole'];
-			$lieu_chargement = $user['lieu_chargement'];
-			$nom_directeur = $user['nom_directeur'];
-			$nb_classe = $user['nb_classe'];
-			$actif = $user['actif'];
+			$prenomUtilisateur = $user['prenom'];
+			$nomUtilisateur = $user['nom'];
+			$telUtilisateur = $user['telephone'];
+			$mailUtilisateur = $user['mail'];
+			$adresseUtilisateur = $user['adresse'];
 			include $_CONFIG['DIR_View']."v_headTitre.php";
 			include $_CONFIG['DIR_View']."v_frmModifCompte.php";
 		}

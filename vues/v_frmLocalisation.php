@@ -1,9 +1,14 @@
 <br>
 <br>
-<div>
+<div align="left">
 <form action="" method="POST">
 <fieldset>
-<legend>Rechercher sur un rayon de 5km</legend>
+<legend>Rechercher sur un rayon de <select>
+										<option>5</option>
+										<option>10</option>
+										<option>15</option>
+										<option>20</option>
+									</select> km </legend>
 	<input type="checkbox" name="choix1" value="piscine"> piscine
 	<br>
 	<input type="checkbox" name="choix2" value="gymnase"> gymnase
@@ -20,6 +25,7 @@
 <h2 align="center"> Resultat</h2>
 <br>
 <br>
-<p align="center"> <b>Afficher la map</b></p> 
+<p align="center"> <b>Google map</b></p> 
 <br>
-	<!--<h2>Résultat</h2>!-->
+
+<iframe src="https://mapsengine.google.com/map/embed?mid=zYbVwSPB5_Qk.k-FXEUFYh-aM" width="640" height="480"></iframe>

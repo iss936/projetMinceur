@@ -1,14 +1,26 @@
 	<!-- Menu de la page -->
 	<div id="menu">
 		<ul>
+			<!-- Suivi -->
+			<?php if(estConnecte()) { ?>
+			<li > <a href="index.php?uc=suivi&action=frmSuivi"> Mon suivi </a>
+				<ul class="sousMenu">
+					<li> <a href="index.php?uc=suivi&action=frmSuivi"> Ajouter une fiche de suivi </a></li>
+					<li> <a href="index.php?uc=suivi&action=lstSuivi"> Voir mes fiches de suivi </a></li>
+					<li> <a href="index.php?uc=suivi&action="> Voir courbe </a></li>
+					<li> <a href="index.php?uc=suivi&action="> Calculer IMC </a></li>
+				</ul>
+			</li>
+			<?php } ?>
+			
 			<!-- Exercices physiques -->
 			<?php if(estConnecte()) { ?>
 			<li> <a href=""> Exercices </a>
 				<ul class="sousMenu">
 				<li> <a href="index.php?uc=exercice&action=abdominaux">Abdominaux</a></li>
 				<li> <a href="index.php?uc=exercice&action=dos">Dos</a></li>
-				<li> <a href="">Pectoraux</a></li>
-				<li> <a href="">Biceps</a></li>
+				<!-- <li> <a href="">Pectoraux</a></li>
+				<li> <a href="">Biceps</a></li> -->
 				</ul>
 			</li>
 			<?php } ?>
@@ -17,9 +29,9 @@
 			<?php if(estConnecte()) { ?>
 			<li> <a href=""> Nutrition </a>
 				<ul class="sousMenu">
-				<li> <li> <a href=""> les lipides </a></li>
-				<li> <li> <a href="index.php?uc=nutrition&action=proteines"> les protéines </a></li>
-				<li> <li> <a href=""> le sucre </a></li>
+				<!-- <li> <li> <a href=""> les lipides </a></li> -->
+				<li> <li> <a href="index.php?uc=nutrition&action=proteines"> Les protéines </a></li>
+				<!-- <li> <li> <a href=""> le sucre </a></li> -->
 				</ul>
 			</li>
 			<?php } ?>
@@ -32,30 +44,6 @@
 				</ul>
 			</li>
 			<?php } ?>
-			
-			<!-- Suivi -->
-			<?php if(estConnecte()) { ?>
-			<li> <a href="index.php?uc=suivi&action=frmSuivi"> Mon suivi </a>
-				<ul class="sousMenu">
-					<li> <a href="index.php?uc=suivi&action=frmSuivi"> Ajouter une fiche de suivi </a></li>
-					<li> <a href="index.php?uc=suivi&action=lstSuivi"> Voir mes fiches de suivi </a></li>
-					<li> <a href="index.php?uc=suivi&action="> Voir courbe </a></li>
-					<li> <a href="index.php?uc=suivi&action="> Calculer IMC </a></li>
-				</ul>
-			</li>
-			<?php } ?>
-			
-			<li> <a href="index.php?uc=identif&action=frmConnexion"><img src="<?php echo $_CONFIG['DIR_Image']; ?>menuAccount.png"> Mon compte </a>
-				<ul class="sousMenu">
-					<?php if(estConnecte()) { ?>
-					<li> <a href="index.php?uc=identif&action=frmModifCompte"><img src="<?php echo $_CONFIG['DIR_Image']; ?>sbConfig.png"> Modifier le compte </a> </li>
-					<li> <a href="index.php?uc=identif&action=frmModifMdp"><img src="<?php echo $_CONFIG['DIR_Image']; ?>menuPassword.png"> Modifier le mot de passe </a> </li>
-					<li> <a href="index.php?uc=identif&action=deconnexion"><img src="<?php echo $_CONFIG['DIR_Image']; ?>menuDisconnect.png"> Déconnexion </a> </li>
-					<?php } else { ?>
-					<li> <a href="index.php?uc=identif&action=frmConnexion"><img src="<?php echo $_CONFIG['DIR_Image']; ?>menuConnect.png"> Connexion </a> </li>
-					<?php } ?>
-				</ul>
-			</li>
 			
 			<!-- Demandes -->
 			<!--<?php /*if(estConnecte()) { ?>
@@ -98,13 +86,29 @@
 			</li>
 			<?php } */?> --!>
 			
-			<!-- Aide -->
+			<!-- Aide 
 			<li> <a href="index.php?uc=identif&action=contact"><img src="<?php echo $_CONFIG['DIR_Image']; ?>menuAide.png"> Aide </a>
 				<ul class="sousMenu">
 					<li> <a href="<?php echo $_CONFIG['DIR_Attachment']; ?>Guide.pdf" target="_blank"><img src="<?php echo $_CONFIG['DIR_Image']; ?>menuGuide.png"> Guide d'utilisation </a> </li>
 					<li> <a href="index.php?uc=identif&action=contact"><img src="<?php echo $_CONFIG['DIR_Image']; ?>menuContact.png"> Contact </a> </li>
 				</ul>
+			</li>-->
+			
+			<li> <a href="index.php?uc=identif&action=frmConnexion"><img src="<?php echo $_CONFIG['DIR_Image']; ?>menuAccount.png"> <?php echo $_SESSION['login']; ?> </a>
+				<ul class="sousMenu">
+					<?php if(estConnecte()) { ?>
+					<li> <a href="index.php?uc=identif&action=frmModifCompte"><img src="<?php echo $_CONFIG['DIR_Image']; ?>sbConfig.png"> Modifier le compte </a> </li>
+					<li> <a href="index.php?uc=identif&action=frmModifMdp"><img src="<?php echo $_CONFIG['DIR_Image']; ?>menuPassword.png"> Modifier le mot de passe </a> </li>
+					<?php } else { ?>
+					<li> <a href="index.php?uc=identif&action=frmConnexion"><img src="<?php echo $_CONFIG['DIR_Image']; ?>menuConnect.png"> Connexion </a> </li>
+					<?php } ?>
+				</ul>
 			</li>
+			
+			<?php if(estConnecte()) { ?>
+			<li> <a href="index.php?uc=identif&action=deconnexion"><img src="<?php echo $_CONFIG['DIR_Image']; ?>menuDisconnect.png"> Déconnexion </a> </li>
+			<?php } ?>
+			
 		</ul>
 		<?php if(estConnecte()) echo "<h3><img src=\"".$_CONFIG['DIR_Image']."menuUserInfo.png\"> <u>"."</u> ".$_SESSION['login']."</h3>"; ?>
 	</div>

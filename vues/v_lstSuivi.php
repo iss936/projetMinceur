@@ -4,12 +4,10 @@ if(isset($lesSuivis))
 {
 	echo "<table class='sortable'>
 			<tr>
-				<th> <a href='index.php?uc=param&action=frmAddUtilisateur'><img src='".$_CONFIG['DIR_Image']."imgAdd.png' title='Ajouter une école'></a> </th>
 				<th>Date</th>
 				<th>Poids</th>
 				<th>Taille</th>
 				<th>Evenement</th>
-				<th></th>
 			</tr>"; 
 
 	foreach($lesSuivis as $unSuivi)
@@ -29,12 +27,10 @@ if(isset($lesSuivis))
 		
 		//Lignes
 		echo "<tr class='ligneTableau'>
-			<td width='16'> $imgEdit </td>
-			<td $paramTD> $date </td>
-			<td $paramTD> $poids </td>
-			<td $paramTD> $taille </td>
-			<td $paramTD> $evenement</td>
-			<td width='16'> $imgSuppr </td>
+			<td> $date </td>
+			<td> $poids </td>
+			<td> $taille </td>
+			<td> $evenement</td>
 		</tr>";
 	}
 	echo "</table><br>";

@@ -4,6 +4,7 @@
 <h2 align="center">Les exercices pour muscler les abdominaux</h2>
 
 <br><br>
+<video height="400" width="400" src="https://www.youtube.com/watch?v=y7iuW-ksXYQ" controls width="400" height="315"></video> 
 
 <img height="400" width="400" src="ressources/images/abdo.jpg"/>
 
@@ -47,4 +48,3 @@ Le crunch à la poulie haute pour les obliques est essentiel pour le développemen
 Allant du grand droit jusqu'aux dorsaux, le grand oblique recouvre les côtés et l'avant de l'abdomen. Les fibres sont disposées en diagonale depuis leurs insertions inférieures des deux côtés de l'abdomen et forme la lettre "V". Le petit oblique est logé directement sous le grand oblique. Dans sa partie haute, ses fibres sont presque perpendiculaires à celles du grand obliques et forment un "V" à l'envers. Dans sa partie basse, près du pubis, les fibres sont presque horizontales. 
 </p>
 <br><br><br><br><br><br>
-<a href=""> recette</a>
