@@ -12,7 +12,6 @@
 	<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
 	<link rel="icon" type="image/ico" href="<?php echo $_CONFIG['DIR_Image']; ?>favicon.ico">
 	<link rel="stylesheet" type="text/css" href="<?php echo $_CONFIG['DIR_CSS']; ?>default.php" media="screen" title="Principal">
-	<link rel="stylesheet" type="text/css" href="<?php echo $_CONFIG['DIR_CSS']; ?>print.php" media="print">
 	<link rel="stylesheet" type="text/css" href="<?php echo $_CONFIG['DIR_Plugin']; ?>JQuery/css/custom-theme/jquery-ui-1.8.17.custom.css" />
 	<link rel="stylesheet" type="text/css" href="<?php echo $_CONFIG['DIR_Plugin']; ?>TimePicker/jquery-ui-timepicker-addon.css">
 	<script type="text/javascript" src="<?php echo $_CONFIG['DIR_Dynamic']; ?>javascript.all.php"></script>

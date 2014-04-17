@@ -74,4 +74,23 @@ function addSuivi($dateSuivi, $poidsUtilisateur, $tailleUtilisateur, $evenementS
 
 	return $Erreurs;
 }
+
+function getDernierSuivi($idUtilisateur)
+{
+	//Requête
+	if(!$idUtilisateur) $idUtilisateur = 0;
+	$req = "SELECT * FROM suivi WHERE idUtilisateur = ".getMySqlString($idUtilisateur);
+	$req.= " AND date = (SELECT MAX(date) FROM suivi WHERE idUtilisateur = ".getMySqlString($idUtilisateur).")";
+	
+	//Exécution
+	$conx = connexion();
+	$res = mysql_query($req, $conx) or die("<u>Erreur SQL (getDernierSuivi)</u>: ".mysql_error()." <br>");
+	mysql_close($conx);
+	
+	//Récupération
+	$unSuivi = mysql_fetch_assoc($res);
+	
+	return $unSuivi;
+}
+
 ?>

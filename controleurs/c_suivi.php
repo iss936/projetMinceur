@@ -78,113 +78,42 @@ switch($action)
 		}
 		break;
 	}
-	case 'vdModifCompte':
+	case 'imc':
 	{
 		if(estConnecte())
 		{
-			//Si l'utilisateur est en train de modifier son compte
-			$titre = "Modification du compte";
-			$abrg_utilisateur = getRequest('abrg');
-			$nom_utilisateur = getRequest('nom');
-			$tel_utilisateur = getRequest('tel');
-			$fax_utilisateur = getRequest('fax');
-			$adresse_ecole = htmlentities(getRequest('adresseEcole'));
-			$lieu_chargement = htmlentities(getRequest('lieuCharge'));
-			$nom_directeur = getRequest('nomDirecteur');
-			$nb_classe = getRequest('nbClasse');
-			$actif = getRequest('actif_ecole', 0);
-			$xMail = getRequest('xMail');
-			$idUtilisateur = $_SESSION['idUtilisateur'];
-			$msgErreurs = editUtilisateur($idUtilisateur, $abrg_utilisateur, $nom_utilisateur, $tel_utilisateur, $fax_utilisateur, $xMail, $adresse_ecole, $lieu_chargement, $nom_directeur, $nb_classe, $actif);
-			 
-			//Titre
-			include $_CONFIG['DIR_View']."v_headTitre.php";
-			 
-			//Message d'erreurs ou de confirmation
-			if($msgErreurs)
-			{
-				$urlFrm = 'index.php?uc=identif&action=vdModifCompte';
-				$modifEnseignement = false;
-				include $_CONFIG['DIR_View']."v_msgErreurs.php";
-				include $_CONFIG['DIR_View']."v_frmModifCompte.php";
-			}
-			else
-			{
-				$msgConfirmation[] = "Compte changé avec succès!";
-				include $_CONFIG['DIR_View']."v_msgConfirmation.php";
-				redirection(2, "index.php?uc=identif&action=frmConnexion", "Redirection vers l'accueil ...", "POINT");
-				
-			}	
-		}
-		else include $_CONFIG['DIR_View']."i_retourConnexion.php";
-		break;
-	}
-	case 'frmModifMdp':
-	{	
-		if(estConnecte()) 
-		{
-			$titre = "Modification du mot de passe";
-			include $_CONFIG['DIR_View']."v_headTitre.php";
-			include $_CONFIG['DIR_View']."v_frmModifMdp.php";
-		}			
-		else include $_CONFIG['DIR_View']."i_retourConnexion.php";
-		break;
-	}
-	case 'vdModifMdp':
-	{	
-		if(estConnecte())
-		{
-			//Si l'utilisateur est en train de changer son mot de passe
-			$titre = "Modification du mot de passe";
-			$oldPass = getRequest('oldPass');
-			$newPass = getRequest('newPass');
-			$confirmPass = getRequest('confirmPass');
-			$msgErreurs = modifMdp($oldPass, $newPass, $confirmPass);
+			//------------
+			// Variables
+			//------------
 			
-			//Titre
+			$titre = "Indice de Masse Corporelle";
+			
+			//------------
+			// Vues
+			//------------
+			
+			//En-tête
 			include $_CONFIG['DIR_View']."v_headTitre.php";
 			
-			//Message d'erreurs ou de confirmation
-			if($msgErreurs)
+			//Récupération du dernier suivi
+			$leSuivi = getDernierSuivi($_SESSION['idUtilisateur']);
+			if($leSuivi)
 			{
-				//Formulaire pour changer son mot de passe
-				include $_CONFIG['DIR_View']."v_msgErreurs.php";
-				include $_CONFIG['DIR_View']."v_frmModifMdp.php";
+				$taille = $leSuivi['taille'];
+				$poids = $leSuivi['poids'];
+				$imc = $poids/(($taille/100)*($taille/100));
+				include $_CONFIG['DIR_View']."v_imc.php";
 			}
-			else
-			{
-				$msgConfirmation[] = "Mot de passe changé avec succès!";
-				include $_CONFIG['DIR_View']."v_msgConfirmation.php";
-				redirection(2, "index.php?uc=identif&action=frmConnexion", "Redirection vers l'accueil ...", "POINT");
-			}
+			else "	<fieldset style='width:95%:'>
+						Aucune fiche de suivi n'a été trouvée. <br>
+						Veuillez renseigner tout d'abord une fiche.
+					</fieldset>";
 		}
-		else include $_CONFIG['DIR_View']."i_retourConnexion.php";
-		break;
-	}
-	case 'deconnexion':
-	{
-		estDeconnecte();
-		redirection(1, 'index.php', "En cours de déconnexion ...", "BAR");
-		break;
-	}
-	case 'contact':
-	{
-		$titre = "Contact";
-		include $_CONFIG['DIR_View']."v_headTitre.php";
-		include $_CONFIG['DIR_View']."v_contact.php";
-		break;
-	}
-	case 'frmCreerCompte':
-	{
-		$titre = "Création d'un nouveau compte";
-		$prenomUtilisateur = null;
-		$nomUtilisateur = null;
-		$telUtilisateur = null;
-		$mailUtilisateur = null;
-		$adresseUtilisateur = null;
-		$urlFrm = null;
-		include $_CONFIG['DIR_View']."v_headTitre.php";
-		include $_CONFIG['DIR_View']."v_frmModifCompte.php";
+		else
+		{
+			$msgErreurs[] = "Vous n'êtes pas autorisé à accéder à cette page!";
+			include $_CONFIG['DIR_View']."v_msgErreurs.php";
+		}
 		break;
 	}
 	default: 

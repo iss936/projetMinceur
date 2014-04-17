@@ -3,19 +3,19 @@
 		<ul>
 			<!-- Suivi -->
 			<?php if(estConnecte()) { ?>
-			<li > <a href="index.php?uc=suivi&action=frmSuivi"> Mon suivi </a>
+			<li <?php if($uc == "suivi") echo "style='background:#226D48'";?>> <a href="index.php?uc=suivi&action=frmSuivi"> Mon suivi </a>
 				<ul class="sousMenu">
 					<li> <a href="index.php?uc=suivi&action=frmSuivi"> Ajouter une fiche de suivi </a></li>
 					<li> <a href="index.php?uc=suivi&action=lstSuivi"> Voir mes fiches de suivi </a></li>
 					<li> <a href="index.php?uc=suivi&action="> Voir courbe </a></li>
-					<li> <a href="index.php?uc=suivi&action="> Calculer IMC </a></li>
+					<li> <a href="index.php?uc=suivi&action=imc"> Calculer IMC </a></li>
 				</ul>
 			</li>
 			<?php } ?>
 			
 			<!-- Exercices physiques -->
 			<?php if(estConnecte()) { ?>
-			<li> <a href=""> Exercices </a>
+			<li <?php if($uc == "exercice") echo "style='background:#226D48'";?>> <a href=""> Exercices </a>
 				<ul class="sousMenu">
 				<li> <a href="index.php?uc=exercice&action=abdominaux">Abdominaux</a></li>
 				<li> <a href="index.php?uc=exercice&action=dos">Dos</a></li>
@@ -27,7 +27,7 @@
 			
 			<!-- Nutrition -->
 			<?php if(estConnecte()) { ?>
-			<li> <a href=""> Nutrition </a>
+			<li <?php if($uc == "nutrition") echo "style='background:#226D48'";?>> <a href=""> Nutrition </a>
 				<ul class="sousMenu">
 				<!-- <li> <li> <a href=""> les lipides </a></li> -->
 				<li> <li> <a href="index.php?uc=nutrition&action=proteines"> Les protéines </a></li>
@@ -38,7 +38,7 @@
 			
 			<!-- Localisation -->
 			<?php if(estConnecte()) { ?>
-			<li> <a href="index.php?uc=localisation&action=frmLocalisation"> Localisation </a>
+			<li <?php if($uc == "localisation") echo "style='background:#226D48'";?>> <a href="index.php?uc=localisation&action=frmLocalisation"> Localisation </a>
 				<ul class="sousMenu">
 				
 				</ul>
@@ -65,7 +65,7 @@
 			
 			<!-- Statistiques -->
 			<?php if(estConnecte() && estUtilisateur()) { ?>
-			<li> <a href="index.php?uc=stat&action=frmStat"><img src="<?php echo $_CONFIG['DIR_Image']; ?>menuStat.png"> Statistiques</a>
+			<li <?php if($uc == "stat") echo "style='background:#226D48'";?>> <a href="index.php?uc=stat&action=frmStat"><img src="<?php echo $_CONFIG['DIR_Image']; ?>menuStat.png"> Statistiques</a>
 				<ul class="sousMenu">
 					<!--<li><a href="index.php?uc=stat&action=frmStat"><img src="<?php echo $_CONFIG['DIR_Image']; ?>menuStat.png"> Nombre de réservations / mois</a></li>
 					<li><a href="index.php?uc=stat&action=frmDestiRecu"><img src="<?php echo $_CONFIG['DIR_Image']; ?>menuStat.png"> Destinations récurrentes / écoles</a></li>-->
@@ -94,7 +94,7 @@
 				</ul>
 			</li>-->
 			
-			<li> <a href="index.php?uc=identif&action=frmConnexion"><img src="<?php echo $_CONFIG['DIR_Image']; ?>menuAccount.png"> <?php echo $_SESSION['login']; ?> </a>
+			<li> <a href="index.php?uc=identif&action=frmConnexion"><img src="<?php echo $_CONFIG['DIR_Image']; ?>menuUserInfo.png"> <?php if(estConnecte()) echo $_SESSION['login']; else echo "Mon compte"; ?> </a>
 				<ul class="sousMenu">
 					<?php if(estConnecte()) { ?>
 					<li> <a href="index.php?uc=identif&action=frmModifCompte"><img src="<?php echo $_CONFIG['DIR_Image']; ?>sbConfig.png"> Modifier le compte </a> </li>
