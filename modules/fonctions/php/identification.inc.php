@@ -56,7 +56,7 @@ function authentification($login, $mdp)
 		$_SESSION['idUtilisateur'] = $donnee['idUtilisateur'];
 		$_SESSION['login'] = $donnee['login'];
 		//On garde l'id du service en mémoire pour une prochaine connexion
-		$duree = time() + (3600 * 24 * 30); //Durée d'expiration du cookie (timestamp actuel + 30 jours)
+		$duree = time() + (3600 * 24 * 1); //Durée d'expiration du cookie (timestamp actuel + 1 jour)
 		setcookie("idUtilisateur", $donnee['idUtilisateur'], $duree); 
 		
 		$result = true;

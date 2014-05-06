@@ -36,66 +36,22 @@ switch($uc)
 		else include $_CONFIG['DIR_View']."i_retourConnexion.php";
 		break;
 	}
-	case 'consult':
-	{
-		if(estConnecte()) include $_CONFIG['DIR_Control']."c_voirReservation.php";
-		else include $_CONFIG['DIR_View']."i_retourConnexion.php";
-		break;
-	}
-	case 'gestion':
-	{
-		if(estConnecte()) include $_CONFIG['DIR_Control']."c_gererReservation.php";
-		else include $_CONFIG['DIR_View']."i_retourConnexion.php";
-		break;
-	}
-	case 'param':
-	{
-		if(estConnecte())
-		{
-			if(estEnseignement() || estRoulage()) include $_CONFIG['DIR_Control']."c_gererParametre.php";
-			else
-			{
-				$msgErreurs[] = "Vous n'êtes pas autorisé à accéder à cette page!";
-				include $_CONFIG['DIR_View']."v_msgErreurs.php";
-			}
-		}
-		else include $_CONFIG['DIR_View']."i_retourConnexion.php";
-		break;
-	}
-	case 'plan':
-	{
-		if(estConnecte())
-		{
-			if(estEnseignement() || estRoulage()) include $_CONFIG['DIR_Control']."c_gererPlanning.php";
-			else
-			{
-				$msgErreurs[] = "Vous n'êtes pas autorisé à accéder à cette page!";
-				include $_CONFIG['DIR_View']."v_msgErreurs.php";
-			}
-		}
-		else include $_CONFIG['DIR_View']."i_retourConnexion.php";
-		break;
-	}
-	case 'doc':
-	{
-		if(estConnecte()) include $_CONFIG['DIR_Control']."c_gererDocument.php";
-		else include $_CONFIG['DIR_View']."i_retourConnexion.php";
-		break;
-	}
-	case 'stat':
-	{
-		if(estConnecte()) include $_CONFIG['DIR_Control']."c_statistiques.php";
-		else include $_CONFIG['DIR_View']."i_retourConnexion.php";
-		break;
-	}
 	case 'nutrition':
 	{
-		 include $_CONFIG['DIR_Control']."c_nutrition.php";
+		if(estConnecte()) include $_CONFIG['DIR_Control']."c_nutrition.php";
+		else include $_CONFIG['DIR_View']."i_retourConnexion.php";
 		break;
 	}
 	case 'exercice':
 	{
-		 include $_CONFIG['DIR_Control']."c_exercice.php";
+		if(estConnecte()) include $_CONFIG['DIR_Control']."c_exercice.php";
+		else include $_CONFIG['DIR_View']."i_retourConnexion.php";
+		break;
+	}
+	case 'admin':
+	{
+		if(estConnecte()) include $_CONFIG['DIR_Control']."c_admin.php";
+		else include $_CONFIG['DIR_View']."i_retourConnexion.php";
 		break;
 	}
 	default:

@@ -2,11 +2,11 @@
 //Aiguillage en fonction de l'action choisie
 switch($action)
 {
-	case 'frmSuivi':
+	case 'frmAddExercice':
 	{
 		if(estConnecte())
 		{
-			$titre = "Mon suivi";
+			$titre = "Ajouter un exercice";
 			$date = null;
 			$poids = null;
 			$taille = null;
@@ -17,7 +17,7 @@ switch($action)
 		else include $_CONFIG['DIR_View']."i_retourConnexion.php";
 		break;
 	}
-	case 'vdSuivi':
+	case 'vdAddExercice':
 	{
 		if(estConnecte())
 		{
@@ -69,7 +69,7 @@ switch($action)
 			$lesSuivis = getLesSuivis($_SESSION['idUtilisateur']);
 			if($lesSuivis)
 				include $_CONFIG['DIR_View']."v_lstSuivi.php";
-			else echo "<fieldset style='width:95%'> Aucune fiche de suivi n'a été trouvée. </fieldset>";
+			else "<fieldset style='width:95%:'> Aucune fiche de suivi n'a été trouvée. </fieldset>";
 		}
 		else
 		{
@@ -102,13 +102,12 @@ switch($action)
 				$taille = $leSuivi['taille'];
 				$poids = $leSuivi['poids'];
 				$imc = $poids/(($taille/100)*($taille/100));
-				$poidsDenutrition = 15*(($taille/100)*($taille/100));
 				include $_CONFIG['DIR_View']."v_imc.php";
 			}
-			else echo "	<fieldset style='width:95%:'>
-							Aucune fiche de suivi n'a été trouvée. <br>
-							Veuillez renseigner tout d'abord une fiche.
-						</fieldset>";
+			else "	<fieldset style='width:95%:'>
+						Aucune fiche de suivi n'a été trouvée. <br>
+						Veuillez renseigner tout d'abord une fiche.
+					</fieldset>";
 		}
 		else
 		{

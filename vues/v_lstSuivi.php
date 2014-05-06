@@ -36,5 +36,4 @@ if(isset($lesSuivis))
 	echo "</table><br>";
 
 }
-
 ?>
