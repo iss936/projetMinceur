@@ -7,8 +7,7 @@
 				<ul class="sousMenu">
 					<li> <a href="index.php?uc=suivi&action=frmSuivi"><img src="<?php echo $_CONFIG['DIR_Image']; ?>imgAdd.png"> Ajouter une fiche de suivi </a></li>
 					<li> <a href="index.php?uc=suivi&action=lstSuivi"><img src="<?php echo $_CONFIG['DIR_Image']; ?>imgFiche.png"> Voir mes fiches de suivi </a></li>
-					<li> <a href="index.php?uc=suivi&action="><img src="<?php echo $_CONFIG['DIR_Image']; ?>menuStat.png"> Voir courbe </a></li>
-					<li> <a href="index.php?uc=suivi&action=imc"> Calculer IMC </a></li>
+					<li> <a href="index.php?uc=suivi&action=imc"><img src="<?php echo $_CONFIG['DIR_Image']; ?>menuStat.png"> Votre progression </a></li>
 				</ul>
 			</li>
 			<?php } ?>
@@ -38,7 +37,7 @@
 			
 			<!-- Localisation -->
 			<?php if(estConnecte()) { ?>
-			<li <?php if($uc == "localisation") echo "style='background:#226D48'";?>> <a href="index.php?uc=localisation&action=frmLocalisation"> Localisation </a>
+			<li <?php if($uc == "localisation") echo "style='background:#226D48'";?>> <a href="index.php?uc=localisation&action=frmLocalisation">Où se muscler</a>
 				<ul class="sousMenu">
 					<?php if(estAdmin()) { ?>
 					<li> <a href="index.php?uc=localisation&action=frmLocalisation"> Rechercher une salle </a></li>
@@ -59,9 +58,20 @@
 			</li>
 			<?php } ?> -->
 			
-			<!-- Administration -->
+			<!-- Gestion des exercices -->
 			<?php if(estAdmin()) { ?>
 			<li <?php if($uc == "admin") echo "style='background:#226D48'";?>> <a href="index.php?uc=admin&action="> Gestion des exercices </a>
+				<ul class="sousMenu">
+					<li> <a href="index.php?uc=admin&action=frmAddExercice"><img src="<?php echo $_CONFIG['DIR_Image']; ?>imgAdd.png"> Ajouter un exercice </a></li>
+					<li> <a href="index.php?uc=admin&action=frmModifExercice"><img src="<?php echo $_CONFIG['DIR_Image']; ?>tbEdit.png"> Modifier un exercice </a></li>
+					<li> <a href="index.php?uc=admin&action=frmDelExercice"><img src="<?php echo $_CONFIG['DIR_Image']; ?>imgTrash.png"> Supprimer un exercice </a></li>
+				</ul>
+			</li>
+			<?php } ?>
+			
+			<!-- Gestion nutrition -->
+			<?php if(estAdmin()) { ?>
+			<li <?php if($uc == "admin") echo "style='background:#226D48'";?>> <a href="index.php?uc=admin&action="> Gestion nutrition </a>
 				<ul class="sousMenu">
 					<li> <a href="index.php?uc=admin&action=frmAddExercice"><img src="<?php echo $_CONFIG['DIR_Image']; ?>imgAdd.png"> Ajouter un exercice </a></li>
 					<li> <a href="index.php?uc=admin&action=frmModifExercice"><img src="<?php echo $_CONFIG['DIR_Image']; ?>tbEdit.png"> Modifier un exercice </a></li>

@@ -12,7 +12,6 @@ switch($action)
 			$taille = null;
 			$evenement = null;
 			include $_CONFIG['DIR_View']."v_headTitre.php";
-			include $_CONFIG['DIR_View']."v_frmSuivi.php";
 		}
 		else include $_CONFIG['DIR_View']."i_retourConnexion.php";
 		break;
