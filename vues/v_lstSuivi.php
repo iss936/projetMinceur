@@ -34,6 +34,39 @@ if(isset($lesSuivis))
 		</tr>";
 	}
 	echo "</table><br>";
-
+	
+	
+$nbSuivi = count($lesSuivis);
 }
 ?>
+<script src="https://www.google.com/jsapi" type="text/javascript"></script>
+<script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = new google.visualization.DataTable();
+	data.addColumn('string', 'Kilogrammes');
+    data.addColumn('number', 'Poids');
+   
+   
+    data.addRows(<?php echo $nbSuivi ?>);
+ 
+<?php
+$i = 0;
+foreach($lesSuivis as $unSuivi)
+	{
+		//Variables
+		//Utilisateur
+		$poids = $unSuivi['poids'];
+		
+		echo "data.setValue($i, 0, '$poids');
+			data.setValue($i, 1, $poids);";
+		$i= $i+1;
+	}
+?>
+	var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+    chart.draw(data, {width: 400, height: 240, title: 'Courbes de poids'});
+      }
+</script>
+<div id="chart_div">&nbsp;</div>
+
