@@ -88,4 +88,26 @@ function delExercice($idExercice)
 	
 	return $Erreurs;
 }
+
+//Récupère les parties du corts
+function getLesbodyParts()
+{
+	//Requête
+	$req = "SELECT * FROM partiecorps order by libelle";
+	
+	//Exécution
+	$conx = connexion();
+	$res = mysql_query($req, $conx) or die("<u>Erreur SQL (getLesExercices)</u>: ".mysql_error()." <br>");
+	mysql_close($conx);
+	
+	$LesbodyParts = array();
+	$ligne = mysql_fetch_assoc($res);
+	while($ligne != false)
+	{
+		$LesbodyParts[] = $ligne;
+		$ligne = mysql_fetch_assoc($res);
+	}
+	
+	return $LesbodyParts;
+}
 ?>
