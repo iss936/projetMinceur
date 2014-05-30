@@ -20,7 +20,7 @@ switch($uc)
 {
 	case 'identif':
 	{
-		$action = getRequest('action', "frmConnexion");
+		$action = getRequest('action', "index");
 		include $_CONFIG['DIR_Control']."c_gererCompte.php";
 		break;
 	}
@@ -44,8 +44,8 @@ switch($uc)
 	}
 	case 'exercice':
 	{
-		if(estConnecte()) include $_CONFIG['DIR_Control']."c_exercice.php";
-		else include $_CONFIG['DIR_View']."i_retourConnexion.php";
+		$action = getRequest('action', "lstExercice");
+		include $_CONFIG['DIR_Control']."c_exercice.php";
 		break;
 	}
 	case 'admin':

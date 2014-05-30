@@ -59,7 +59,7 @@ foreach($lesSuivis as $unSuivi)
 		//Utilisateur
 		$poids = $unSuivi['poids'];
 		
-		echo "data.setValue($i, 0, '$poids');
+		echo "data.setValue($i, 0, '$date');
 			data.setValue($i, 1, $poids);";
 		$i= $i+1;
 	}

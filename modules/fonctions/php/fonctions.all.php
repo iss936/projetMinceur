@@ -8,4 +8,8 @@ include "exercices.inc.php";
 include "localisation.inc.php";
 include "salles.inc.php";
 include "typeSalle.inc.php";
+include "partieCorps.inc.php";
+include "programme.inc.php";
+include "x_programme_exercice.inc.php";
+include "x_exercice_partiecorps.inc.php";
 ?>

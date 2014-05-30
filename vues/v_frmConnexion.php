@@ -9,4 +9,3 @@
 </div>
 </div>
 </form>
-<a href="index.php?uc=identif&action=frmCreerCompte">Créer un compte</a>

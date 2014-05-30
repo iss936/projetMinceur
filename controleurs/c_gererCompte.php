@@ -2,6 +2,11 @@
 //Aiguillage en fonction de l'action choisie
 switch($action)
 {
+	case 'index':
+	{
+		include $_CONFIG['DIR_View']."v_accueil.php";
+		break;
+	}
 	case 'frmConnexion': 
 	{	
 		if(estConnecte()) include $_CONFIG['DIR_View']."v_accueil.php";

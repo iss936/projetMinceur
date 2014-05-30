@@ -7,7 +7,7 @@
 function getUnExercice($idExercice)
 {
 	//Requête
-	$req = "SELECT * FROM exercice where idConseil = ".getMySqlString($idExercice);
+	$req = "SELECT * FROM ficheexercice where idFicheExercice = ".getMySqlString($idExercice);
 	
 	//Exécution
 	$conx = connexion();
@@ -24,7 +24,7 @@ function getUnExercice($idExercice)
 function getLesExercices()
 {
 	//Requête
-	$req = "SELECT * FROM exercice";
+	$req = "SELECT * FROM ficheexercice";
 	
 	//Exécution
 	$conx = connexion();
@@ -56,9 +56,9 @@ function editExercice($idExercice, $contenuExercice)
 	//Mise à jour de la base
 	if(!$Erreurs)
 	{
-		$req = "UPDATE exercice SET
+		$req = "UPDATE ficheexercice SET
 				contenu = $contenu
-				WHERE idExercice = $id";
+				WHERE idFicheExercice = $id";
 		$conx = connexion();
 		mysql_query($req, $conx) or $Erreurs[] = "<u>Erreur SQL (editExercice)</u>: ".mysql_error();
 		mysql_close($conx);
@@ -79,8 +79,8 @@ function delExercice($idExercice)
 	
 	if(!$Erreurs)
 	{
-		$req = "DELETE FROM exercice
-				WHERE idExercice = $id";
+		$req = "DELETE FROM ficheexercice
+				WHERE idFicheExercice = $id";
 		$conx = connexion();
 		mysql_query($req, $conx) or $Erreurs[] = "<u>Erreur SQL (delExercice)</u>: ".mysql_error();
 		mysql_close($conx);

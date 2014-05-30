@@ -6,12 +6,17 @@ switch($action)
 	{
 		if(estConnecte())
 		{
-			$titre = "Ajouter un exercice";
-			$date = null;
-			$poids = null;
-			$taille = null;
-			$evenement = null;
-			include $_CONFIG['DIR_View']."v_headTitre.php";
+			if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    			
+
+			}
+			else// on affiche le formulaire d'ajout
+			{
+				$titre = "Ajouter un exercice";
+				$bodyParts = getLesPartiesCorps();
+				include $_CONFIG['DIR_View']."v_headTitre.php";
+				include $_CONFIG['DIR_View']."exercices/v_frmAddExercice.php";
+			}
 		}
 		else include $_CONFIG['DIR_View']."i_retourConnexion.php";
 		break;

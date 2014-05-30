@@ -5,7 +5,7 @@ switch($action)
 	case 'proteines':
 	{
 		
-		include $_CONFIG['DIR_View']."v_proteines.php";
+		include $_CONFIG['DIR_View']."/nutritions/v_proteines.php";
 		break;
 	}
 
