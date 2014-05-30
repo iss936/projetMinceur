@@ -4,12 +4,12 @@ switch($action)
 {
 	case 'abdominaux':
 	{
-		include $_CONFIG['DIR_View']."v_exAbdominaux.php";
+		include $_CONFIG['DIR_View']."/exercices/v_exAbdominaux.php";
 		break;
 	}
 	case 'dos':
 	{
-		include $_CONFIG['DIR_View']."v_exDos.php";
+		include $_CONFIG['DIR_View']."/exercices/v_exDos.php";
 		break;
 	}
 	case 'pectoraux':
