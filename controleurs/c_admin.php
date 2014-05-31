@@ -5,24 +5,17 @@ switch($action)
 	case 'frmAddExercice':
 	{
 		if(estConnecte())
-<<<<<<< HEAD
 		{
-=======
-		{	
->>>>>>> 5fc7d662df268377cf3d95e03963b3cef8e24ef0
 			if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     			
 
 			}
 			else// on affiche le formulaire d'ajout
 			{
-<<<<<<< HEAD
 				$titre = "Ajouter un exercice";
 				$bodyParts = getLesPartiesCorps();
 				include $_CONFIG['DIR_View']."v_headTitre.php";
-=======
 				$bodyParts = getLesbodyParts();
->>>>>>> 5fc7d662df268377cf3d95e03963b3cef8e24ef0
 				include $_CONFIG['DIR_View']."exercices/v_frmAddExercice.php";
 			}
 		}
