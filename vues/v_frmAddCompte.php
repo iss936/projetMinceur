@@ -1,6 +1,15 @@
-<form method='post' action='<?php echo $urlFrm ?>'>
+<form method='post' action='index.php?uc=identif&action=vdCreerCompte'>
 <fieldset style="width:50%;">
 
+	<label class="alignLabel required"> Login : </label>
+	<input type="text" name="login" style="width:60%" value="<?php echo $loginUtilisateur ?>"> <br> <br>
+	
+	<label class="alignLabel required"> Mot de passe : </label>
+	<input type="password" name="mdp" style="width:60%" value="<?php echo $mdpUtilisateur ?>"> <br> <br>
+	
+	<label class="alignLabel required"> Confirmation : </label>
+	<input type="password" name="confirm" style="width:60%" value="<?php echo $confirm ?>"> <br> <br>
+	
 	<label class="alignLabel required"> Prénom : </label> 
 	<input type="text" name="prenom" style="width:60%" value="<?php echo $prenomUtilisateur ?>"> <br> <br>
 	

@@ -75,7 +75,7 @@
 					<li> <a href="index.php?uc=identif&action=frmModifMdp"><img src="<?php echo $_CONFIG['DIR_Image']; ?>menuPassword.png"> Modifier le mot de passe </a> </li>
 					<?php } else { ?>
 					<li> <a href="index.php?uc=identif&action=frmConnexion"><img src="<?php echo $_CONFIG['DIR_Image']; ?>menuConnect.png"> Connexion </a> </li>
-					<li> <a href="index.php?uc=identif&action=frmCreerCompte"> Créer un compte </a> </li>
+					<li> <a href="index.php?uc=identif&action=frmCreerCompte"><img src="<?php echo $_CONFIG['DIR_Image']; ?>imgAdd.png"> Créer un compte </a> </li>
 					<?php } ?>
 				</ul>
 			</li>

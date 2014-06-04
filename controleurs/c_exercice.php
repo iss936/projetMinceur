@@ -1,4 +1,5 @@
 <?php
+include $_CONFIG['DIR_View']."v_filAriane.php";
 //Aiguillage en fonction de l'action choisie
 
 switch($action)
@@ -35,7 +36,7 @@ switch($action)
 	case 'lstExBiceps':
 	{
 		$titre = "Liste des exercices pour biceps";
-		$lesExercicePartieCorps = getLesExercicePartieCorps(4);
+		$lesExercicePartieCorps = getLesExercices(4);
 		include $_CONFIG['DIR_View']."v_headTitre.php";
 		include $_CONFIG['DIR_View']."v_lstEx.php";
 		break;

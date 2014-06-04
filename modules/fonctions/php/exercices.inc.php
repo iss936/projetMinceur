@@ -21,10 +21,11 @@ function getUnExercice($idExercice)
 }
 
 //Récupère les exercices
-function getLesExercices()
+function getLesExercices($idPartieCorps = null)
 {
 	//Requête
 	$req = "SELECT * FROM ficheexercice";
+	if($idPartieCorps != null) $req .= " WHERE idPartieCorps = ".getMySqlString($idPartieCorps);
 	
 	//Exécution
 	$conx = connexion();
@@ -89,25 +90,20 @@ function delExercice($idExercice)
 	return $Erreurs;
 }
 
-//Récupère les parties du corts
-function getLesbodyParts()
+//Récupère le dernier exercice ajouté
+function getLeDernierExercice()
 {
 	//Requête
-	$req = "SELECT * FROM partiecorps order by libelle";
+	$req = "SELECT * FROM ficheexercice where dateAjout = (SELECT MAX(dateAjout) FROM ficheexercice)";
 	
 	//Exécution
 	$conx = connexion();
-	$res = mysql_query($req, $conx) or die("<u>Erreur SQL (getLesExercices)</u>: ".mysql_error()." <br>");
+	$res = mysql_query($req, $conx) or die ("<u>Erreur SQL (getLeDernierExercice)</u>: ".mysql_error()." <br>");
 	mysql_close($conx);
 	
-	$LesbodyParts = array();
-	$ligne = mysql_fetch_assoc($res);
-	while($ligne != false)
-	{
-		$LesbodyParts[] = $ligne;
-		$ligne = mysql_fetch_assoc($res);
-	}
+	//Récupération
+	$unExercice = mysql_fetch_assoc($res);
 	
-	return $LesbodyParts;
+	return $unExercice;
 }
 ?>

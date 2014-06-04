@@ -4,18 +4,27 @@ switch($action)
 {
 	case 'index':
 	{
+		$unExercice = getLeDernierExercice();
 		include $_CONFIG['DIR_View']."v_accueil.php";
 		break;
 	}
 	case 'frmConnexion': 
 	{	
-		if(estConnecte()) include $_CONFIG['DIR_View']."v_accueil.php";
+		if(estConnecte())
+		{
+			$unExercice = getLeDernierExercice();
+			include $_CONFIG['DIR_View']."v_accueil.php";
+		}
 		else include $_CONFIG['DIR_View']."i_retourConnexion.php";
 		break;
 	}
 	case 'vdConnexion': 
 	{	
-		if(estConnecte()) include $_CONFIG['DIR_View']."v_accueil.php";
+		if(estConnecte())
+		{
+			$unExercice = getLeDernierExercice();
+			include $_CONFIG['DIR_View']."v_accueil.php";
+		}
 		else
 		{
 			//Variables
@@ -68,18 +77,13 @@ switch($action)
 		{
 			//Si l'utilisateur est en train de modifier son compte
 			$titre = "Modification du compte";
-			$abrg_utilisateur = getRequest('abrg');
-			$nom_utilisateur = getRequest('nom');
-			$tel_utilisateur = getRequest('tel');
-			$fax_utilisateur = getRequest('fax');
-			$adresse_ecole = htmlentities(getRequest('adresseEcole'));
-			$lieu_chargement = htmlentities(getRequest('lieuCharge'));
-			$nom_directeur = getRequest('nomDirecteur');
-			$nb_classe = getRequest('nbClasse');
-			$actif = getRequest('actif_ecole', 0);
-			$xMail = getRequest('xMail');
+			$prenomUtilisateur = getRequest('prenom');
+			$nomUtilisateur = getRequest('nom');
+			$telUtilisateur = getRequest('tel');
+			$mailUtilisateur = getRequest('mail');
+			$adresseUtilisateur = htmlentities(getRequest('adresse'));
 			$idUtilisateur = $_SESSION['idUtilisateur'];
-			$msgErreurs = editUtilisateur($idUtilisateur, $abrg_utilisateur, $nom_utilisateur, $tel_utilisateur, $fax_utilisateur, $xMail, $adresse_ecole, $lieu_chargement, $nom_directeur, $nb_classe, $actif);
+			$msgErreurs = editUtilisateur($idUtilisateur, $prenomUtilisateur, $nomUtilisateur, $telUtilisateur, $mailUtilisateur, $adresseUtilisateur);
 			 
 			//Titre
 			include $_CONFIG['DIR_View']."v_headTitre.php";
@@ -88,7 +92,6 @@ switch($action)
 			if($msgErreurs)
 			{
 				$urlFrm = 'index.php?uc=identif&action=vdModifCompte';
-				$modifEnseignement = false;
 				include $_CONFIG['DIR_View']."v_msgErreurs.php";
 				include $_CONFIG['DIR_View']."v_frmModifCompte.php";
 			}
@@ -161,14 +164,46 @@ switch($action)
 	case 'frmCreerCompte':
 	{
 		$titre = "Création d'un nouveau compte";
+		$loginUtilisateur = null;
+		$mdpUtilisateur = null;
+		$confirm = null;
 		$prenomUtilisateur = null;
 		$nomUtilisateur = null;
 		$telUtilisateur = null;
 		$mailUtilisateur = null;
 		$adresseUtilisateur = null;
-		$urlFrm = null;
 		include $_CONFIG['DIR_View']."v_headTitre.php";
-		include $_CONFIG['DIR_View']."v_frmModifCompte.php";
+		include $_CONFIG['DIR_View']."v_frmAddCompte.php";
+		break;
+	}
+	case 'vdCreerCompte':
+	{
+		$titre = "Création d'un nouveau compte";
+		$loginUtilisateur = getRequest('login');
+		$mdpUtilisateur = getRequest('mdp');
+		$confirm = getRequest('confirm');
+		$prenomUtilisateur = getRequest('prenom');
+		$nomUtilisateur = getRequest('nom');
+		$telUtilisateur = getRequest('tel');
+		$mailUtilisateur = getRequest('mail');
+		$adresseUtilisateur = getRequest('adresse');
+		$msgErreurs = addUtilisateur($loginUtilisateur, $mdpUtilisateur, $confirm, $prenomUtilisateur, $nomUtilisateur, $telUtilisateur, $mailUtilisateur, $adresseUtilisateur);
+			
+		//Titre
+		include $_CONFIG['DIR_View']."v_headTitre.php";
+			
+		//Message d'erreurs ou de confirmation
+		if($msgErreurs)
+		{
+			include $_CONFIG['DIR_View']."v_msgErreurs.php";
+			include $_CONFIG['DIR_View']."v_frmAddCompte.php";
+		}
+		else
+		{
+			$msgConfirmation[] = "Compte crée avec succès!";
+			include $_CONFIG['DIR_View']."v_msgConfirmation.php";
+			redirection(2, "index.php?uc=identif&action=frmConnexion", "Redirection vers l'accueil ...", "POINT");
+		}
 		break;
 	}
 	default: 

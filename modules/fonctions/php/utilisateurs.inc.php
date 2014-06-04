@@ -23,16 +23,11 @@ function getUnUtilisateur($idUtilisateur, $nomChamp = null)
 }
 
 //Récupère les utilisateurs
-function getLesUtilisateurs($mot = null, $id_utilisateur = 1, $enseignement = 0, $roulage = 0)
+function getLesUtilisateurs()
 {
 	//Requête
-	$req = "SELECT * FROM utilisateurs WHERE idUtilisateur > 3";
-	if($mot) $req .= " AND login LIKE '%".getMySqlString($mot, "", 1)."%'";
-	if($id_utilisateur) $req .= " OR idUtilisateur = ".getMySqlString($id_utilisateur);
-	if($enseignement) $req .= " OR idUtilisateur = ".getMySqlString(2);
-	if($roulage) $req .= " OR idUtilisateur = ".getMySqlString(3);
+	$req = "SELECT * FROM utilisateurs";
 	
-	$req .= " ORDER BY login";
 	//Exécution
 	$conx = connexion();
 	$res = mysql_query($req, $conx) or die("<u>Erreur SQL (getLesUtilisateurs)</u>: ".mysql_error()." <br>");
@@ -51,60 +46,32 @@ function getLesUtilisateurs($mot = null, $id_utilisateur = 1, $enseignement = 0,
 }
 
 //Modifie un utilisateur
-function editUtilisateur($id_utilisateur, $abrevUser, $nomUser, $telUser, $faxUser, $xMail, $adresseEcole, $lieuChargement, $nom_Directeur, $nbClasse, $actif)
+function editUtilisateur($idUtilisateur, $prenomUtilisateur, $nomUtilisateur, $telUtilisateur, $mailUtilisateur, $adresseUtilisateur)
 {
 	//Récupération des variables
 	$Erreurs = array();
-	$id = getMySqlString($id_utilisateur, 0);
-	$abrev = getMySqlString($abrevUser);
-	$nom = getMySqlString($nomUser);
-	$tel = getMySqlString($telUser);
-	$fax = getMySqlString($faxUser);
-	$adresse = getMySqlString($adresseEcole);
-	$lieu = getMySqlString($lieuChargement);
-	$nomDirecteur = getMySqlString($nom_Directeur);
-	$nbClasse = getMySqlString($nbClasse);
-	$mail = "";
+	$id = getMySqlString($idUtilisateur, 0);
+	$prenom = getMySqlString($prenomUtilisateur);
+	$nom = getMySqlString($nomUtilisateur);
+	$tel = getMySqlString($telUtilisateur);
+	$mail = getMySqlString($mailUtilisateur);
+	$adresse = getMySqlString($adresseUtilisateur);
 	
 	//Test des erreurs
-	if(!$id_utilisateur || intval($id_utilisateur) <= 0) $Erreurs[] = "Pas d'utilisateur à modifier!";
-	if(!$nomUser || !$abrevUser || !$lieuChargement || !$xMail[0] || !$telUser) $Erreurs[] = "Veuillez remplir tous les champs obligatoires (*).";
-	if(count($xMail) == 1)
-	{
-		if(!estunMail($xMail[0])) $Erreurs[] = "L'adresse mail saisie n'est pas valide!";
-		else $mail = $xMail[0];
-	}
-	if(count($xMail)>1)
-	{
-		$erreurMail = 0;
-		for($i = 0; $i<count($xMail); $i++)
-		{
-			if(!estUnMail($xMail[$i])) $erreurMail++;
-			else
-			{
-				$mail.= $xMail[$i] ;
-				if(count($xMail)-1 != $i) $mail.=";";
-			}
-		}
-		if($erreurMail > 0) $Erreurs[] = "Une des adresses mails n'est pas valide!";
-	}
-	$mail = getMySqlString($mail);
+	if(!$idUtilisateur || intval($idUtilisateur) <= 0) $Erreurs[] = "Pas d'utilisateur à modifier!";
+	if(!$prenomUtilisateur || !$nomUtilisateur || !$telUtilisateur || !$mailUtilisateur || !$adresseUtilisateur) $Erreurs[] = "Veuillez remplir tous les champs obligatoires (*).";
+	if(!estunMail($mailUtilisateur)) $Erreurs[] = "L'adresse mail saisie n'est pas valide!";
+
 	//Mise à jour de la base
 	if(!$Erreurs)
 	{
 		$req = "UPDATE utilisateurs SET 
-				".($nomUser ? "nom_utilisateur = $nom," : null)."
-				abrg_utilisateur = $abrev,
-				nom_utilisateur = $nom,
-				tel_utilisateur = $tel,
-				fax_utilisateur = $fax,
-				mail_utilisateur = $mail,
-				adresse_ecole = $adresse,
-				lieu_chargement = $lieu,
-				nom_directeur = $nomDirecteur,
-				nb_Classe = $nbClasse,
-				actif = $actif
-				WHERE id_utilisateur = $id";
+				prenom = $prenom,
+				nom = $nom,
+				telephone = $tel,
+				mail = $mail,
+				adresse = $adresse
+				WHERE idUtilisateur = $id";
 		$conx = connexion();
 		mysql_query($req, $conx) or $Erreurs[] = "<u>Erreur SQL (editUtilisateur)</u>: $mail".mysql_error();
 		mysql_close($conx);
@@ -114,55 +81,55 @@ function editUtilisateur($id_utilisateur, $abrevUser, $nomUser, $telUser, $faxUs
 }
 
 //Ajoute un utilisateur
-function addUtilisateur($abrevUser, $nomUser, $mdpUser, $telUser, $faxUser, $xMail, $adresseEcole, $lieuChargement, $nomDirecteur, $nbClasse, $actif)
+function addUtilisateur($loginUtilisateur, $mdpUtilisateur, $confirmMdp, $prenomUtilisateur, $nomUtilisateur, $telephoneUtilisateur, $mailUtilisateur, $adresseUtilisateur)
 {
 	//Récupération des variables
 	$Erreurs = array();
 	
-	$abrev = getMySqlString($abrevUser);
-	$nom = getMySqlString($nomUser);
-	$mdp = getMySqlString($mdpUser);
-	$tel = getMySqlString($telUser);
-	$fax = getMySqlString($faxUser);
-	$mail = "";
-	$adresse = getMySqlString($adresseEcole);
-	$lieu = getMySqlString($lieuChargement);
-	$nom_directeur = getMySqlString($nomDirecteur);
-	$nb_classe = getMySqlString($nbClasse);
+	$login = getMySqlString($loginUtilisateur);
+	$mdp = getMySqlString($mdpUtilisateur);
+	$prenom = getMySqlString($prenomUtilisateur);
+	$nom = getMySqlString($nomUtilisateur);
+	$tel = getMySqlString($telephoneUtilisateur);
+	$mail = getMySqlString($mailUtilisateur);
+	$adresse = getMySqlString($adresseUtilisateur);
 	
 	//Test des erreurs
-	if(!$nomUser || !$abrevUser || !$mdpUser || !$lieuChargement || !$xMail[0] || !$telUser) $Erreurs[] = "Veuillez remplir tous les champs obligatoires (*).";
-	if(count($xMail) == 1)
-	{
-		if(!estunMail($xMail[0])) $Erreurs[] = "L'adresse mail saisie n'est pas valide!";
-		else $mail = $xMail[0];
-	}
-	if(count($xMail)>1)
-	{
-		$erreurMail = 0;
-		for($i = 0; $i<count($xMail); $i++)
-		{
-			if(!estUnMail($xMail[$i])) $erreurMail++;
-			else
-			{
-				$mail.= $xMail[$i] ;
-				if(count($xMail)-1 != $i) $mail.=";";
-			}
-		}
-		if($erreurMail > 0) $Erreurs[] = "Une des adresses mails n'est pas valide!";
-	}
-	$mail = getMySqlString($mail);
+	if(!$loginUtilisateur || !$mdpUtilisateur || !$confirmMdp || !$prenomUtilisateur || !$nomUtilisateur || !$telephoneUtilisateur || !$mailUtilisateur || !$adresseUtilisateur) $Erreurs[] = "Veuillez remplir tous les champs obligatoires (*).";
+	if(!estunMail($mailUtilisateur)) $Erreurs[] = "L'adresse mail saisie n'est pas valide!";
+	if(strlen($mdpUtilisateur) < 6) $Erreurs[] = "Le nouveau mot de passe doit contenir au moins 6 caractères.";
+	if($mdpUtilisateur != $confirmMdp) $Erreurs[] = "Le nouveau mot de passe et sa confirmation ne sont pas identiques.";
 	
 	//Ajout dans la base
 	if(!$Erreurs)
 	{
-		$req = "INSERT INTO utilisateurs (abrg_utilisateur, nom_utilisateur, mdp_utilisateur, tel_utilisateur, fax_utilisateur, mail_utilisateur, adresse_ecole, lieu_chargement, nom_directeur, nb_classe, actif)
-				VALUES ($abrev, $nom, sha1($mdp), $tel, $fax, $mail, $adresse, $lieu, $nom_directeur, $nb_classe, $actif)";
+		$req = "INSERT INTO utilisateurs (login, mdp, prenom, nom, telephone, mail, adresse)
+				VALUES ($login, sha1($mdp), $prenom, $nom, $tel, $mail, $adresse)";
 		$conx = connexion();
 		mysql_query($req, $conx) or $Erreurs[] = "<u>Erreur SQL (addUtilisateur)</u>: ".mysql_error();
 		mysql_close($conx);
 	}
 
+	//Envoi du mail de confirmation de la création du compte
+	if(!$Erreurs)
+	{
+		$destinataire = "$prenomUtilisateur $nomUtilisateur <$mailUtilisateur>";
+		$sujet = "Confirmation de la création de votre compte MyDietFit";
+		$msg = "Bienvenue chez MyDietFit ! <br> <br>
+		
+				Votre compte utilisateur a été crée.<br>
+				Vous pouvez dès maintenant vous connecter en utilisant les informations suivantes : <br> <br>
+				
+				Login : $loginUtilisateur <br>
+				Mot de passe : $mdpUtilisateur <br> <br>
+				
+				Bien à vous,<br>
+				L'équipe MyDietFit";
+		$entete = "From: \"MyDietFit\" <noreply@mydietfit.fr> \n";
+		$entete .= "MIME-Version: 1.0 \n";
+		$entete .= "Content-type: text/html; charset='ISO-8859-1'";
+		mail($destinataire, $sujet, $msg, $entete) or die("<u>Erreur (envoiMail)</u>: Impossible d'envoyer le mail! $destinataire<br>");
+	}
 	return $Erreurs;
 }
 

@@ -38,7 +38,7 @@ function authentification($login, $mdp)
 {
 	//Variables
 	global $_CONFIG;
-	//$mdp = ($mdp != "") ? sha1($mdp) : null;
+	$mdp = ($mdp != "") ? sha1($mdp) : null;
 	
 	//Requête
 	$req = "SELECT * FROM utilisateurs WHERE login = '$login' AND mdp = '$mdp'";
@@ -70,7 +70,8 @@ function modifMdp($oldMdp, $newMdp, $confirmMdp)
 {
 	$Erreurs = array();
 	$idUtilisateur = $_SESSION['idUtilisateur'];
-	$verifOldMdp = authentification($idUtilisateur, $oldMdp);
+	$login = $_SESSION['login'];
+	$verifOldMdp = authentification($login, $oldMdp);
 	
 	//Erreurs
 	// - Erreurs sur l'ancien mot de passe
@@ -91,7 +92,7 @@ function modifMdp($oldMdp, $newMdp, $confirmMdp)
 	if(!$Erreurs)
 	{		
 		$newMdp = sha1($newMdp);
-		$req = "UPDATE utilisateurs SET mdp_utilisateur = '$newMdp' WHERE idUtilisateur = '$idUtilisateur'";
+		$req = "UPDATE utilisateurs SET mdp = '$newMdp' WHERE idUtilisateur = '$idUtilisateur'";
 		
 		if($req)
 		{
@@ -99,7 +100,6 @@ function modifMdp($oldMdp, $newMdp, $confirmMdp)
 			mysql_query($req, $conx) or $Erreurs[] = "<u>Erreur SQL (modifMdp) </u>: ".mysql_error();
 			mysql_close($conx);
 		}
-		else $Erreurs[] = "L'utilisateur connecté n'est ni un service, ni un technicien!";
 	}
 	
 	return $Erreurs;
