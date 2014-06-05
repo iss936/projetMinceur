@@ -15,7 +15,6 @@ switch($action)
 				$titre = "Ajouter un exercice";
 				$bodyParts = getLesPartiesCorps();
 				include $_CONFIG['DIR_View']."v_headTitre.php";
-				$bodyParts = getLesbodyParts();
 				include $_CONFIG['DIR_View']."exercices/v_frmAddExercice.php";
 			}
 		}

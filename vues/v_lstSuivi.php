@@ -56,7 +56,7 @@ $i = 0;
 foreach($lesSuivis as $unSuivi)
 	{
 		//Variables
-		//Utilisateur
+		$date = $unSuivi['date'];
 		$poids = $unSuivi['poids'];
 		
 		echo "data.setValue($i, 0, '$date');
