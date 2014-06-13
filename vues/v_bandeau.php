@@ -2,6 +2,6 @@
 <div id="header">
 	<a href="index.php?uc=identif&action=index">
 		<div id="logo">
-			<h1>My Diet Fit</h1>
+			<h1>MyDietFit</h1>
 		</div>
 	</a>

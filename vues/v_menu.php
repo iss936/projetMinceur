@@ -3,17 +3,18 @@
 		<ul>
 			<!-- Suivi -->
 			<?php if(estConnecte()) { ?>
-			<li <?php if($uc == "suivi") echo "style='background:#226D48'";?>> <a href="index.php?uc=suivi&action=frmSuivi"> Mon suivi </a>
+			<li <?php if($uc == "suivi") echo "style='background:#32CAED'";?>> <a href="index.php?uc=suivi&action=frmSuivi"> Mon suivi </a>
 				<ul class="sousMenu">
 					<li> <a href="index.php?uc=suivi&action=frmSuivi"><img src="<?php echo $_CONFIG['DIR_Image']; ?>imgAdd.png"> Ajouter une fiche de suivi </a></li>
 					<li> <a href="index.php?uc=suivi&action=lstSuivi"><img src="<?php echo $_CONFIG['DIR_Image']; ?>imgFiche.png"> Voir mes fiches de suivi </a></li>
 					<li> <a href="index.php?uc=suivi&action=imc"><img src="<?php echo $_CONFIG['DIR_Image']; ?>menuStat.png"> Votre progression </a></li>
+					<!-- <li> <a href="index.php?uc=suivi&action=frmObjectif"><img src="<?php echo $_CONFIG['DIR_Image']; ?>imgAdd.png"> Ajouter un objectif </a></li> -->
 				</ul>
 			</li>
 			<?php } ?>
 			
 			<!-- Exercices physiques -->
-			<li <?php if($uc == "exercice") echo "style='background:#226D48'";?>> <a href="index.php?uc=exercice&action=lstExercice"> Exercices </a>
+			<li <?php if($uc == "exercice") echo "style='background:#32CAED'";?>> <a href="index.php?uc=exercice&action=lstExercice"> Exercices </a>
 				<ul class="sousMenu">
 					<li> <a href="index.php?uc=exercice&action=abdominaux">Abdominaux</a></li>
 					<li> <a href="index.php?uc=exercice&action=dos">Dos</a></li>
@@ -25,7 +26,7 @@
 			</li>
 			
 			<!-- Nutrition -->
-			<li <?php if($uc == "nutrition") echo "style='background:#226D48'";?>> <a href=""> Nutrition </a>
+			<li <?php if($uc == "nutrition") echo "style='background:#32CAED'";?>> <a href=""> Nutrition </a>
 				<ul class="sousMenu">
 					<li> <a href=""> Les lipides </a></li> 
 					<li> <a href="index.php?uc=nutrition&action=proteines"> Les protéines </a></li>
@@ -36,7 +37,7 @@
 			
 			<!-- Localisation -->
 			<?php if(estConnecte()) { ?>
-			<li <?php if($uc == "localisation") echo "style='background:#226D48'";?>> <a href="index.php?uc=localisation&action=frmLocalisation">Où se muscler</a>
+			<li <?php if($uc == "localisation") echo "style='background:#32CAED'";?>> <a href="index.php?uc=localisation&action=frmLocalisation">Où se muscler</a>
 				<ul class="sousMenu">
 					<?php if(estAdmin()) { ?>
 					<li> <a href="index.php?uc=localisation&action=frmLocalisation"> Rechercher une salle </a></li>
@@ -48,7 +49,7 @@
 			
 			<!-- Gestion des exercices -->
 			<?php if(estAdmin()) { ?>
-			<li <?php if($uc == "admin") echo "style='background:#226D48'";?>> <a href="index.php?uc=admin&action="> Gestion des exercices </a>
+			<li <?php if($uc == "admin") echo "style='background:#32CAED'";?>> <a href="index.php?uc=admin&action="> Gestion des exercices </a>
 				<ul class="sousMenu">
 					<li> <a href="index.php?uc=admin&action=frmAddExercice"><img src="<?php echo $_CONFIG['DIR_Image']; ?>imgAdd.png"> Ajouter un exercice </a></li>
 					<li> <a href="index.php?uc=admin&action=frmModifExercice"><img src="<?php echo $_CONFIG['DIR_Image']; ?>tbEdit.png"> Modifier un exercice </a></li>
@@ -59,7 +60,7 @@
 			
 			<!-- Gestion nutrition -->
 			<?php if(estAdmin()) { ?>
-			<li <?php if($uc == "admin") echo "style='background:#226D48'";?>> <a href="index.php?uc=admin&action="> Gestion nutrition </a>
+			<li <?php if($uc == "admin") echo "style='background:#32CAED'";?>> <a href="index.php?uc=admin&action="> Gestion nutrition </a>
 				<ul class="sousMenu">
 					<li> <a href="index.php?uc=admin&action=frmAddExercice"><img src="<?php echo $_CONFIG['DIR_Image']; ?>imgAdd.png"> Ajouter un exercice </a></li>
 					<li> <a href="index.php?uc=admin&action=frmModifExercice"><img src="<?php echo $_CONFIG['DIR_Image']; ?>tbEdit.png"> Modifier un exercice </a></li>

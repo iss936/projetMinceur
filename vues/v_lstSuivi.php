@@ -27,7 +27,7 @@ if(isset($lesSuivis))
 		
 		//Lignes
 		echo "<tr class='ligneTableau'>
-			<td> $date </td>
+			<td> ".dateFR($date)." </td>
 			<td> $poids </td>
 			<td> $taille </td>
 			<td> $evenement</td>
@@ -56,7 +56,7 @@ $i = 0;
 foreach($lesSuivis as $unSuivi)
 	{
 		//Variables
-		$date = $unSuivi['date'];
+		$date = dateFR($unSuivi['date']);
 		$poids = $unSuivi['poids'];
 		
 		echo "data.setValue($i, 0, '$date');
