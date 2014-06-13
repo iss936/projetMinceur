@@ -67,6 +67,12 @@ switch($action)
 		//include $_CONFIG['DIR_View']."v_exBiceps.php";
 		break;
 	}
+	case 'v_exercice':
+	{
+		
+		include $_CONFIG['DIR_View']."v_exercice.php";
+		break;
+	}
 	default: 
 	{
 		echo "Cas d'utilisation inconnu!"; 

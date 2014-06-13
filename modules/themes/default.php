@@ -19,6 +19,10 @@ body {
 	text-align: justify;
 	font-family: <?php echo $_VARCSS['ContentFontFamily']; ?>;
 	font-size: 13px;
+	-webkit-background-size: cover; /* pour Chrome et Safari */
+  -moz-background-size: cover; /* pour Firefox */
+  -o-background-size: cover; /* pour Opera */
+  background-size: cover; /* version standardisée */
 }
 
 a {
