@@ -15,14 +15,14 @@ html {
 body {
 	margin: 0px;
 	/*background: <?php echo $_VARCSS['BgBody']; ?>;*/
-	background: black url(http://www.sfgym.com.au/wp-content/uploads/2012/12/DSC8972-background.jpg) no-repeat;
+	background: black url(<?php echo $_VARCSS['DirImg']; ?>background.jpg) no-repeat center center fixed;
 	text-align: justify;
 	font-family: <?php echo $_VARCSS['ContentFontFamily']; ?>;
 	font-size: 13px;
 	-webkit-background-size: cover; /* pour Chrome et Safari */
-  -moz-background-size: cover; /* pour Firefox */
-  -o-background-size: cover; /* pour Opera */
-  background-size: cover; /* version standardisée */
+	-moz-background-size: cover; /* pour Firefox */
+	-o-background-size: cover; /* pour Opera */
+	background-size: cover; /* version standardisée */
 }
 
 a {
