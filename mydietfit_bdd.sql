@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le: Ven 30 Mai 2014 à 18:13
+-- Généré le: Ven 13 Juin 2014 à 10:02
 -- Version du serveur: 5.5.24-log
 -- Version de PHP: 5.3.13
 
@@ -66,17 +66,25 @@ CREATE TABLE IF NOT EXISTS `ficheexercice` (
   `dateAjout` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `titre` varchar(45) NOT NULL DEFAULT '',
   `resume` varchar(1000) NOT NULL DEFAULT '',
-  PRIMARY KEY (`idFicheExercice`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+  `idPartieCorps` int(10) unsigned DEFAULT NULL,
+  `video` varchar(1000) NOT NULL DEFAULT '',
+  `image1` varchar(100) NOT NULL DEFAULT '',
+  `image2` varchar(100) NOT NULL DEFAULT '',
+  `image3` varchar(100) NOT NULL DEFAULT '',
+  PRIMARY KEY (`idFicheExercice`),
+  KEY `FK_ficheexercice_1` (`idPartieCorps`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Contenu de la table `ficheexercice`
 --
 
-INSERT INTO `ficheexercice` (`idFicheExercice`, `description`, `dateAjout`, `titre`, `resume`) VALUES
-(1, 'Le crunch à la poulie haute pour les obliques est essentiel pour le développement des abdominaux. Attention tout de même, comme le précise cet article pour avoir une taille fine, les lourdes charges sont à proscrire pour ne pas épaissir la taille. En revanche, pour tous les athlètes qui doivent tenir des charges lourdes au-dessus de la tête ont besoin d''abdominaux puissants afin d''assurer la stabilisation du centre corporel. Dans ce cas, n''hésitez pas à augmenter la charge pour développer un maximum de force. \r\n- Fixez la corde à l’extrémité du câble relié à la poulie haute, tenez-la fermement des deux mains et agenouillez-vous à environ 60 cm devant les contrepoids.\r\n    - Descendez les mains le long de la tête, près des oreilles, les coudes fléchis. Dans cette position de départ, le buste penché en avant avec les genoux et les hanches à environ 90° : le câble devrait être bien tendu.\r\n    - Expirez en tirant contre la résistance et faites une flexion du rachis en contractant les abdominaux. À mesure que vous arrondissez le dos, pivotez le buste pour amener un coude vers le genou opposé.\r\n    - En arrivant à la position basse, videz énergétiquement vos poumons et maintenez la position un instant en contractant les abdos et les obliques.\r\n    - En inspirant, revenez lentement à la position de départ. Refaites l''exercice de l''autre côté.\r\n    - Pensez à garder la même position des mains et des coudes pendant tout l''exercice.\r\n    - Les hanches doivent rester à la verticale des genoux. Si l''on s''assied sur les mollets, on diminue l''amplitude du mouvement et les abdominaux ne sont plus en tension.\r\n Le groupe des muscles de l''abdomen comprend le grand droit, le grand oblique et le petit oblique. Long et mince, le grand droit descend verticalement le long de la paroi abdominale; il naît sur les 5, 6 et 7 côtes sur l''appendice xiphoïde du sternum et se termine plus bas sur le pubis. Les moitiés droite et gauche sont séparées par la ligne blanche, long tendon coupé d''intersections tendineuses qui forment les rainures transversales généralement visibles quand l''abdomen est "écorché".\r\nAllant du grand droit jusqu''aux dorsaux, le grand oblique recouvre les côtés et l''avant de l''abdomen. Les fibres sont disposées en diagonale depuis leurs insertions inférieures des deux côtés de l''abdomen et forme la lettre "V". Le petit oblique est logé directement sous le grand oblique. Dans sa partie haute, ses fibres sont presque perpendiculaires à celles du grand obliques et forment un "V" à l''envers. Dans sa partie basse, près du pubis, les fibres sont presque horizontales. ', '2014-04-10 00:00:00', '', ''),
-(3, 'Moderniser un classique peut donner des résultats mitigés : ainsi, certains termes hybrides qu''on a inventés n''ont pas toujours eu le succès qui caractérise les modifications du rowing, mouvement de base du bodybuilding dans l''entraînement du dos. Le rowing buste penché avec haltères illustre bien un tel succès. Mais nous ne parlons pas ici de ce bon vieux tirage d''un bras avec une jambe sur le banc. Cette fois, il s''agit d''un tirage des deux bras, buste penché, avec rotation. \r\n- Les bras tendus et les coudes pointés vers l''extérieur, maintenez une paire d''haltères devant vos cuisses, les avant-bras en position neutre ou pronation (paume face à vous), les pieds juste à l''intérieur de la largeur des épaules, le menton un peu relevé et les genoux légèrement fléchis.\r\n- Penchez-vous en avant à partir des hanches jusqu''à ce que votre buste soit légèrement au-dessus de l''horizontale, les bras perpendiculaires au sol et le tête relevée. Remarque : pour réduire les contraintes au niveau du dos, fléchissez vos genoux dans une position confortable.\r\n- En maintenant la cambrure naturelle de votre colonne vertébrale, commencez le mouvement en serrant vos omoplates l''une contre l''autre et vers le bas.\r\n- Dès que la rétractation des omoplates est complète, continuez à tirer les haltères en tournant vos paumes vers l''avant et en amenant les coudes contre le corps et en arrière. Ces mouvements devront être fluides et sans à-coups.\r\n- Maintenez un instant la position en haut avant de redescendre lentement les charges en les contrôlant tout en inversant la rotation des mains.\r\n- Inspirez entre les répétitions ou pendant la partie négative et expirez une fois que vous avez passé le point délicat du mouvement.\r\n- Faites le nombre nécessaire de reps pour terminer votre série.\r\nCet exercice sollicite les muscles grands dorsaux, le grand rond, les rhomboïdes et le faisceau moyen du trapèze.', '2014-04-10 00:00:00', '', ''),
-(4, '', '0000-00-00 00:00:00', 'Curl haltère au banc', 'Cette version du curl sur un banc vous permet de vous concentrer sur le travail d''un seul biceps. Cela vous apportera davantage l''intensité sur un biceps à la fois.');
+INSERT INTO `ficheexercice` (`idFicheExercice`, `description`, `dateAjout`, `titre`, `resume`, `idPartieCorps`, `video`, `image1`, `image2`, `image3`) VALUES
+(1, 'Le crunch à la poulie haute pour les obliques est essentiel pour le développement des abdominaux. Attention tout de même, comme le précise cet article pour avoir une taille fine, les lourdes charges sont à proscrire pour ne pas épaissir la taille. En revanche, pour tous les athlètes qui doivent tenir des charges lourdes au-dessus de la tête ont besoin d''abdominaux puissants afin d''assurer la stabilisation du centre corporel. Dans ce cas, n''hésitez pas à augmenter la charge pour développer un maximum de force. \r\n- Fixez la corde à l’extrémité du câble relié à la poulie haute, tenez-la fermement des deux mains et agenouillez-vous à environ 60 cm devant les contrepoids.\r\n    - Descendez les mains le long de la tête, près des oreilles, les coudes fléchis. Dans cette position de départ, le buste penché en avant avec les genoux et les hanches à environ 90° : le câble devrait être bien tendu.\r\n    - Expirez en tirant contre la résistance et faites une flexion du rachis en contractant les abdominaux. À mesure que vous arrondissez le dos, pivotez le buste pour amener un coude vers le genou opposé.\r\n    - En arrivant à la position basse, videz énergétiquement vos poumons et maintenez la position un instant en contractant les abdos et les obliques.\r\n    - En inspirant, revenez lentement à la position de départ. Refaites l''exercice de l''autre côté.\r\n    - Pensez à garder la même position des mains et des coudes pendant tout l''exercice.\r\n    - Les hanches doivent rester à la verticale des genoux. Si l''on s''assied sur les mollets, on diminue l''amplitude du mouvement et les abdominaux ne sont plus en tension.\r\n Le groupe des muscles de l''abdomen comprend le grand droit, le grand oblique et le petit oblique. Long et mince, le grand droit descend verticalement le long de la paroi abdominale; il naît sur les 5, 6 et 7 côtes sur l''appendice xiphoïde du sternum et se termine plus bas sur le pubis. Les moitiés droite et gauche sont séparées par la ligne blanche, long tendon coupé d''intersections tendineuses qui forment les rainures transversales généralement visibles quand l''abdomen est "écorché".\r\nAllant du grand droit jusqu''aux dorsaux, le grand oblique recouvre les côtés et l''avant de l''abdomen. Les fibres sont disposées en diagonale depuis leurs insertions inférieures des deux côtés de l''abdomen et forme la lettre "V". Le petit oblique est logé directement sous le grand oblique. Dans sa partie haute, ses fibres sont presque perpendiculaires à celles du grand obliques et forment un "V" à l''envers. Dans sa partie basse, près du pubis, les fibres sont presque horizontales. ', '2014-04-10 00:00:00', '', '', 1, '', '', '', ''),
+(3, 'Moderniser un classique peut donner des résultats mitigés : ainsi, certains termes hybrides qu''on a inventés n''ont pas toujours eu le succès qui caractérise les modifications du rowing, mouvement de base du bodybuilding dans l''entraînement du dos. Le rowing buste penché avec haltères illustre bien un tel succès. Mais nous ne parlons pas ici de ce bon vieux tirage d''un bras avec une jambe sur le banc. Cette fois, il s''agit d''un tirage des deux bras, buste penché, avec rotation. \r\n- Les bras tendus et les coudes pointés vers l''extérieur, maintenez une paire d''haltères devant vos cuisses, les avant-bras en position neutre ou pronation (paume face à vous), les pieds juste à l''intérieur de la largeur des épaules, le menton un peu relevé et les genoux légèrement fléchis.\r\n- Penchez-vous en avant à partir des hanches jusqu''à ce que votre buste soit légèrement au-dessus de l''horizontale, les bras perpendiculaires au sol et le tête relevée. Remarque : pour réduire les contraintes au niveau du dos, fléchissez vos genoux dans une position confortable.\r\n- En maintenant la cambrure naturelle de votre colonne vertébrale, commencez le mouvement en serrant vos omoplates l''une contre l''autre et vers le bas.\r\n- Dès que la rétractation des omoplates est complète, continuez à tirer les haltères en tournant vos paumes vers l''avant et en amenant les coudes contre le corps et en arrière. Ces mouvements devront être fluides et sans à-coups.\r\n- Maintenez un instant la position en haut avant de redescendre lentement les charges en les contrôlant tout en inversant la rotation des mains.\r\n- Inspirez entre les répétitions ou pendant la partie négative et expirez une fois que vous avez passé le point délicat du mouvement.\r\n- Faites le nombre nécessaire de reps pour terminer votre série.\r\nCet exercice sollicite les muscles grands dorsaux, le grand rond, les rhomboïdes et le faisceau moyen du trapèze.', '2014-04-10 00:00:00', '', '', 1, '', '', '', ''),
+(4, '', '0000-00-00 00:00:00', 'Curl haltère au banc', 'Cette version du curl sur un banc vous permet de vous concentrer sur le travail d''un seul biceps. Cela vous apportera davantage l''intensité sur un biceps à la fois.', 4, '', '', '', ''),
+(5, '', '2014-06-02 19:50:00', 'Curl haltère supination', 'Cette  version du curl avec haltères est une des plus classiques. Les haltères permettent une fluidité au niveau des poignets qui évitent les tensions qu''une barre peut apporter.', 4, '', '', '', ''),
+(6, '', '2014-06-02 19:50:01', 'Curl haltère au pupitre', 'La flexion de l''avant-bras avec haltère au pupitre vous permet d''augmenter l''intensité du travail sur chaque biceps grâce à une concentration plus importante.', 4, '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -175,7 +183,7 @@ INSERT INTO `salle` (`idSalle`, `nomSalle`, `adresse`, `latitude`, `longitude`, 
 
 CREATE TABLE IF NOT EXISTS `suivi` (
   `idSuivi` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `date` date NOT NULL DEFAULT '0000-00-00',
   `poids` float NOT NULL DEFAULT '0',
   `taille` int(11) unsigned NOT NULL DEFAULT '0',
   `evenement` varchar(200) DEFAULT NULL,
@@ -189,8 +197,8 @@ CREATE TABLE IF NOT EXISTS `suivi` (
 --
 
 INSERT INTO `suivi` (`idSuivi`, `date`, `poids`, `taille`, `evenement`, `idUtilisateur`) VALUES
-(1, '2014-04-01 00:00:00', 78, 180, '1h30 de sport', 1),
-(2, '2014-04-03 00:00:00', 77.8, 180, 'Jecommence l''entrainement.', 1);
+(1, '2014-04-01', 78, 180, '1h30 de sport', 1),
+(2, '2014-04-03', 77.8, 180, 'Jecommence l''entrainement.', 1);
 
 -- --------------------------------------------------------
 
@@ -237,30 +245,8 @@ CREATE TABLE IF NOT EXISTS `utilisateurs` (
 --
 
 INSERT INTO `utilisateurs` (`idUtilisateur`, `login`, `mdp`, `prenom`, `nom`, `telephone`, `mail`, `adresse`, `dateInscription`) VALUES
-(1, 'admin', 'admin', 'Admin', 'admin', '', '', '', '0000-00-00 00:00:00'),
-(2, 'test', 'test', '', '', '', '', '', '0000-00-00 00:00:00');
-
--- --------------------------------------------------------
-
---
--- Structure de la table `x_exercice_partiecorps`
---
-
-CREATE TABLE IF NOT EXISTS `x_exercice_partiecorps` (
-  `idFicheExercice` int(10) unsigned NOT NULL DEFAULT '0',
-  `idPartieCorps` int(10) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`idFicheExercice`,`idPartieCorps`),
-  KEY `FK_x_exercice_partiecorps_2` (`idPartieCorps`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Contenu de la table `x_exercice_partiecorps`
---
-
-INSERT INTO `x_exercice_partiecorps` (`idFicheExercice`, `idPartieCorps`) VALUES
-(1, 1),
-(3, 2),
-(4, 4);
+(1, 'admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', 'Admin', 'admin', '0493827', 'admin@admin.com', '140 Rue de la Nouvelle France Montreuil', '0000-00-00 00:00:00'),
+(2, 'test', 'a94a8fe5ccb19ba61c4c0873d391e987982fbbd3', '', '', '', '', '', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -299,6 +285,12 @@ ALTER TABLE `avisnutrition`
   ADD CONSTRAINT `FK_avisnutrition_2` FOREIGN KEY (`idFicheNutrition`) REFERENCES `fichenutrition` (`idFicheNutrition`);
 
 --
+-- Contraintes pour la table `ficheexercice`
+--
+ALTER TABLE `ficheexercice`
+  ADD CONSTRAINT `FK_ficheexercice_1` FOREIGN KEY (`idPartieCorps`) REFERENCES `partiecorps` (`idPartieCorps`);
+
+--
 -- Contraintes pour la table `programme`
 --
 ALTER TABLE `programme`
@@ -315,13 +307,6 @@ ALTER TABLE `salle`
 --
 ALTER TABLE `suivi`
   ADD CONSTRAINT `FK_suivi_1` FOREIGN KEY (`idUtilisateur`) REFERENCES `utilisateurs` (`idUtilisateur`);
-
---
--- Contraintes pour la table `x_exercice_partiecorps`
---
-ALTER TABLE `x_exercice_partiecorps`
-  ADD CONSTRAINT `FK_x_exercice_partiecorps_1` FOREIGN KEY (`idFicheExercice`) REFERENCES `ficheexercice` (`idFicheExercice`),
-  ADD CONSTRAINT `FK_x_exercice_partiecorps_2` FOREIGN KEY (`idPartieCorps`) REFERENCES `partiecorps` (`idPartieCorps`);
 
 --
 -- Contraintes pour la table `x_programme_exercice`

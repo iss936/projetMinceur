@@ -14,7 +14,8 @@ html {
 
 body {
 	margin: 0px;
-	background: <?php echo $_VARCSS['BgBody']; ?>;
+	/*background: <?php echo $_VARCSS['BgBody']; ?>;*/
+	background: black url(http://www.sfgym.com.au/wp-content/uploads/2012/12/DSC8972-background.jpg) no-repeat;
 	text-align: justify;
 	font-family: <?php echo $_VARCSS['ContentFontFamily']; ?>;
 	font-size: 13px;

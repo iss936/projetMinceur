@@ -43,10 +43,18 @@ switch($action)
 	}
 	case 'lstPgrmBiceps':
 	{
-		$titre = "Liste des programmes";
-		$lesProgrammes = getLesProgrammes(4);
-		include $_CONFIG['DIR_View']."v_headTitre.php";
-		include $_CONFIG['DIR_View']."v_lstPgrm.php";
+		if(estConnecte())
+		{
+			$titre = "Liste des programmes";
+			$lesProgrammes = getLesProgrammes(4);
+			include $_CONFIG['DIR_View']."v_headTitre.php";
+			include $_CONFIG['DIR_View']."v_lstPgrm.php";
+		}
+		else
+		{
+			$msgErreurs[] = "Vous n'êtes pas autorisé à accéder à cette page!";
+			include $_CONFIG['DIR_View']."v_msgErreurs.php";
+		}
 		break;
 	}
 	case 'triceps':
