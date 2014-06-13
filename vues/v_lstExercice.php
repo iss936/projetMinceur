@@ -10,10 +10,10 @@ if(isset($lesPartiesCorps))
 		$libelle = $unePartieCorps['libelle'];
 		$libelleM = strtolower($libelle);
 		//Lignes
-		echo "	<a href='index.php?uc=exercice&action=$libelleM'><fieldset>
-					<legend>$libelle</legend>
+		echo "	<fieldset>
+					<legend><a href='index.php?uc=exercice&action=$libelleM'>$libelle</a></legend>
 					<img src='$_CONFIG[DIR_Image]$libelle.png'>
-				</fieldset></a>
+				</fieldset>
 				<br>";
 	}
 }

@@ -21,6 +21,7 @@ body {
 	font-size: 13px;
 	-webkit-background-size: cover; /* pour Chrome et Safari */
 	-moz-background-size: cover; /* pour Firefox */
+	-ms-background-size: cover;
 	-o-background-size: cover; /* pour Opera */
 	background-size: cover; /* version standardisée */
 }

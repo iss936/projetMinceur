@@ -69,8 +69,11 @@ switch($action)
 	}
 	case 'v_exercice':
 	{
-		
-		include $_CONFIG['DIR_View']."v_exercice.php";
+		$idExercice = getRequest('idExercice');
+		$unExercice = getUnExercice($idExercice);
+		$titre = $unExercice['titre'];
+		include $_CONFIG['DIR_View']."v_headTitre.php";
+		include $_CONFIG['DIR_View']."/exercices/v_exercice.php";
 		break;
 	}
 	default: 

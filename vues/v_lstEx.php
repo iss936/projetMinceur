@@ -9,12 +9,13 @@ if(isset($lesExercicePartieCorps))
 		$unExercice = getUnExercice($idExercice);
 		$titre = $unExercice['titre'];
 		$resume = $unExercice['resume'];
+		$id = $unExercice['idFicheExercice'];
 		
 		//Lignes
-		echo "	<a><fieldset>
-					<legend>$titre</legend>
+		echo "	<fieldset>
+					<legend><a href='index.php?uc=exercice&action=v_exercice&idExercice=$id'>$titre</a></legend>
 					<p>$resume</p>
-				</fieldset></a>
+				</fieldset>
 				<br>";
 	}
 }
