@@ -6,10 +6,12 @@ if(isset($lesProgrammes))
 	{
 		//Variables
 		$niveau = $unProgramme['niveau'];
+		$idPgrm = $unProgramme['idProgramme'];
+		
 		//Lignes
-		echo "	<a><fieldset>
-					<legend>$niveau</legend>
-				</fieldset></a>
+		echo "	<fieldset>
+					<legend><a href='index.php?uc=exercice&action=v_pgrm&idPgrm=$idPgrm'>$niveau</a></legend>
+				</fieldset>
 				<br>";
 	}
 }

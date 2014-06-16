@@ -9,6 +9,7 @@ function getUnProgrammeExercice($idProgramme, $idFicheExercice = null)
 	//Requête
 	$req = "SELECT * FROM x_programme_exercice where idProgramme = ".getMySqlString($idProgramme);
 	if($idFicheExercice != null) $req .= " AND idFicheExercice = ".getMySqlString($idFicheExercice);
+	$req .= " ORDER BY ordre";
 	
 	//Exécution
 	$conx = connexion();
@@ -16,7 +17,13 @@ function getUnProgrammeExercice($idProgramme, $idFicheExercice = null)
 	mysql_close($conx);
 	
 	//Récupération
-	$unProgrammeExercice = mysql_fetch_assoc($res);
+	$unProgrammeExercice = array();
+	$ligne = mysql_fetch_assoc($res);
+	while($ligne != false)
+	{
+		$unProgrammeExercice[] = $ligne;
+		$ligne = mysql_fetch_assoc($res);
+	} 
 	
 	return $unProgrammeExercice;
 }

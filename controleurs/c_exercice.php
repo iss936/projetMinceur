@@ -13,24 +13,56 @@ switch($action)
 	}
 	case 'abdominaux':
 	{
-		include $_CONFIG['DIR_View']."/exercices/v_exAbdominaux.php";
+		$titre = "Entrainement des abdominaux";
+		include $_CONFIG['DIR_View']."v_headTitre.php";
+		include $_CONFIG['DIR_View']."exercices/abdominaux/v_abdominaux.php";
+		//include $_CONFIG['DIR_View']."/exercices/v_exAbdominaux.php";
+		break;
+	}
+	case 'lstExAbdominaux':
+	{
+		$titre = "Liste des exercices pour abdominaux";
+		$lesExercicePartieCorps = getLesExercices(1);
+		include $_CONFIG['DIR_View']."v_headTitre.php";
+		include $_CONFIG['DIR_View']."v_lstEx.php";
+		break;
+	}
+	case 'lstPgrmAbdominaux':
+	{
+		if(estConnecte())
+		{
+			$titre = "Liste des programmes";
+			$lesProgrammes = getLesProgrammes(1);
+			include $_CONFIG['DIR_View']."v_headTitre.php";
+			include $_CONFIG['DIR_View']."v_lstPgrm.php";
+		}
+		else
+		{
+			$msgErreurs[] = "Vous n'êtes pas autorisé à accéder à cette page!";
+			include $_CONFIG['DIR_View']."v_msgErreurs.php";
+		}
 		break;
 	}
 	case 'dos':
 	{
-		include $_CONFIG['DIR_View']."/exercices/v_exDos.php";
+		$titre = "Entrainement du dos";
+		include $_CONFIG['DIR_View']."v_headTitre.php";
+		include $_CONFIG['DIR_View']."exercices/dos/v_dos.php";
+		//include $_CONFIG['DIR_View']."/exercices/v_exDos.php";
 		break;
 	}
 	case 'pectoraux':
 	{
-		//include $_CONFIG['DIR_View']."v_exPectoraux.php";
+		$titre = "Entrainement des pectoraux";
+		include $_CONFIG['DIR_View']."v_headTitre.php";
+		include $_CONFIG['DIR_View']."exercices/pectoraux/v_pectoraux.php";
 		break;
 	}
 	case 'biceps':
 	{
 		$titre = "Entrainement des biceps";
 		include $_CONFIG['DIR_View']."v_headTitre.php";
-		include $_CONFIG['DIR_View']."/exercices/biceps/v_biceps.php";
+		include $_CONFIG['DIR_View']."exercices/biceps/v_biceps.php";
 		break;
 	}
 	case 'lstExBiceps':
@@ -59,12 +91,16 @@ switch($action)
 	}
 	case 'triceps':
 	{
-		//include $_CONFIG['DIR_View']."v_exBiceps.php";
+		$titre = "Entrainement des triceps";
+		include $_CONFIG['DIR_View']."v_headTitre.php";
+		include $_CONFIG['DIR_View']."exercices/triceps/v_triceps.php";
 		break;
 	}
 	case 'epaules':
 	{
-		//include $_CONFIG['DIR_View']."v_exBiceps.php";
+		$titre = "Entrainement des épaules";
+		include $_CONFIG['DIR_View']."v_headTitre.php";
+		include $_CONFIG['DIR_View']."exercices/epaules/v_epaules.php";
 		break;
 	}
 	case 'v_exercice':
@@ -73,7 +109,25 @@ switch($action)
 		$unExercice = getUnExercice($idExercice);
 		$titre = $unExercice['titre'];
 		include $_CONFIG['DIR_View']."v_headTitre.php";
-		include $_CONFIG['DIR_View']."/exercices/v_exercice.php";
+		include $_CONFIG['DIR_View']."exercices/v_exercice.php";
+		break;
+	}
+	case 'v_pgrm':
+	{
+		if(estConnecte())
+		{
+			$idPgrm = getRequest('idPgrm');
+			$unProgramme = getUnProgramme($idPgrm);
+			$unProgrammeExercice = getUnProgrammeExercice($idPgrm);
+			$titre = $unProgramme['niveau'];
+			include $_CONFIG['DIR_View']."v_headTitre.php";
+			include $_CONFIG['DIR_View']."exercices/v_pgrm.php";
+		}
+		else
+		{
+			$msgErreurs[] = "Vous n'êtes pas autorisé à accéder à cette page!";
+			include $_CONFIG['DIR_View']."v_msgErreurs.php";
+		}
 		break;
 	}
 	default: 

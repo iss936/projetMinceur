@@ -10,6 +10,7 @@ $biceps = "<a href='index.php?uc=exercice&action=biceps'>Entrainement des biceps
 $triceps = "<a href='index.php?uc=exercice&action=triceps'>Entrainement des triceps</a>";
 $epaules = "<a href='index.php?uc=exercice&action=epaules'>Entrainement des épaules</a>";
 
+
 echo "<div style='text-align:justify'>";
 
 if($action == "lstExercice") {
@@ -60,5 +61,18 @@ if($action == "lstPgrmBiceps") {
 	echo $home." > ".$niveau1." > ".$biceps;
 }
 
-echo "</div>";
+if($action == "v_exercice") {
+	$idExercice = getRequest('idExercice');
+	$unExercice = getUnExercice($idExercice);
+	$partieCorps = getUnePartieCorps($unExercice['idPartieCorps']);
+	if($partieCorps['libelle'] == "Abdominaux") {
+		$ex = "<a href='index.php?uc=exercice&action=lstExBiceps'>Liste des exercices pour abdominaux</a>";
+		echo $home." > ".$niveau1." > ".$abdominaux." > ".$ex;
+	}
+	if($partieCorps['libelle'] == "Biceps") {
+		$ex = "<a href='index.php?uc=exercice&action=lstExBiceps'>Liste des exercices pour biceps</a>";
+		echo $home." > ".$niveau1." > ".$biceps." > ".$ex;
+	}
+}
+echo "</div><br>";
 ?>

@@ -3,7 +3,7 @@
 	<p>Il existe trois principaux mouvements appelés "curl" pour travailler les biceps (muscle biceps brachial). Les plus couramment utilisés 
 	sont le curl barre (prise en supination), le curl prise marteau et le curl en pronation.</p>
 </fieldset>
-
+<br>
 <?php if(estConnecte()) { ?>
 	<fieldset>
 		<legend><a href="index.php?uc=exercice&action=lstPgrmBiceps">Programme Biceps</a></legend>

@@ -82,4 +82,30 @@ function getLesSallesOrder($lesSalles, $lat, $long, $rayon)
 	return $lesSallesOrder;
 }
 
+//Ajoute une salle
+function addSalle($nomSalle, $adresseSalle, $latitude, $longitude, $idTypeSalle)
+{
+	//Récupération des variables
+	$Erreurs = array();
+	
+	$nom = getMySqlString($nomSalle);
+	$adresse = getMySqlString($adresseSalle);
+	$lat = getMySqlString($latitude);
+	$long = getMySqlString($longitude);
+	
+	//Test des erreurs
+	if(!$nomSalle || !$adresseSalle || !$idTypeSalle) $Erreurs[] = "Veuillez remplir tous les champs obligatoires (*).";
+
+	//Ajout dans la base
+	if(!$Erreurs)
+	{
+		$req = "INSERT INTO salle (nomSalle, adresse, latitude, longitude, idTypeSalle)
+				VALUES ($nom, $adresse, $lat, $long, $idTypeSalle)";
+		$conx = connexion();
+		mysql_query($req, $conx) or $Erreurs[] = "<u>Erreur SQL (addSalle)</u>: ".mysql_error();
+		mysql_close($conx);
+	}
+
+	return $Erreurs;
+}
 ?>

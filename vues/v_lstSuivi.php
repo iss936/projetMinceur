@@ -19,14 +19,9 @@ if(isset($lesSuivis))
 		$poids = $unSuivi['poids'];
 		$taille = $unSuivi['taille'];
 		$evenement = $unSuivi['evenement'];
-		// - Image et lien
-		$urlFiche = "index.php?uc=param&action=frmModifUtilisateur&id_utilisateur=$idSuivi";
-		$paramTD = "onClick=document.location.href='index.php?uc=param&action=frmModifUtilisateur&id_utilisateur=$idSuivi' title=\"Cliquez ici pour voir l'école\"";
-		$imgEdit = "<a href='$urlFiche'><img src='".$_CONFIG['DIR_Image']."imgEdit.png' title=\"Voir l'école\"></a>";
-		$imgSuppr = "<a onClick=confirmDelUtilisateur($idSuivi);><img src='".$_CONFIG['DIR_Image']."imgTrash.png' title=\"Supprimer l'école\"></a>";
 		
 		//Lignes
-		echo "<tr class='ligneTableau'>
+		echo "<tr>
 			<td> ".dateFR($date)." </td>
 			<td> $poids </td>
 			<td> $taille </td>

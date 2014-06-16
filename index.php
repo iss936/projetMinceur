@@ -27,19 +27,26 @@ switch($uc)
 	case 'suivi':
 	{
 		if(estConnecte()) include $_CONFIG['DIR_Control']."c_suivi.php";
-		else include $_CONFIG['DIR_View']."i_retourConnexion.php";
+		else
+		{
+			$msgErreurs[] = "Vous n'êtes pas autorisé à accéder à cette page!";
+			include $_CONFIG['DIR_View']."v_msgErreurs.php";
+		}
 		break;
 	}
 	case 'localisation':
 	{
 		if(estConnecte()) include $_CONFIG['DIR_Control']."c_localisation.php";
-		else include $_CONFIG['DIR_View']."i_retourConnexion.php";
+		else
+		{
+			$msgErreurs[] = "Vous n'êtes pas autorisé à accéder à cette page!";
+			include $_CONFIG['DIR_View']."v_msgErreurs.php";
+		}
 		break;
 	}
 	case 'nutrition':
 	{
-		if(estConnecte()) include $_CONFIG['DIR_Control']."c_nutrition.php";
-		else include $_CONFIG['DIR_View']."i_retourConnexion.php";
+		include $_CONFIG['DIR_Control']."c_nutrition.php";
 		break;
 	}
 	case 'exercice':
@@ -51,7 +58,11 @@ switch($uc)
 	case 'admin':
 	{
 		if(estConnecte()) include $_CONFIG['DIR_Control']."c_admin.php";
-		else include $_CONFIG['DIR_View']."i_retourConnexion.php";
+		else
+		{
+			$msgErreurs[] = "Vous n'êtes pas autorisé à accéder à cette page!";
+			include $_CONFIG['DIR_View']."v_msgErreurs.php";
+		}
 		break;
 	}
 	default:
