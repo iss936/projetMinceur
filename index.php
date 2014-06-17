@@ -10,6 +10,8 @@ require $_CONFIG['DIR_Model']."fonctions.all.php";
 $uc = getRequest('uc', "identif");
 $action = getRequest('action');
 
+$lesPartiesCorps = getLesPartiesCorps();
+
 //Haut de page
 include $_CONFIG['DIR_View']."v_entete.php";
 include $_CONFIG['DIR_View']."v_bandeau.php";

@@ -8,10 +8,9 @@ if(isset($lesPartiesCorps))
 		//Utilisateur
 		$idPartieCorps = $unePartieCorps['idPartieCorps'];
 		$libelle = $unePartieCorps['libelle'];
-		$libelleM = strtolower($libelle);
 		//Lignes
 		echo "	<fieldset>
-					<legend><a href='index.php?uc=exercice&action=$libelleM'>$libelle</a></legend>
+					<legend><a href='index.php?uc=exercice&action=entrainement&idPartieCorps=$idPartieCorps'>$libelle</a></legend>
 					<img src='$_CONFIG[DIR_Image]$libelle.png'>
 				</fieldset>
 				<br>";

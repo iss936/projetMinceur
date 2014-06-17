@@ -6,33 +6,38 @@ switch($action)
 {
 	case 'lstExercice':
 	{
-		$titre = "Les exercices";
+		$titre = "Les parties du corps";
 		$lesPartiesCorps = getLesPartiesCorps();
+		include $_CONFIG['DIR_View']."v_headTitre.php";
 		include $_CONFIG['DIR_View']."v_lstExercice.php";
 		break;
 	}
-	case 'abdominaux':
+	case 'entrainement':
 	{
-		$titre = "Entrainement des abdominaux";
+		$idPartieCorps = getRequest('idPartieCorps');
+		$unePartieCorps = getUnePartieCorps($idPartieCorps);
+		$titre = "Entrainement ".$unePartieCorps['libelle'];
 		include $_CONFIG['DIR_View']."v_headTitre.php";
-		include $_CONFIG['DIR_View']."exercices/abdominaux/v_abdominaux.php";
-		//include $_CONFIG['DIR_View']."/exercices/v_exAbdominaux.php";
+		include $_CONFIG['DIR_View']."v_entrainement.php";
 		break;
 	}
-	case 'lstExAbdominaux':
+	case 'lstEx':
 	{
-		$titre = "Liste des exercices pour abdominaux";
-		$lesExercicePartieCorps = getLesExercices(1);
+		$idPartieCorps = getRequest('idPartieCorps');
+		$unePartieCorps = getUnePartieCorps($idPartieCorps);
+		$titre = "Liste des exercices pour ".$unePartieCorps['libelle'];
+		$lesExercicePartieCorps = getLesExercices($idPartieCorps);
 		include $_CONFIG['DIR_View']."v_headTitre.php";
 		include $_CONFIG['DIR_View']."v_lstEx.php";
 		break;
 	}
-	case 'lstPgrmAbdominaux':
+	case 'lstPgrm':
 	{
 		if(estConnecte())
 		{
 			$titre = "Liste des programmes";
-			$lesProgrammes = getLesProgrammes(1);
+			$idPartieCorps = getRequest('idPartieCorps');
+			$lesProgrammes = getLesProgrammes($idPartieCorps);
 			include $_CONFIG['DIR_View']."v_headTitre.php";
 			include $_CONFIG['DIR_View']."v_lstPgrm.php";
 		}
@@ -43,66 +48,7 @@ switch($action)
 		}
 		break;
 	}
-	case 'dos':
-	{
-		$titre = "Entrainement du dos";
-		include $_CONFIG['DIR_View']."v_headTitre.php";
-		include $_CONFIG['DIR_View']."exercices/dos/v_dos.php";
-		//include $_CONFIG['DIR_View']."/exercices/v_exDos.php";
-		break;
-	}
-	case 'pectoraux':
-	{
-		$titre = "Entrainement des pectoraux";
-		include $_CONFIG['DIR_View']."v_headTitre.php";
-		include $_CONFIG['DIR_View']."exercices/pectoraux/v_pectoraux.php";
-		break;
-	}
-	case 'biceps':
-	{
-		$titre = "Entrainement des biceps";
-		include $_CONFIG['DIR_View']."v_headTitre.php";
-		include $_CONFIG['DIR_View']."exercices/biceps/v_biceps.php";
-		break;
-	}
-	case 'lstExBiceps':
-	{
-		$titre = "Liste des exercices pour biceps";
-		$lesExercicePartieCorps = getLesExercices(4);
-		include $_CONFIG['DIR_View']."v_headTitre.php";
-		include $_CONFIG['DIR_View']."v_lstEx.php";
-		break;
-	}
-	case 'lstPgrmBiceps':
-	{
-		if(estConnecte())
-		{
-			$titre = "Liste des programmes";
-			$lesProgrammes = getLesProgrammes(4);
-			include $_CONFIG['DIR_View']."v_headTitre.php";
-			include $_CONFIG['DIR_View']."v_lstPgrm.php";
-		}
-		else
-		{
-			$msgErreurs[] = "Vous n'êtes pas autorisé à accéder à cette page!";
-			include $_CONFIG['DIR_View']."v_msgErreurs.php";
-		}
-		break;
-	}
-	case 'triceps':
-	{
-		$titre = "Entrainement des triceps";
-		include $_CONFIG['DIR_View']."v_headTitre.php";
-		include $_CONFIG['DIR_View']."exercices/triceps/v_triceps.php";
-		break;
-	}
-	case 'epaules':
-	{
-		$titre = "Entrainement des épaules";
-		include $_CONFIG['DIR_View']."v_headTitre.php";
-		include $_CONFIG['DIR_View']."exercices/epaules/v_epaules.php";
-		break;
-	}
+	
 	case 'v_exercice':
 	{
 		$idExercice = getRequest('idExercice');

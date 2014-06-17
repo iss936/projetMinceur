@@ -16,12 +16,9 @@
 			<!-- Exercices physiques -->
 			<li <?php if($uc == "exercice") echo "style='background:#32CAED'";?>> <a href="index.php?uc=exercice&action=lstExercice"> Exercices </a>
 				<ul class="sousMenu">
-					<li> <a href="index.php?uc=exercice&action=abdominaux">Abdominaux</a></li>
-					<li> <a href="index.php?uc=exercice&action=dos">Dos</a></li>
-					<li> <a href="index.php?uc=exercice&action=pectoraux">Pectoraux</a></li>
-					<li> <a href="index.php?uc=exercice&action=biceps">Biceps</a></li>
-					<li> <a href="index.php?uc=exercice&action=triceps">Triceps</a></li>
-					<li> <a href="index.php?uc=exercice&action=epaules">Epaules</a></li>
+					<?php foreach($lesPartiesCorps as $unePartieCorps) { ?>
+					<li> <a href="index.php?uc=exercice&action=entrainement&idPartieCorps=<?php echo $unePartieCorps['idPartieCorps'] ?>"><?php echo $unePartieCorps['libelle'] ?></a></li>
+					<?php } ?>
 				</ul>
 			</li>
 			
