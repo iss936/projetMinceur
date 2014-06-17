@@ -321,6 +321,11 @@ ALTER TABLE `x_programme_exercice`
   ADD CONSTRAINT `FK_x_programme_exercice_1` FOREIGN KEY (`idProgramme`) REFERENCES `programme` (`idProgramme`),
   ADD CONSTRAINT `FK_x_programme_exercice_2` FOREIGN KEY (`idFicheExercice`) REFERENCES `ficheexercice` (`idFicheExercice`);
 
+ALTER TABLE `ficheexercice` ADD imageResume varchar( 100 );
+ALTER TABLE `ficheexercice` CHANGE `image3` `image3` VARCHAR( 100 ) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT '';
+ALTER TABLE `ficheexercice` CHANGE `image2` `image2` VARCHAR( 100 ) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT '';
+ALTER TABLE `ficheexercice` CHANGE `image1` `image1` VARCHAR( 100 ) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT '';
+ALTER TABLE `ficheexercice` CHANGE `video` `video` VARCHAR( 1000 ) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT '';
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

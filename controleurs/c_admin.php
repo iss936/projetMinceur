@@ -6,8 +6,63 @@ switch($action)
 	{
 		if(estConnecte())
 		{
-			if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    			
+			if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    			$msgErreurs= array();
+				$bodyPart = $_POST['bodyParts'];
+				$idBodyPart = getIdPartieCorps($bodyPart);
+				$ok=false;
+				$titre = $_POST['titre'];
+				//verif titre
+				if($titre==null)
+				{
+					$titre = "Ajouter un exercice";
+					$bodyParts = getLesPartiesCorps();
+					$ok=true;
+					include $_CONFIG['DIR_View']."v_headTitre.php";
+					$msgErreurs[] = "Saisir un titre";
+					include $_CONFIG['DIR_View']."v_msgErreurs.php";
+					include $_CONFIG['DIR_View']."exercices/v_frmAddExercice.php";
+				}
+				
+				$resume = $_POST['resume']; 
+				// on compte dans le resume le nb d'image importé
+				if(mb_substr_count($resume, "<img ") >1 || $resume==null)
+				{	
+					$ok=true;
+					// $resume = getRequest('resume');
+					$titre = "Ajouter un exercice";
+					$bodyParts = getLesPartiesCorps();
+					include $_CONFIG['DIR_View']."v_headTitre.php";
+					$msgErreurs[] = "Saisir un resume avec une seule image";
+					include $_CONFIG['DIR_View']."v_msgErreurs.php";
+					include $_CONFIG['DIR_View']."exercices/v_frmAddExercice.php";
+				}
+				
+				$contenu = $_POST['contenu'];
+				// on compte dans le contenu le nb d'image importé
+				if(mb_substr_count($contenu, "<img ") >3 || $contenu==null)
+				{	
+					$ok=true;
+					// $resume = getRequest('resume');
+					$titre = "Ajouter un exercice";
+					$bodyParts = getLesPartiesCorps();
+					include $_CONFIG['DIR_View']."v_headTitre.php";
+					$msgErreurs[] = "Saisir le contenu avec maximum 3 images";
+					include $_CONFIG['DIR_View']."v_msgErreurs.php";
+					include $_CONFIG['DIR_View']."exercices/v_frmAddExercice.php";
+				}
+				//pas d'erreur de saisie
+				if(!$ok)
+				{
+					insertExercice($contenu,$titre,$resume,$bodyPart);
+					$titre = "Ajouter un exercice";
+					$bodyParts = getLesPartiesCorps();
+					include $_CONFIG['DIR_View']."v_headTitre.php";
+					include $_CONFIG['DIR_View']."exercices/v_frmAddExercice.php";
+					echo " réussi";
+				}
+				/*var_dump($contenu);
+				die();*/
 
 			}
 			else// on affiche le formulaire d'ajout

@@ -106,4 +106,39 @@ function getLeDernierExercice()
 	
 	return $unExercice;
 }
+
+//ajoute un exercice dans la table fiche exercice
+function insertExercice($contenuExercice,$titre,$resume,$bodyPart)
+{
+	$idBodyPart= getIdPartieCorps($bodyPart);
+	$idBodyPart = $idBodyPart[0];
+	var_dump($idBodyPart);
+	$date = date('d/m/y');
+	//Requête
+	$req = "insert Into ficheexercice (description,dateAjout,titre,resume,idPartieCorps) values ('$contenuExercice',
+		'$date','$titre','$resume',$idBodyPart)";
+	
+	//Exécution
+	$conx = connexion();
+	$res = mysql_query($req, $conx) or die ("<u>Erreur SQL (échouééé)</u>: ".mysql_error()." <br>");
+	mysql_close($conx);
+	
+}
+
+//Récupère un exercice
+function getIdPartieCorps($bodyPart)
+{
+	//Requête
+	$req = "SELECT idPartieCorps FROM partiecorps where libelle = '$bodyPart'";
+	
+	//Exécution
+	$conx = connexion();
+	$res = mysql_query($req, $conx) or die ("<u>Erreur SQL (getUnExercice)</u>: ".mysql_error()." <br>");
+	mysql_close($conx);
+	
+	//Récupération
+	$id = mysql_fetch_row($res);
+	
+	return $id;
+}
 ?>
