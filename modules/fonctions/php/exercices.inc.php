@@ -21,11 +21,10 @@ function getUnExercice($idExercice)
 }
 
 //Récupère les exercices
-function getLesExercices($idPartieCorps = null)
+function getLesExercices($idPartieCorps)
 {
 	//Requête
-	$req = "SELECT * FROM ficheexercice";
-	if($idPartieCorps != null) $req .= " WHERE idPartieCorps = ".getMySqlString($idPartieCorps);
+	$req = "SELECT * FROM ficheexercice WHERE idPartieCorps = $idPartieCorps";
 	
 	//Exécution
 	$conx = connexion();
@@ -107,16 +106,24 @@ function getLeDernierExercice()
 	return $unExercice;
 }
 
-//ajoute un exercice dans la table fiche exercice
-function insertExercice($contenuExercice,$titre,$resume,$bodyPart)
+//ajoute un exercice dans la table fiche exercice 
+function insertExercice($contenuExercice,$titre,$resume,$imageResume,$bodyPart,$videoExercice)
 {
 	$idBodyPart= getIdPartieCorps($bodyPart);
 	$idBodyPart = $idBodyPart[0];
-	var_dump($idBodyPart);
 	$date = date('d/m/y');
-	//Requête
-	$req = "insert Into ficheexercice (description,dateAjout,titre,resume,idPartieCorps) values ('$contenuExercice',
-		'$date','$titre','$resume',$idBodyPart)";
+
+	if($videoExercice == null)
+	{
+		$req = "insert Into ficheexercice (description,dateAjout,titre,resume,imageResume,idPartieCorps) values ('$contenuExercice',
+		'$date','$titre','$resume','$imageResume',$idBodyPart)";
+	}
+	else
+	{
+		$req = "insert Into ficheexercice (description,dateAjout,titre,resume,imageResume,idPartieCorps,video) values ('$contenuExercice',
+		'$date','$titre','$resume','$imageResume',$idBodyPart,'$videoExercice')";
+	}
+	
 	
 	//Exécution
 	$conx = connexion();
@@ -124,7 +131,6 @@ function insertExercice($contenuExercice,$titre,$resume,$bodyPart)
 	mysql_close($conx);
 	
 }
-
 //Récupère un exercice
 function getIdPartieCorps($bodyPart)
 {
@@ -141,4 +147,34 @@ function getIdPartieCorps($bodyPart)
 	
 	return $id;
 }
+
+function verifFormExercice($titre,$resume,$imageResume,$contenuExercice)
+{
+	$msgErreur = array();
+	if($titre == null || $titre == '')
+		$msgErreur[] = 'Saisir un titre';
+	if($resume == null || $resume == '')
+		$msgErreur[] = 'Saisir un resume';
+	if(mb_substr_count($contenuExercice, "<img ") >3 || $contenuExercice==null)
+			$msgErreur[] = 'Saisir le contenu avec maximum 3 images';
+
+	//vérification de l'imageResume
+	$explode = explode(".",$imageResume);
+	$extension = end($explode);
+	if($imageResume == null && in_array($extension, 
+		array('jpg', 'jpeg', 'png', 'gif', 'bmp', 'tiff')) == false){
+					$msgErreur[] = "image du résumé: Le fichier importé n'est pas une image";	
+		}
+	else if(in_array($extension, array('jpg', 'jpeg', 'png', 'gif', 'bmp', 'tiff')))
+	{
+		$ok = true;
+	}
+	else
+	{
+		$msgErreur[] = "image du résumé: Saisir une image(jpg, jpeg, png, gif, bmp ou tiff)";
+	}
+
+	return $msgErreur;
+}
+
 ?>
