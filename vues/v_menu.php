@@ -51,7 +51,7 @@
 			
 			<!-- Gestion nutrition -->
 			<?php if(estAdmin()) { ?>
-			<li <?php if($uc == "admin" && stripos($action, "nutrition")) echo "style='background:#32CAED'";?>> <a href="index.php?uc=admin&action=frmAddNutrition"> Gestion nutrition </a>
+			<li <?php if($uc == "admin" && stripos($action, "nutrition")) echo "style='background:#32CAED'";?>> <a href="index.php?uc=admin&action=lstNutrition"> Gestion nutrition </a>
 			</li>
 			<?php } ?>
 			

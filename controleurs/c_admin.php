@@ -2,6 +2,12 @@
 //Aiguillage en fonction de l'action choisie
 switch($action)
 {
+	case 'lstNutrition':
+	{
+		$lesNutritions = getLesNutritions();
+		include $_CONFIG['DIR_View']."v_lstNutrition.php";
+		break;
+	}
 	case 'espaceGestionExercice':
 	{
 		if(estConnecte())
