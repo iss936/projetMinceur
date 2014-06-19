@@ -177,4 +177,26 @@ function verifFormExercice($titre,$resume,$imageResume,$contenuExercice)
 	return $msgErreur;
 }
 
+//Récupère les cinqs derniers exercices ajoutés
+function getLes5DerniersExercices()
+{
+	//Requête
+	$req = "SELECT * from ficheexercice ORDER BY dateAjout DESC LIMIT 0,5";
+	
+	//Exécution
+	$conx = connexion();
+	$res = mysql_query($req, $conx) or die ("<u>Erreur SQL (getLes5DerniersExercices()</u>: ".mysql_error()."<br>");
+	mysql_close($conx);
+	
+	//Récupération
+	$lesExercices = array();
+	$ligne = mysql_fetch_assoc($res);
+	while($ligne != false)
+	{
+		$lesExercices[] = $ligne;
+		$ligne = mysql_fetch_assoc($res);
+	}
+	
+	return $lesExercices;
+}
 ?>
