@@ -21,10 +21,11 @@ function getUnExercice($idExercice)
 }
 
 //Récupère les exercices
-function getLesExercices($idPartieCorps)
+function getLesExercices($idPartieCorps = null)
 {
 	//Requête
-	$req = "SELECT * FROM ficheexercice WHERE idPartieCorps = $idPartieCorps";
+	$req = "SELECT * FROM ficheexercice";
+	if($idPartieCorps) $req .= " WHERE idPartieCorps = $idPartieCorps";
 	
 	//Exécution
 	$conx = connexion();
