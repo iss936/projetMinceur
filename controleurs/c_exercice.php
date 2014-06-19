@@ -35,9 +35,10 @@ switch($action)
 	{
 		if(estConnecte())
 		{
-			$titre = "Liste des programmes";
 			$idPartieCorps = getRequest('idPartieCorps');
 			$lesProgrammes = getLesProgrammes($idPartieCorps);
+			$unePartieCorps = getUnePartieCorps($idPartieCorps);
+			$titre = "Liste des programmes pour ".$unePartieCorps['libelle'];
 			include $_CONFIG['DIR_View']."v_headTitre.php";
 			include $_CONFIG['DIR_View']."v_lstPgrm.php";
 		}

@@ -1,7 +1,8 @@
 <?php
-//Liste des Suivis
-if(isset($lesProgrammes))
+//Liste des programmes
+if($lesProgrammes)
 {
+	echo "<ul>";
 	foreach($lesProgrammes as $unProgramme)
 	{
 		//Variables
@@ -9,9 +10,11 @@ if(isset($lesProgrammes))
 		$idPgrm = $unProgramme['idProgramme'];
 		
 		//Lignes
-		echo "	<fieldset>
-					<legend><a href='index.php?uc=exercice&action=v_pgrm&idPgrm=$idPgrm'>$niveau</a></legend>
-				</fieldset>
-				<br>";
+		echo "<li><a href='index.php?uc=exercice&action=v_pgrm&idPgrm=$idPgrm'>$niveau</a></li>";
 	}
+	echo "</ul>";
+}
+else
+{
+	echo "<fieldset>Pas de programmes disponibles pour le moment.</fieldset>";
 }

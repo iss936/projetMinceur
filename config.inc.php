@@ -21,5 +21,9 @@ $_CONFIG = array
     "DIR_Attachment" => "ressources/documents/",
     "DIR_Image" => "ressources/images/",
 	
+	//Mail
+	"EML_Envoi" => false,
+	"EML_ServerSMTP" => "",
+	"EML_PortSMTP" => "",
 );
 ?>

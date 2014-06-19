@@ -5,6 +5,7 @@ switch($action)
 	case 'index':
 	{
 		$unExercice = getLeDernierExercice();
+		$les5Exercices = getLes5DerniersExercices();
 		include $_CONFIG['DIR_View']."v_accueil.php";
 		break;
 	}
@@ -13,6 +14,7 @@ switch($action)
 		if(estConnecte())
 		{
 			$unExercice = getLeDernierExercice();
+			$les5Exercices = getLes5DerniersExercices();
 			include $_CONFIG['DIR_View']."v_accueil.php";
 		}
 		else include $_CONFIG['DIR_View']."i_retourConnexion.php";
@@ -23,6 +25,7 @@ switch($action)
 		if(estConnecte())
 		{
 			$unExercice = getLeDernierExercice();
+			$les5Exercices = getLes5DerniersExercices();
 			include $_CONFIG['DIR_View']."v_accueil.php";
 		}
 		else
@@ -68,7 +71,11 @@ switch($action)
 			include $_CONFIG['DIR_View']."v_headTitre.php";
 			include $_CONFIG['DIR_View']."v_frmModifCompte.php";
 		}
-		else include $_CONFIG['DIR_View']."i_retourConnexion.php";
+		else
+		{
+			$msgErreurs[] = "Vous n'êtes pas autorisé à accéder à cette page!";
+			include $_CONFIG['DIR_View']."v_msgErreurs.php";
+		}
 		break;
 	}
 	case 'vdModifCompte':
@@ -103,7 +110,11 @@ switch($action)
 				
 			}	
 		}
-		else include $_CONFIG['DIR_View']."i_retourConnexion.php";
+		else
+		{
+			$msgErreurs[] = "Vous n'êtes pas autorisé à accéder à cette page!";
+			include $_CONFIG['DIR_View']."v_msgErreurs.php";
+		}
 		break;
 	}
 	case 'frmModifMdp':
@@ -114,7 +125,11 @@ switch($action)
 			include $_CONFIG['DIR_View']."v_headTitre.php";
 			include $_CONFIG['DIR_View']."v_frmModifMdp.php";
 		}			
-		else include $_CONFIG['DIR_View']."i_retourConnexion.php";
+		else
+		{
+			$msgErreurs[] = "Vous n'êtes pas autorisé à accéder à cette page!";
+			include $_CONFIG['DIR_View']."v_msgErreurs.php";
+		}
 		break;
 	}
 	case 'vdModifMdp':
@@ -145,7 +160,11 @@ switch($action)
 				redirection(2, "index.php?uc=identif&action=frmConnexion", "Redirection vers l'accueil ...", "POINT");
 			}
 		}
-		else include $_CONFIG['DIR_View']."i_retourConnexion.php";
+		else
+		{
+			$msgErreurs[] = "Vous n'êtes pas autorisé à accéder à cette page!";
+			include $_CONFIG['DIR_View']."v_msgErreurs.php";
+		}
 		break;
 	}
 	case 'deconnexion':
@@ -200,9 +219,9 @@ switch($action)
 		}
 		else
 		{
-			$msgConfirmation[] = "Compte crée avec succès!";
+			$msgConfirmation[] = "Compte créé avec succès!";
 			include $_CONFIG['DIR_View']."v_msgConfirmation.php";
-			redirection(2, "index.php?uc=identif&action=frmConnexion", "Redirection vers l'accueil ...", "POINT");
+			redirection(10, "index.php?uc=identif&action=frmConnexion", "Redirection vers l'accueil ...", "POINT");
 		}
 		break;
 	}

@@ -1,6 +1,6 @@
 <?php
 //Liste des Suivis
-if(isset($lesExercicePartieCorps))
+if($lesExercicePartieCorps)
 {
 	foreach($lesExercicePartieCorps as $unExercicePartieCorps)
 	{
@@ -18,4 +18,8 @@ if(isset($lesExercicePartieCorps))
 				</fieldset>
 				<br>";
 	}
+}
+else
+{
+	echo "<fieldset>Pas d'exercices disponibles pour le moment.</fieldset>";
 }

@@ -2,68 +2,72 @@
 //Aiguillage en fonction de l'action choisie
 switch($action)
 {
+	case 'espaceGestionExercice':
+	{
+		if(estConnecte())
+		{
+
+			$titre = "Gestion des exercices";
+			$bodyParts = getLesPartiesCorps();
+			include $_CONFIG['DIR_View']."v_headTitre.php";
+			include $_CONFIG['DIR_View']."exercices/v_filtreExercice.php";
+
+			if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    			$bodyPart = $_POST['bodyParts'];
+				$idBodyPart = getIdPartieCorps($bodyPart);
+				var_dump($idBodyPart[0]);
+
+				var_dump(getLesExercices($idBodyPart[0]));
+				die();
+			}
+		}
+		else include $_CONFIG['DIR_View']."i_retourConnexion.php";
+		break;
+	}
 	case 'frmAddExercice':
 	{
 		if(estConnecte())
 		{
 			if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     			$msgErreurs= array();
-				$bodyPart = $_POST['bodyParts'];
+    			$ok=false;
+    			// $bodyPart = ($bodyPart == null) ? '' : $_POST['bodyParts'];
+    			$bodyPart = $_POST['bodyParts'];
 				$idBodyPart = getIdPartieCorps($bodyPart);
-				$ok=false;
 				$titre = $_POST['titre'];
-				//verif titre
-				if($titre==null)
-				{
-					$titre = "Ajouter un exercice";
-					$bodyParts = getLesPartiesCorps();
-					$ok=true;
-					include $_CONFIG['DIR_View']."v_headTitre.php";
-					$msgErreurs[] = "Saisir un titre";
-					include $_CONFIG['DIR_View']."v_msgErreurs.php";
-					include $_CONFIG['DIR_View']."exercices/v_frmAddExercice.php";
-				}
-				
 				$resume = $_POST['resume']; 
-				// on compte dans le resume le nb d'image importé
-				if(mb_substr_count($resume, "<img ") >1 || $resume==null)
-				{	
-					$ok=true;
-					// $resume = getRequest('resume');
-					$titre = "Ajouter un exercice";
-					$bodyParts = getLesPartiesCorps();
-					include $_CONFIG['DIR_View']."v_headTitre.php";
-					$msgErreurs[] = "Saisir un resume avec une seule image";
-					include $_CONFIG['DIR_View']."v_msgErreurs.php";
-					include $_CONFIG['DIR_View']."exercices/v_frmAddExercice.php";
-				}
-				
 				$contenu = $_POST['contenu'];
-				// on compte dans le contenu le nb d'image importé
-				if(mb_substr_count($contenu, "<img ") >3 || $contenu==null)
-				{	
-					$ok=true;
-					// $resume = getRequest('resume');
+				$imageResume = $_FILES['imageResume']['name'];
+				$msgErreurs = verifFormExercice($titre,$resume,$imageResume,$contenu);
+				if(sizeof($msgErreurs)>0)
+				{
 					$titre = "Ajouter un exercice";
 					$bodyParts = getLesPartiesCorps();
 					include $_CONFIG['DIR_View']."v_headTitre.php";
-					$msgErreurs[] = "Saisir le contenu avec maximum 3 images";
 					include $_CONFIG['DIR_View']."v_msgErreurs.php";
 					include $_CONFIG['DIR_View']."exercices/v_frmAddExercice.php";
-				}
-				//pas d'erreur de saisie
-				if(!$ok)
+				}	
+				else
 				{
-					insertExercice($contenu,$titre,$resume,$bodyPart);
+					$video = $_POST['videoExerciceY'];
+					if($video != '' && $video != null)
+						$video = str_replace("/watch?v=", "/v/", $video);
+
+					$path = __DIR__.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'ressources'.DIRECTORY_SEPARATOR.'imageResume'.
+					DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR. $_FILES["imageResume"]["name"];
+
+					if(!file_exists($path))
+						move_uploaded_file($_FILES["imageResume"]["tmp_name"],$path);
+					
+
+					insertExercice($contenu,$titre,$resume,$path,$bodyPart,$video);
 					$titre = "Ajouter un exercice";
 					$bodyParts = getLesPartiesCorps();
 					include $_CONFIG['DIR_View']."v_headTitre.php";
+					$msgConfirmation[] = "Article bien enregistré";
+					include $_CONFIG['DIR_View']."v_msgConfirmation.php";
 					include $_CONFIG['DIR_View']."exercices/v_frmAddExercice.php";
-					echo " réussi";
 				}
-				/*var_dump($contenu);
-				die();*/
-
 			}
 			else// on affiche le formulaire d'ajout
 			{
@@ -71,36 +75,6 @@ switch($action)
 				$bodyParts = getLesPartiesCorps();
 				include $_CONFIG['DIR_View']."v_headTitre.php";
 				include $_CONFIG['DIR_View']."exercices/v_frmAddExercice.php";
-			}
-		}
-		else include $_CONFIG['DIR_View']."i_retourConnexion.php";
-		break;
-	}
-	case 'vdAddExercice':
-	{
-		if(estConnecte())
-		{
-			$titre = "Mon suivi";
-			$date = getRequest('date');
-			$poids = getRequest('poids');
-			$taille = getRequest('taille');
-			$evenement = getRequest('evenement');
-			$msgErreurs = addSuivi($date, $poids, $taille, $evenement);
-			
-			//Titre
-			include $_CONFIG['DIR_View']."v_headTitre.php";
-			
-			//Message d'erreurs ou de confirmation
-			if($msgErreurs)
-			{
-				include $_CONFIG['DIR_View']."v_msgErreurs.php";
-				include $_CONFIG['DIR_View']."v_frmSuivi.php";
-			}
-			else
-			{
-				$msgConfirmation[] = "Fiche suivi ajouté avec succès!";
-				include $_CONFIG['DIR_View']."v_msgConfirmation.php";
-				redirection(2, "index.php?uc=identif&action=frmConnexion", "Redirection vers l'accueil ...", "POINT");
 			}
 		}
 		else include $_CONFIG['DIR_View']."i_retourConnexion.php";

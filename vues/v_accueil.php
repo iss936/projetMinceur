@@ -23,3 +23,12 @@
 	<h1>Pub</h1>
 </div>
 
+<!-- <embed
+width="420" height="345"
+src="<?php echo $unExercice['video'] ?>"
+type="application/x-shockwave-flash">
+</embed> -->
+
+<?php if(!estConnecte()) { ?>
+	<p>Connectez-vous pour bénéficier de plus de fonctionnalités.</p>
+<?php } ?>

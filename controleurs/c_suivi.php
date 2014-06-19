@@ -14,7 +14,11 @@ switch($action)
 			include $_CONFIG['DIR_View']."v_headTitre.php";
 			include $_CONFIG['DIR_View']."v_frmSuivi.php";
 		}
-		else include $_CONFIG['DIR_View']."i_retourConnexion.php";
+		else
+		{
+			$msgErreurs[] = "Vous n'êtes pas autorisé à accéder à cette page!";
+			include $_CONFIG['DIR_View']."v_msgErreurs.php";
+		}
 		break;
 	}
 	case 'vdSuivi':
@@ -44,7 +48,11 @@ switch($action)
 				redirection(2, "index.php?uc=identif&action=frmConnexion", "Redirection vers l'accueil ...", "POINT");
 			}
 		}
-		else include $_CONFIG['DIR_View']."i_retourConnexion.php";
+		else
+		{
+			$msgErreurs[] = "Vous n'êtes pas autorisé à accéder à cette page!";
+			include $_CONFIG['DIR_View']."v_msgErreurs.php";
+		}
 		break;
 	}
 	case 'lstSuivi':

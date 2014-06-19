@@ -84,6 +84,7 @@ function editUtilisateur($idUtilisateur, $prenomUtilisateur, $nomUtilisateur, $t
 function addUtilisateur($loginUtilisateur, $mdpUtilisateur, $confirmMdp, $prenomUtilisateur, $nomUtilisateur, $telephoneUtilisateur, $mailUtilisateur, $adresseUtilisateur)
 {
 	//Récupération des variables
+	global $_CONFIG;
 	$Erreurs = array();
 	
 	$login = getMySqlString($loginUtilisateur);
@@ -99,6 +100,7 @@ function addUtilisateur($loginUtilisateur, $mdpUtilisateur, $confirmMdp, $prenom
 	if(!estunMail($mailUtilisateur)) $Erreurs[] = "L'adresse mail saisie n'est pas valide!";
 	if(strlen($mdpUtilisateur) < 6) $Erreurs[] = "Le nouveau mot de passe doit contenir au moins 6 caractères.";
 	if($mdpUtilisateur != $confirmMdp) $Erreurs[] = "Le nouveau mot de passe et sa confirmation ne sont pas identiques.";
+	if(!verifLogin($loginUtilisateur)) $Erreurs[] = "Le login choisi existe déjà, veuillez en choisir un autre.";
 	
 	//Ajout dans la base
 	if(!$Erreurs)
@@ -111,7 +113,7 @@ function addUtilisateur($loginUtilisateur, $mdpUtilisateur, $confirmMdp, $prenom
 	}
 
 	//Envoi du mail de confirmation de la création du compte
-	if(!$Erreurs)
+	if(!$Erreurs && $_CONFIG['EML_Envoi'])
 	{
 		$destinataire = "$prenomUtilisateur $nomUtilisateur <$mailUtilisateur>";
 		$sujet = "Confirmation de la création de votre compte MyDietFit";
@@ -125,7 +127,7 @@ function addUtilisateur($loginUtilisateur, $mdpUtilisateur, $confirmMdp, $prenom
 				
 				Bien à vous,<br>
 				L'équipe MyDietFit";
-		$entete = "From: \"MyDietFit\" <noreply@mydietfit.fr> \n";
+		$entete = "From: \"MyDietFit\" <no-reply@mydietfit.fr> \n";
 		$entete .= "MIME-Version: 1.0 \n";
 		$entete .= "Content-type: text/html; charset='ISO-8859-1'";
 		mail($destinataire, $sujet, $msg, $entete) or die("<u>Erreur (envoiMail)</u>: Impossible d'envoyer le mail! $destinataire<br>");
@@ -157,4 +159,24 @@ function delUtilisateur($id_utilisateur)
 	return $Erreurs;
 }
 
+//Vérifie si le login entré n'est pas déjà pris
+function verifLogin($loginUtilisateur)
+{
+	//Récupération des variables
+	$Erreurs = array();
+	
+	$login = getMySqlString($loginUtilisateur);
+	
+	$req = "SELECT COUNT(1) AS nbUser FROM utilisateurs WHERE login = $login";
+	
+	//Exécution
+	$conx = connexion();
+	$res = mysql_query($req, $conx) or die("<u>Erreur SQL (verifLogin)</u>: ".mysql_error()." <br>");
+	mysql_close($conx);
+	
+	//Récupération
+	$ligne = mysql_fetch_assoc($res);
+	
+	return (($ligne['nbUser'] > 0) ? false : true);
+}
 ?>

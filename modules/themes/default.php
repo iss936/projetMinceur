@@ -14,7 +14,7 @@ html {
 
 body {
 	margin: 0px;
-	/*background: <?php echo $_VARCSS['BgBody']; ?>;*/
+	margin-bottom: 40px;
 	background: black url(<?php echo $_VARCSS['DirImg']; ?>background.jpg) no-repeat center center fixed;
 	text-align: justify;
 	font-family: <?php echo $_VARCSS['ContentFontFamily']; ?>;
@@ -202,6 +202,7 @@ fieldset legend{
 	background: <?php echo $_VARCSS['ContentBgColor']; ?>;
 	color: <?php echo $_VARCSS['ContentFontColor']; ?>;
 	-webkit-text-size-adjust: 100%;
+	display: table;
 }
 
 #content h2 {
@@ -660,6 +661,8 @@ fieldset legend{
 	margin: 0px auto;
 	padding: 10px;
 	color: <?php echo $_VARCSS['FootFontColor']; ?>;
+	background: <?php echo $_VARCSS['ContentBgColor']; ?>;
+	border-radius: 0 0 10px 10px;
 }
 
 #footer p {

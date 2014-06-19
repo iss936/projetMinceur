@@ -46,8 +46,7 @@
 			
 			<!-- Gestion des exercices -->
 			<?php if(estAdmin()) { ?>
-			<li <?php if($uc == "admin" && stripos($action, "exercice")) echo "style='background:#32CAED'";?>> <a href="index.php?uc=admin&action=espaceGestionExercice"> Gestion des exercices </a>
-			</li>
+			<li <?php if($uc == "admin" && stripos($action, "exercice")) echo "style='background:#32CAED'";?>> <a href="index.php?uc=admin&action=espaceGestionExercice"> Gestion des exercices </a></li>
 			<?php } ?>
 			
 			<!-- Gestion nutrition -->
