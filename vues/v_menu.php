@@ -46,23 +46,13 @@
 			
 			<!-- Gestion des exercices -->
 			<?php if(estAdmin()) { ?>
-			<li <?php if($uc == "admin") echo "style='background:#32CAED'";?>> <a href="index.php?uc=admin&action="> Gestion des exercices </a>
-				<ul class="sousMenu">
-					<li> <a href="index.php?uc=admin&action=frmAddExercice"><img src="<?php echo $_CONFIG['DIR_Image']; ?>imgAdd.png"> Ajouter un exercice </a></li>
-					<li> <a href="index.php?uc=admin&action=frmModifExercice"><img src="<?php echo $_CONFIG['DIR_Image']; ?>tbEdit.png"> Modifier un exercice </a></li>
-					<li> <a href="index.php?uc=admin&action=frmDelExercice"><img src="<?php echo $_CONFIG['DIR_Image']; ?>imgTrash.png"> Supprimer un exercice </a></li>
-				</ul>
+			<li <?php if($uc == "admin" && stripos($action, "exercice")) echo "style='background:#32CAED'";?>> <a href="index.php?uc=admin&action=espaceGestionExercice"> Gestion des exercices </a>
 			</li>
 			<?php } ?>
 			
 			<!-- Gestion nutrition -->
 			<?php if(estAdmin()) { ?>
-			<li <?php if($uc == "admin") echo "style='background:#32CAED'";?>> <a href="index.php?uc=admin&action="> Gestion nutrition </a>
-				<ul class="sousMenu">
-					<li> <a href="index.php?uc=admin&action=frmAddExercice"><img src="<?php echo $_CONFIG['DIR_Image']; ?>imgAdd.png"> Ajouter un exercice </a></li>
-					<li> <a href="index.php?uc=admin&action=frmModifExercice"><img src="<?php echo $_CONFIG['DIR_Image']; ?>tbEdit.png"> Modifier un exercice </a></li>
-					<li> <a href="index.php?uc=admin&action=frmDelExercice"><img src="<?php echo $_CONFIG['DIR_Image']; ?>imgTrash.png"> Supprimer un exercice </a></li>
-				</ul>
+			<li <?php if($uc == "admin" && stripos($action, "nutrition")) echo "style='background:#32CAED'";?>> <a href="index.php?uc=admin&action=frmAddNutrition"> Gestion nutrition </a>
 			</li>
 			<?php } ?>
 			
