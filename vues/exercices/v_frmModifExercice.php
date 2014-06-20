@@ -3,9 +3,8 @@
 <a href="index.php?uc=admin&action=espaceGestionExercice"> << gérer les exercices </a>
 </div>
 <br />
-<?php 
-	
-?>
+<?php  if(isset($unExercice)) 
+		{echo "actuel:"?> <img src= "/ressources/imageResume/images/<?php echo $unExercice['imageResume'];?>" height="100" width="50"><?php } ?> 
 <div align="center">
 	<form action = "index.php?uc=admin&action=frmModifExercice&idExercice=<?php if(isset($unExercice)) echo $unExercice['idFicheExercice']; ?>" method = "POST" enctype="multipart/form-data">
 <table>
@@ -32,8 +31,7 @@
     </tr>
     <tr>
         <td>* image du résumé</td>
-        <td><input type = "file" name="imageResume" value=""/><?php  if(isset($unExercice)) 
-		{echo "actuel:"?> <img src="/ressources/imageResume/images/<?php echo $unExercice['imageResume'];?>" height="100" width="300%"><?php } ?> </td>
+        <td ><input type = "file" name="imageResume" value=""/> </td>
     </tr>
     <tr>
     	<td><b>* contenu de l'exercice</b>(maximum 3 image)</td>
