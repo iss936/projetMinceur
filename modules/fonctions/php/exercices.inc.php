@@ -87,25 +87,28 @@ function updateExercice($idExercice, $contenuExercice,$titre,$resume,$imageResum
 //Supprime un exercice
 function delExercice($idExercice)
 {
-	//Récupération des variables
-	$Erreurs = array();
 	
 	$id = getMySqlString($idExercice);
 	
 	//Test des erreurs
 	
-	if(!$Erreurs)
-	{
 		$req = "DELETE FROM ficheexercice
-				WHERE idFicheExercice = $id";
-		$conx = connexion();
-		mysql_query($req, $conx) or $Erreurs[] = "<u>Erreur SQL (delExercice)</u>: ".mysql_error();
-		mysql_close($conx);
-	}
+				WHERE idFicheExercice = '$idExercice';
+				";
 	
-	return $Erreurs;
+		$conx = connexion();
+		mysql_query($req, $conx) or die ("<u>Erreur SQL (delExercice)</u>: ".mysql_error()." <br>");
+		mysql_close($conx);
 }
-
+function delExerciceProg($idExercice)
+{
+	
+		$req= " DELETE FROM x_programme_exercice WHERE idFicheExercice = '$idExercice';";
+		$conx = connexion();
+		mysql_query($req, $conx) or die ("<u>Erreur SQL (delProgExercice)</u>: ".mysql_error()." <br>");
+		mysql_close($conx);
+}
+	
 //Récupère le dernier exercice ajouté
 function getLeDernierExercice()
 {
@@ -226,5 +229,27 @@ function getLes5DerniersExercices()
 	}
 	
 	return $lesExercices;
+}
+
+function getFicheProgrammeExercice($idFicheExercice)
+{
+	//Requête
+	$req = "SELECT * FROM x_programme_exercice where idFicheExercice = ".getMySqlString($idFicheExercice);
+	
+	//Exécution
+	$conx = connexion();
+	$res = mysql_query($req, $conx) or die ("<u>Erreur SQL (getFicheProgrammeExercice)</u>: ".mysql_error()." <br>");
+	mysql_close($conx);
+	
+	//Récupération
+	$unProgrammeExercice = array();
+	$ligne = mysql_fetch_assoc($res);
+	while($ligne != false)
+	{
+		$unProgrammeExercice[] = $ligne;
+		$ligne = mysql_fetch_assoc($res);
+	} 
+	
+	return $unProgrammeExercice;
 }
 ?>

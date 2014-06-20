@@ -22,16 +22,19 @@ if(isset($lesExercices))
 		$urlFiche = "index.php?uc=admin&action=frmModifExercice&idExercice=$idExercice";
 		$paramTD = "onClick=document.location.href='index.php?uc=admin&action=frmModifExercice&idExercice=$idExercice' title=\"Cliquez ici pour voir la fiche exercice\"";
 		$imgEdit = "<a href='$urlFiche'><img src='".$_CONFIG['DIR_Image']."imgEdit.png' title=\"Voir la fiche exercice\"></a>";
-		$imgSuppr = "<a onClick=confirmDelUtilisateur($idExercice);><img src='".$_CONFIG['DIR_Image']."imgTrash.png' title=\"Supprimer la fiche exercice\"></a>";
-		
+		$imgSuppr = "<a href='index.php?uc=admin&action=deleteExercice&idExercice=$idExercice' onclick='return confirm('voulez-vous supprimer cette article?');'><img src='".$_CONFIG['DIR_Image']."imgTrash.png' title=\"Supprimer la fiche exercice\"></a>";
+		 
 		//Lignes
 		echo "<tr class='ligneTableau'>
 			<td width='16'> $imgEdit </td>
 			<td $paramTD> $titre </td>
 			<td $paramTD> $resume </td>
-			<td $paramTD> $dateAjout </td>
-			<td width='16'> $imgSuppr </td>
-		</tr>";
+			<td $paramTD> $dateAjout </td>";
+			
+		?>
+		<td width='16'><a href='index.php?uc=admin&action=deleteExercice&idExercice=<?php echo $idExercice ?>' onclick="return confirm('voulez-vous supprimer cette article?');"><img src="<?php echo $_CONFIG['DIR_Image'].'imgTrash.png';?>" title="Supprimer la fiche exercice"></a> </td>
+		</tr>
+		<?php
 	}
 	echo "</table><br>";
 }
