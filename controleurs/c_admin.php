@@ -4,8 +4,123 @@ switch($action)
 {
 	case 'lstNutrition':
 	{
-		$lesNutritions = getLesNutritions();
-		include $_CONFIG['DIR_View']."v_lstNutrition.php";
+		if(estAdmin())
+		{
+			$titre = "Gestion des fiches de nutrition";
+			$lesNutritions = getLesNutritions();
+			include $_CONFIG['DIR_View']."v_headTitre.php";
+			include $_CONFIG['DIR_View']."v_lstNutrition.php";
+		}
+		else
+		{
+			$msgErreurs[] = "Vous n'êtes pas autorisé à accéder à cette page!";
+			include $_CONFIG['DIR_View']."v_msgErreurs.php";
+		}
+		break;
+	}
+	case 'frmModifNutrition':
+	{
+		if(estAdmin())
+		{
+			$idNutrition = getRequest('idNutrition');
+			$uneNutrition = getUneNutrition($idNutrition);
+			$titreNutrition = $uneNutrition['titre'];
+			$contenu = $uneNutrition['contenu'];
+			$titre = "Modification d'une fiche de nutrition";
+			$urlFrm = "index.php?uc=admin&action=vdModifNutrition&idNutrition=$idNutrition";
+			include $_CONFIG['DIR_View']."v_headTitre.php";
+			include $_CONFIG['DIR_View']."v_frmModifNutrition.php";
+		}
+		else
+		{
+			$msgErreurs[] = "Vous n'êtes pas autorisé à accéder à cette page!";
+			include $_CONFIG['DIR_View']."v_msgErreurs.php";
+		}
+		break;
+	}
+	case 'vdModifNutrition':
+	{
+		if(estAdmin())
+		{
+			$idNutrition = getRequest('idNutrition');
+			$titreNutrition = getRequest('titreNutrition');
+			$contenu = getRequest('contenu');
+			$msgErreurs = editNutrition($idNutrition, $titreNutrition, $contenu);
+			$titre = "Modification d'une fiche de nutrition";
+			$urlFrm = "index.php?uc=admin&action=vdModifNutrition&idNutrition=$idNutrition";
+			
+			//Titre
+			include $_CONFIG['DIR_View']."v_headTitre.php";
+				 
+			//Message d'erreurs ou de confirmation
+			if($msgErreurs)
+			{
+				include $_CONFIG['DIR_View']."v_msgErreurs.php";
+				include $_CONFIG['DIR_View']."v_frmModifNutrition.php";
+			}
+			else
+			{
+				$msgConfirmation[] = "Fiche nutrition changée avec succès!";
+				include $_CONFIG['DIR_View']."v_msgConfirmation.php";
+				redirection(2, "index.php?uc=admin&action=lstNutrition", "Redirection vers la liste des fiches de nutrition ...", "POINT");
+			}
+		}
+		else
+		{
+			$msgErreurs[] = "Vous n'êtes pas autorisé à accéder à cette page!";
+			include $_CONFIG['DIR_View']."v_msgErreurs.php";
+		}
+		break;
+	}
+	case 'frmAddNutrition':
+	{
+		if(estAdmin())
+		{
+			$titreNutrition = null;
+			$contenu = null;
+			$titre = "Ajout d'une fiche de nutrition";
+			$urlFrm = "index.php?uc=admin&action=vdAddNutrition";
+			include $_CONFIG['DIR_View']."v_headTitre.php";
+			include $_CONFIG['DIR_View']."v_frmModifNutrition.php";
+		}
+		else
+		{
+			$msgErreurs[] = "Vous n'êtes pas autorisé à accéder à cette page!";
+			include $_CONFIG['DIR_View']."v_msgErreurs.php";
+		}
+		break;
+	}
+	case 'vdAddNutrition':
+	{
+		if(estAdmin())
+		{
+			$titreNutrition = getRequest('titreNutrition');
+			$contenu = getRequest('contenu');
+			$msgErreurs = addNutrition($titreNutrition, $contenu);
+			$titre = "Ajout d'une fiche de nutrition";
+			$urlFrm = "index.php?uc=admin&action=vdAddNutrition";
+			
+			//Titre
+			include $_CONFIG['DIR_View']."v_headTitre.php";
+				 
+			//Message d'erreurs ou de confirmation
+			if($msgErreurs)
+			{
+				include $_CONFIG['DIR_View']."v_msgErreurs.php";
+				include $_CONFIG['DIR_View']."v_frmModifNutrition.php";
+			}
+			else
+			{
+				$msgConfirmation[] = "Fiche nutrition ajoutée avec succès!";
+				include $_CONFIG['DIR_View']."v_msgConfirmation.php";
+				redirection(2, "index.php?uc=admin&action=lstNutrition", "Redirection vers la liste des fiches de nutrition ...", "POINT");
+			}
+		}
+		else
+		{
+			$msgErreurs[] = "Vous n'êtes pas autorisé à accéder à cette page!";
+			include $_CONFIG['DIR_View']."v_msgErreurs.php";
+		}
 		break;
 	}
 	case 'espaceGestionExercice':
@@ -84,75 +199,6 @@ switch($action)
 			}
 		}
 		else include $_CONFIG['DIR_View']."i_retourConnexion.php";
-		break;
-	}
-	case 'lstSuivi':
-	{
-		if(estConnecte())
-		{
-			//------------
-			// Variables
-			//------------
-			
-			$titre = "Mes fiches de suivi";
-			$nbPagesNull = 0; 
-			
-			//------------
-			// Vues
-			//------------
-			
-			//En-tête
-			include $_CONFIG['DIR_View']."v_headTitre.php";
-			
-			//Récupération des écoles
-			$lesSuivis = getLesSuivis($_SESSION['idUtilisateur']);
-			if($lesSuivis)
-				include $_CONFIG['DIR_View']."v_lstSuivi.php";
-			else "<fieldset style='width:95%:'> Aucune fiche de suivi n'a été trouvée. </fieldset>";
-		}
-		else
-		{
-			$msgErreurs[] = "Vous n'êtes pas autorisé à accéder à cette page!";
-			include $_CONFIG['DIR_View']."v_msgErreurs.php";
-		}
-		break;
-	}
-	case 'imc':
-	{
-		if(estConnecte())
-		{
-			//------------
-			// Variables
-			//------------
-			
-			$titre = "Indice de Masse Corporelle";
-			
-			//------------
-			// Vues
-			//------------
-			
-			//En-tête
-			include $_CONFIG['DIR_View']."v_headTitre.php";
-			
-			//Récupération du dernier suivi
-			$leSuivi = getDernierSuivi($_SESSION['idUtilisateur']);
-			if($leSuivi)
-			{
-				$taille = $leSuivi['taille'];
-				$poids = $leSuivi['poids'];
-				$imc = $poids/(($taille/100)*($taille/100));
-				include $_CONFIG['DIR_View']."v_imc.php";
-			}
-			else "	<fieldset style='width:95%:'>
-						Aucune fiche de suivi n'a été trouvée. <br>
-						Veuillez renseigner tout d'abord une fiche.
-					</fieldset>";
-		}
-		else
-		{
-			$msgErreurs[] = "Vous n'êtes pas autorisé à accéder à cette page!";
-			include $_CONFIG['DIR_View']."v_msgErreurs.php";
-		}
 		break;
 	}
 	default: 

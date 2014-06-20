@@ -17,8 +17,8 @@ if(isset($lesNutritions))
 		$titre = $uneNutrition['titre'];
 		$dateAjout = $uneNutrition['dateAjout'];
 		// - Image et lien
-		$urlFiche = "index.php?uc=param&action=frmModifNutrition&idNutrition=$idNutrition";
-		$paramTD = "onClick=document.location.href='index.php?uc=param&action=frmModifNutrition&idNutrition=$idNutrition' title=\"Cliquez ici pour voir la fiche nutrition\"";
+		$urlFiche = "index.php?uc=admin&action=frmModifNutrition&idNutrition=$idNutrition";
+		$paramTD = "onClick=document.location.href='index.php?uc=admin&action=frmModifNutrition&idNutrition=$idNutrition' title=\"Cliquez ici pour voir la fiche nutrition\"";
 		$imgEdit = "<a href='$urlFiche'><img src='".$_CONFIG['DIR_Image']."imgEdit.png' title=\"Voir la fiche nutrition\"></a>";
 		$imgSuppr = "<a onClick=confirmDelUtilisateur($idNutrition);><img src='".$_CONFIG['DIR_Image']."imgTrash.png' title=\"Supprimer la fiche nutrition\"></a>";
 		

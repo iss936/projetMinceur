@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le: Jeu 19 Juin 2014 à 09:17
+-- Généré le: Ven 20 Juin 2014 à 12:58
 -- Version du serveur: 5.5.24-log
 -- Version de PHP: 5.3.13
 
@@ -53,6 +53,27 @@ CREATE TABLE IF NOT EXISTS `avisnutrition` (
   KEY `FK_avis_1` (`idUtilisateur`),
   KEY `FK_avis_2` (`idFicheNutrition`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `categorienutrition`
+--
+
+CREATE TABLE IF NOT EXISTS `categorienutrition` (
+  `idCategorie` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `libelleCategorie` varchar(45) NOT NULL DEFAULT '',
+  PRIMARY KEY (`idCategorie`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Contenu de la table `categorienutrition`
+--
+
+INSERT INTO `categorienutrition` (`idCategorie`, `libelleCategorie`) VALUES
+(1, 'Diététique'),
+(2, 'Maigrir'),
+(3, 'Conseils Nutrition');
 
 -- --------------------------------------------------------
 
@@ -117,8 +138,21 @@ CREATE TABLE IF NOT EXISTS `fichenutrition` (
   `idFicheNutrition` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `dateAjout` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `contenu` varchar(2000) NOT NULL DEFAULT '',
-  PRIMARY KEY (`idFicheNutrition`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `titre` varchar(100) NOT NULL DEFAULT '',
+  `idCategorieNutrition` int(10) unsigned NOT NULL DEFAULT '0',
+  `image` varchar(60) NOT NULL DEFAULT '',
+  `video` varchar(60) NOT NULL DEFAULT '',
+  PRIMARY KEY (`idFicheNutrition`),
+  KEY `FK_fichenutrition_1` (`idCategorieNutrition`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Contenu de la table `fichenutrition`
+--
+
+INSERT INTO `fichenutrition` (`idFicheNutrition`, `dateAjout`, `contenu`, `titre`, `idCategorieNutrition`, `image`, `video`) VALUES
+(1, '0000-00-00 00:00:00', '<p>Les prot&eacute;ines sont les nutriments les plus important pour la musculation. Ce sont elles qui assurent le fonctionnement de toutes les fonctions de l&#39;organisme. Pour les pratiquants de la musculation, elles vous permettront d&#39;avoir de plus gros muscles &agrave; condition bien s&ucirc;r, de suivre un entra&icirc;nement adapt&eacute;, d&#39;avoir une alimentation saine et une r&eacute;cup&eacute;ration suffisante. Pour tout savoir sur cette substance vitale pour tout bodybuilder, lisez cet article.</p>\r\n', 'Les protéines', 1, '', ''),
+(2, '2014-06-20 14:16:54', '<p>Les lipides, il y en a des bonnes et des mauvaises. Un apport insuffisant de bonnes huiles nuit &agrave; la sant&eacute; et entrave les progr&egrave;s en musculation. En cas d&#39;abus des mauvaises graisses, vous vous retrouvez avec de gros probl&egrave;mes cardiaques. Ce qui compte, ce n&#39;est pas tant la quantit&eacute; de mati&egrave;re grasse dans notre assiette mais le type de lipides consomm&eacute;s. Quelles graisses inclure dans l&#39;alimentation et lesquelles sont dangereuses pour notre sant&eacute; ? Voici le B.A.BA sur les acides gras.</p>\r\n', 'Les lipides', 1, '', '');
 
 -- --------------------------------------------------------
 
@@ -324,6 +358,12 @@ ALTER TABLE `avisnutrition`
 --
 ALTER TABLE `ficheexercice`
   ADD CONSTRAINT `FK_ficheexercice_1` FOREIGN KEY (`idPartieCorps`) REFERENCES `partiecorps` (`idPartieCorps`);
+
+--
+-- Contraintes pour la table `fichenutrition`
+--
+ALTER TABLE `fichenutrition`
+  ADD CONSTRAINT `FK_fichenutrition_1` FOREIGN KEY (`idCategorieNutrition`) REFERENCES `categorienutrition` (`idCategorie`);
 
 --
 -- Contraintes pour la table `programme`

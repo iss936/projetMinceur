@@ -28,6 +28,9 @@ if(!$display) echo "<img src='".$_CONFIG['DIR_Image']."imgDown.png'> <a href='#'
 										<option <?php if($rayon==15) echo "selected" ?>>15</option>
 										<option <?php if($rayon==20) echo "selected" ?>>20</option>
 									</select> km </legend>
+		<input type="text" name="adresse" id="address" value="<?php echo $adresse ?>" size='50'> ou <input type="button" value="Se localiser" onclick="getLocation()">
+		<br> <br>
+		
 	<?php foreach($lesTypesSalles as $unTypeSalle) { ?>
 		<input type="checkbox" 
 			<?php if($typeSalle) {
@@ -39,8 +42,7 @@ if(!$display) echo "<img src='".$_CONFIG['DIR_Image']."imgDown.png'> <a href='#'
 		<br>
 	<?php } ?>
 	<br>
-	<input type="text" name="adresse" id="address" value="<?php echo $adresse ?>" size='50'> ou <input type="button" value="Se localiser" onclick="getLocation()">
-	<br> <br>
+	
 	<input type="submit" value="Rechercher"/>
 </fieldset>
 </form>
@@ -59,7 +61,7 @@ if(!$display) echo "<img src='".$_CONFIG['DIR_Image']."imgDown.png'> <a href='#'
 <?php foreach($lesSallesOrder as $uneSalle) { ?>
 	<tr>
 		<td><?php echo $uneSalle['nomSalle'] ?></td>
-		<td><?php echo getUneDistance($lat, $long, $uneSalle['latitude'], $uneSalle['longitude']) ?></td>
+		<td><?php echo round(getUneDistance($lat, $long, $uneSalle['latitude'], $uneSalle['longitude']), 2) ?></td>
 		<td><?php $type = getUnTypeSalle($uneSalle['idTypeSalle']); echo $type['libelleTypeSalle']; ?>
 		<td><img src="<?php echo $_CONFIG['DIR_Image']; ?>btnSearch.png" onclick="codeAddress('<?php echo $uneSalle['adresse']?>', <?php echo $uneSalle['latitude']?>, <?php echo $uneSalle['longitude']?>)"></td>
 	</tr>
