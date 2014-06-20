@@ -44,28 +44,44 @@ function getLesExercices($idPartieCorps = null)
 }
 
 //Modifie un exercice
-function editExercice($idExercice, $contenuExercice)
+function updateExercice($idExercice, $contenuExercice,$titre,$resume,$imageResume,$bodyPart,$video)
 {
+
 	//Récupération des variables
-	$Erreurs = array();
 	$id = getMySqlString($idExercice);
 	$contenu = getMySqlString($contenuExercice);
-	
-	//Test des erreurs
-	if(!$contenuExercice) $Erreurs[] = "Veuillez remplir tous les champs obligatoires.";
-	
-	//Mise à jour de la base
-	if(!$Erreurs)
+	$resume = getMySqlString($resume);
+	$titre = getMySqlString($titre);
+	$imageResume = getMySqlString($imageResume);
+	$video = getMySqlString($video);
+	$date= date("d/m/y");
+	if($video != null)
 	{
 		$req = "UPDATE ficheexercice SET
-				contenu = $contenu
-				WHERE idFicheExercice = $id";
-		$conx = connexion();
-		mysql_query($req, $conx) or $Erreurs[] = "<u>Erreur SQL (editExercice)</u>: ".mysql_error();
-		mysql_close($conx);
+				description = $contenu,
+				dateAjout = $date,
+				titre = $titre,
+				resume = $resume,
+				imageResume = $imageResume,
+				idPartieCorps= $bodyPart,
+				video = $video
+				WHERE idFicheExercice = $id;";
 	}
-	
-	return $Erreurs;
+	else
+	{
+		$req = "UPDATE ficheexercice SET
+				description = $contenu,
+				dateAjout = $date,
+				titre = $titre,
+				resume = $resume,
+				imageResume = $imageResume,
+				idPartieCorps = $bodyPart,
+				WHERE idFicheExercice = $id;";
+	}
+			
+	$conx = connexion();
+	mysql_query($req, $conx) or die ("<u>Erreur SQL (updateExercice)</u>: ".mysql_error()." <br>");
+	mysql_close($conx);
 }
 
 //Supprime un exercice
@@ -149,7 +165,7 @@ function getIdPartieCorps($bodyPart)
 	return $id;
 }
 
-function verifFormExercice($titre,$resume,$imageResume,$contenuExercice)
+function verifFormExercice($titre,$resume,$imageResume,$contenuExercice,$idExercice)
 {
 	$msgErreur = array();
 	if($titre == null || $titre == '')
@@ -162,17 +178,28 @@ function verifFormExercice($titre,$resume,$imageResume,$contenuExercice)
 	//vérification de l'imageResume
 	$explode = explode(".",$imageResume);
 	$extension = end($explode);
-	if($imageResume == null && in_array($extension, 
-		array('jpg', 'jpeg', 'png', 'gif', 'bmp', 'tiff')) == false){
-					$msgErreur[] = "image du résumé: Le fichier importé n'est pas une image";	
+	if($idExercice == null || $idExercice == "")
+	{
+			if($imageResume == null && in_array($extension, 
+			array('jpg', 'jpeg', 'png', 'gif', 'bmp', 'tiff')) == false){
+						$msgErreur[] = "image du résumé: Le fichier importé n'est pas une image";	
+			}
+		else if(in_array($extension, array('jpg', 'jpeg', 'png', 'gif', 'bmp', 'tiff')))
+		{
+			$ok = true;
 		}
-	else if(in_array($extension, array('jpg', 'jpeg', 'png', 'gif', 'bmp', 'tiff')))
-	{
-		$ok = true;
+		else
+		{
+			$msgErreur[] = "image du résumé: Saisir une image(jpg, jpeg, png, gif, bmp ou tiff)";
+		}
 	}
-	else
+	else // modification
 	{
-		$msgErreur[] = "image du résumé: Saisir une image(jpg, jpeg, png, gif, bmp ou tiff)";
+		if($imageResume = null && in_array($extension, 
+			array('jpg', 'jpeg', 'png', 'gif', 'bmp', 'tiff')) == false){
+						$msgErreur[] = "image du résumé: Le fichier importé n'est pas une image";	
+			}
+		
 	}
 
 	return $msgErreur;
