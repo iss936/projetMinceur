@@ -129,24 +129,28 @@ switch($action)
 		{
 
 			$titre = "Gestion des exercices";
-			$bodyParts = getLesPartiesCorps();
 			include $_CONFIG['DIR_View']."v_headTitre.php";
-			include $_CONFIG['DIR_View']."exercices/v_filtreExercice.php";
+			/*$bodyParts = getLesPartiesCorps();
+			
+			include $_CONFIG['DIR_View']."exercices/v_filtreExercice.php";*/
 
-			if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    			$bodyPart = $_POST['bodyParts'];
-				$idBodyPart = getIdPartieCorps($bodyPart);
-				var_dump($idBodyPart[0]);
-
-				var_dump(getLesExercices($idBodyPart[0]));
-				die();
-			}
+		
+    			/*$bodyPart = $_POST['bodyParts'];
+				$idBodyPart = getIdPartieCorps($bodyPart);*/
+				//$lesExercices = getLesExercices($idBodyPart[0]);
+				$lesExercices = getLesExercices();
+				include $_CONFIG['DIR_View']."exercices/v_espaceGestionExercice.php";
+				
 		}
 		else include $_CONFIG['DIR_View']."i_retourConnexion.php";
 		break;
 	}
-	case 'frmAddExercice':
+	case 'frmModifExercice':
 	{
+		if(isset($_GET['idExercice']))
+			$idExercice =$_GET['idExercice'];
+		else
+			$idExercice = "";
 		if(estConnecte())
 		{
 			if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -159,16 +163,23 @@ switch($action)
 				$resume = $_POST['resume']; 
 				$contenu = $_POST['contenu'];
 				$imageResume = $_FILES['imageResume']['name'];
-				$msgErreurs = verifFormExercice($titre,$resume,$imageResume,$contenu);
+				$msgErreurs = verifFormExercice($titre,$resume,$imageResume,$contenu,$idExercice);
 				if(sizeof($msgErreurs)>0)
 				{
-					$titre = "Ajouter un exercice";
+					if(!isset($idExercice) || $idExercice=="")
+						$titre = "Ajouter un exercice";
+					else
+					{
+						$titre = "Modifier un exercice";
+						$unExercice = getUnExercice($idExercice);
+					}
+						
 					$bodyParts = getLesPartiesCorps();
 					include $_CONFIG['DIR_View']."v_headTitre.php";
 					include $_CONFIG['DIR_View']."v_msgErreurs.php";
-					include $_CONFIG['DIR_View']."exercices/v_frmAddExercice.php";
+					include $_CONFIG['DIR_View']."exercices/v_frmModifExercice.php";
 				}	
-				else
+				else //aucune erreur detectée
 				{
 					$video = $_POST['videoExerciceY'];
 					if($video != '' && $video != null)
@@ -179,23 +190,50 @@ switch($action)
 
 					if(!file_exists($path))
 						move_uploaded_file($_FILES["imageResume"]["tmp_name"],$path);
+						
+					//$path= str_replace('controleurs'.DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR, "", $path);
 					
-
-					insertExercice($contenu,$titre,$resume,$path,$bodyPart,$video);
-					$titre = "Ajouter un exercice";
-					$bodyParts = getLesPartiesCorps();
-					include $_CONFIG['DIR_View']."v_headTitre.php";
-					$msgConfirmation[] = "Article bien enregistré";
+					if(!isset($idExercice) || $idExercice=="")
+					{
+						insertExercice($contenu,$titre,$resume,$imageResume,$bodyPart,$video);
+						$titre = "Ajouter un exercice";
+						$bodyParts = getLesPartiesCorps();
+						include $_CONFIG['DIR_View']."v_headTitre.php";
+						$msgConfirmation[] = "Article bien enregistré";
+						include $_CONFIG['DIR_View']."exercices/v_frmModifExercice.php";
+					}
+					else //modification du formulaire
+					{
+						updateExercice($idExercice,$contenu,$titre,$resume,$imageResume,$idBodyPart[0],$video);
+						$titre = "Gestion des exercices";
+						$lesExercices = getLesExercices();
+						$bodyParts = getLesPartiesCorps();
+						include $_CONFIG['DIR_View']."v_headTitre.php";
+						$msgConfirmation[] = "Article bien modifié";
+						include $_CONFIG['DIR_View']."exercices/v_espaceGestionExercice.php";
+					}
+					
 					include $_CONFIG['DIR_View']."v_msgConfirmation.php";
-					include $_CONFIG['DIR_View']."exercices/v_frmAddExercice.php";
+					
+					
 				}
 			}
-			else// on affiche le formulaire d'ajout
+			else// on affiche le formulaire 
 			{
-				$titre = "Ajouter un exercice";
-				$bodyParts = getLesPartiesCorps();
+				if($idExercice == "")
+				{
+					$titre = "Ajouter un exercice";
+					$bodyParts = getLesPartiesCorps();
+				}
+				else
+				{
+					$titre = "Modifier un exercice";
+					$bodyParts = getLesPartiesCorps();
+					$unExercice = getUnExercice($idExercice);
+				
+				}
 				include $_CONFIG['DIR_View']."v_headTitre.php";
-				include $_CONFIG['DIR_View']."exercices/v_frmAddExercice.php";
+				include $_CONFIG['DIR_View']."exercices/v_frmModifExercice.php";
 			}
 		}
 		else include $_CONFIG['DIR_View']."i_retourConnexion.php";

@@ -1,15 +1,22 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<div align="left">
+<a href="index.php?uc=admin&action=espaceGestionExercice"> << gérer les exercices </a>
+</div>
+<br />
+<?php 
+	
+?>
 <div align="center">
-	<form action = "index.php?uc=admin&action=frmAddExercice" method = "POST" enctype="multipart/form-data">
+	<form action = "index.php?uc=admin&action=frmModifExercice&idExercice=<?php if(isset($unExercice)) echo $unExercice['idFicheExercice']; ?>" method = "POST" enctype="multipart/form-data">
 <table>
     <tr>
     	<td><b>Parties du corps</b></td>
     	<td><select name="bodyParts">
     	<?php
     	foreach ($bodyParts as $parts) {
-    		if($parts['libelle'] == $bodyParts[0]['libelle'])
+			if(isset($unExercice) && $parts['idPartieCorps'] == $unExercice['idPartieCorps'])
                 echo "<option selected>".$parts['libelle']."</option>";
-            else if($parts['libelle'] != $bodyParts[0]['libelle'])
+            else
     		  echo "<option>".$parts['libelle']."</option>";
     	}
     	?>
@@ -17,19 +24,20 @@
     </tr>
 	<tr>
 		<td>* Titre</td>
-		<td><input type="text" name="titre"/></td>
+		<td><input type="text" name="titre" value="<?php if(isset($unExercice)){echo $unExercice['titre'];}?>"/></td>
 	</tr>
      <tr>
     	<td>* Résumé</td>
-    	<td><textarea name="resume" maxlength="50"></textarea></td>
+    	<td><textarea name="resume" maxlength="200" cols="30" rows="5" ><?php if(isset($unExercice)){echo $unExercice['resume'];}?></textarea></td>
     </tr>
     <tr>
         <td>* image du résumé</td>
-        <td><input type = "file" name="imageResume"/></td>
+        <td><input type = "file" name="imageResume" value=""/><?php  if(isset($unExercice)) 
+		{echo "actuel:"?> <img src="/ressources/imageResume/images/<?php echo $unExercice['imageResume'];?>" height="100" width="300%"><?php } ?> </td>
     </tr>
     <tr>
     	<td><b>* contenu de l'exercice</b>(maximum 3 image)</td>
-    	<td><textarea name="contenu" id="contenu" rows="10" cols="50"></textarea> <script>
+    	<td><textarea name="contenu" id="contenu" rows="10" cols="50"><?php if(isset($unExercice)){echo $unExercice['description'];}?></textarea> <script>
                 var pathckf = '/modules/plugins/ckeditor';
                 var editor = CKEDITOR.replace('contenu',
                 {
@@ -48,8 +56,9 @@
     </tr>
 <tr>
 	<td>vidéo de l'exercice</td>
-	<td><input type = "file" name="videoExercice"/> ou saisissez un lien youtube<input type ="text" name="videoExerciceY" /></td>
+	<td>saisissez un lien youtube<input type ="text" name="videoExerciceY" value="<?php if(isset($unExercice)){echo $unExercice['video'];}?>"/></td>
 </tr>
+
     <tr>
     	<td><input type="submit" name = "enregistrer" value="enregistrer"/></td>
     	<td><input type="reset" name = "Annuler" value="annuler"/></td>
