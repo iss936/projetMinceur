@@ -21,10 +21,11 @@ function getUneNutrition($idNutrition)
 }
 
 //Récupère les fiches nutritions
-function getLesNutritions()
+function getLesNutritions($idCategorie = null)
 {
 	//Requête
 	$req = "SELECT * FROM fichenutrition";
+	if ($idCategorie) $req.=" where idCategorieNutrition=$idCategorie";	
 	
 	//Exécution
 	$conx = connexion();

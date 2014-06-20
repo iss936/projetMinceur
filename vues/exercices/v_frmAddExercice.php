@@ -48,10 +48,8 @@
     </tr>
 <tr>
 	<td>vidéo de l'exercice</td>
-	<td><input type = "file" name="videoExercice"/> ou 
-        saisissez un lien youtube<input type ="text" name="videoExerciceY" /></td>
+	<td><input type = "file" name="videoExercice"/> ou saisissez un lien youtube<input type ="text" name="videoExerciceY" /></td>
 </tr>
-
     <tr>
     	<td><input type="submit" name = "enregistrer" value="enregistrer"/></td>
     	<td><input type="reset" name = "Annuler" value="annuler"/></td>

@@ -21,14 +21,12 @@
 					<?php } ?>
 				</ul>
 			</li>
-			
 			<!-- Nutrition -->
-			<li <?php if($uc == "nutrition") echo "style='background:#32CAED'";?>> <a href=""> Nutrition </a>
+			<li <?php if($uc == "nutrition") echo "style='background:#32CAED'";?>> <a href="index.php?uc=nutrition&action=lstNutrition"> Nutrition </a>
 				<ul class="sousMenu">
-					<li> <a href=""> Les lipides </a></li> 
-					<li> <a href="index.php?uc=nutrition&action=proteines"> Les protéines </a></li>
-					<li> <a href=""> Le sucre </a></li>
-					<li> <a href=""> Les nutriments </a></li>
+					<?php foreach($lesCategories as $uneCategorie) { ?>
+					<li> <a href="index.php?uc=nutrition&action=categorie&idCategorie=<?php echo $uneCategorie['idCategorie'] ?>"><?php echo $uneCategorie['libelleCategorie'] ?></a></li>
+					<?php } ?>
 				</ul>
 			</li>
 			

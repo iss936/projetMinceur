@@ -1,44 +1,44 @@
 <?php
 //------------------------------------------------------------------------------------------------------------------
-// Fonctions spécifiques aux exercices
+// Fonctions spécifiques aux catégories de nutrition
 //------------------------------------------------------------------------------------------------------------------
 
-//Récupère un exercice
-function getUneNutritiona($idNutrition)
+//Récupère une categorie
+function getUneCategorie($idCategorie)
 {
 	//Requête
-	$req = "SELECT * FROM fichenutrition where idFicheNutrition = ".getMySqlString($idNutrition);
+	$req = "SELECT * FROM categorienutrition where idCategorie = ".getMySqlString($idCategorie);
 	
 	//Exécution
 	$conx = connexion();
-	$res = mysql_query($req, $conx) or die ("<u>Erreur SQL (getUneNutrition)</u>: ".mysql_error()." <br>");
+	$res = mysql_query($req, $conx) or die ("<u>Erreur SQL (getUneCategorie)</u>: ".mysql_error()." <br>");
 	mysql_close($conx);
 	
 	//Récupération
-	$uneNutrition = mysql_fetch_assoc($res);
+	$uneCategorie = mysql_fetch_assoc($res);
 	
-	return $uneNutrition;
+	return $uneCategorie;
 }
 
-//Récupère les fiches nutritions
-function getLesCategoriesNutrition()
+//Récupère les catégories
+function getLesCategories()
 {
 	//Requête
-	$req = "SELECT * FROM categorie";
+	$req = "SELECT * FROM categorienutrition";
 	
 	//Exécution
 	$conx = connexion();
-	$res = mysql_query($req, $conx) or die("<u>Erreur SQL (getLesNutritions)</u>: ".mysql_error()." <br>");
+	$res = mysql_query($req, $conx) or die("<u>Erreur SQL (getLesCategories)</u>: ".mysql_error()." <br>");
 	mysql_close($conx);
 	
-	$lesNutritions = array();
+	$lesCategories= array();
 	$ligne = mysql_fetch_assoc($res);
 	while($ligne != false)
 	{
-		$lesNutritions[] = $ligne;
+		$lesCategories[] = $ligne;
 		$ligne = mysql_fetch_assoc($res);
 	}
 	
-	return $lesNutritions;
+	return $lesCategories;
 }
 ?>

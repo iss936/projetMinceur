@@ -11,6 +11,7 @@ $uc = getRequest('uc', "identif");
 $action = getRequest('action');
 
 $lesPartiesCorps = getLesPartiesCorps();
+$lesCategories = getLesCategories();
 
 //Haut de page
 include $_CONFIG['DIR_View']."v_entete.php";
@@ -48,6 +49,7 @@ switch($uc)
 	}
 	case 'nutrition':
 	{
+		$action = getRequest('action', "lstNutrition");
 		include $_CONFIG['DIR_Control']."c_nutrition.php";
 		break;
 	}
