@@ -9,7 +9,7 @@ switch($action)
 		$titre = "Les parties du corps";
 		$lesPartiesCorps = getLesPartiesCorps();
 		include $_CONFIG['DIR_View']."v_headTitre.php";
-		include $_CONFIG['DIR_View']."v_lstExercice.php";
+		include $_CONFIG['DIR_View']."v_lstPartieCorps.php";
 		break;
 	}
 	case 'entrainement':

@@ -59,7 +59,7 @@ switch($uc)
 	}
 	case 'admin':
 	{
-		if(estConnecte()) include $_CONFIG['DIR_Control']."c_admin.php";
+		if(estAdmin()) include $_CONFIG['DIR_Control']."c_admin.php";
 		else
 		{
 			$msgErreurs[] = "Vous n'êtes pas autorisé à accéder à cette page!";

@@ -1,6 +1,6 @@
 <div id="main_container">
 
-    <h1>Votre IMC est de : <?php echo $imc ?></h1>
+    <h1>Votre IMC est de : <?php echo round($imc, 2) ?></h1>
     <p><small>Pour rappel: votre poids est <?php echo $poids ?>kg et votre taille est <?php echo $taille ?>cm.</small></p>
     <br />
     <p>L'indice de masse corporelle (IMC) permet d'évaluer la corpulence d'une personne.</p>

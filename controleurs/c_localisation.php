@@ -32,7 +32,10 @@ switch($action)
 			$typeSalle = getRequest('typeSalle');
 			$lesSalles = getLesSalles($typeSalle);
 			$lesTypesSalles = getLesTypesSalles();
-			if($adresse)
+			$msgErreurs = null;
+			if(!$typeSalle) $msgErreurs[] = "Veuillez cocher au moins un type de salle.";
+			if(!$adresse) $msgErreurs[] = "Veuillez renseigner une adresse.";
+			if(count($msgErreurs) < 1)
 			{
 				$titre = "Resultat";
 				$display = false;
@@ -52,10 +55,11 @@ switch($action)
 			}
 			else
 			{
-				$msgErreurs[] = "Veuillez renseigner une adresse.";
+				$titre = "Localisation";
 				$display = true;
 				$lesSallesOrder = null;
 				include $_CONFIG['DIR_View']."v_msgErreurs.php";
+				include $_CONFIG['DIR_View']."v_headTitre.php";
 				include $_CONFIG['DIR_View']."v_frmLocalisation.php";
 			}
 		}
