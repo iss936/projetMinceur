@@ -44,7 +44,7 @@ function getLesNutritions($idCategorie = null)
 }
 
 //Ajoute une fiche nutrition
-function addNutrition($titreNutrition, $contenuNutrition)
+function addNutrition($titreNutrition, $contenuNutrition, $idCategorieNutrition)
 {
 	//Récupération des variables
 	global $_CONFIG;
@@ -52,15 +52,16 @@ function addNutrition($titreNutrition, $contenuNutrition)
 	
 	$titre = getMySqlString($titreNutrition);
 	$contenu = getMySqlString($contenuNutrition);
+	$idCategorie = getMySqlString($idCategorieNutrition);
 	
 	//Test des errreurs
-	if(!$titreNutrition || !$contenuNutrition) $Erreurs[] = "Veuillez remplir tous les champs obligatoires (*).";
+	if(!$titreNutrition || !$contenuNutrition || !$idCategorieNutrition) $Erreurs[] = "Veuillez remplir tous les champs obligatoires (*).";
 	
 	//Ajout dans la base
 	if(!$Erreurs)
 	{
-		$req = "INSERT INTO fichenutrition (titre, contenu, dateAjout)
-				VALUES ($titre, $contenu, CURRENT_TIMESTAMP)";
+		$req = "INSERT INTO fichenutrition (titre, contenu, dateAjout, idCategorieNutrition)
+				VALUES ($titre, $contenu, CURRENT_TIMESTAMP, $idCategorie)";
 		$conx = connexion();
 		mysql_query($req, $conx) or $Erreurs[] = "<u>Erreur SQL (addNutrition)</u>: ".mysql_error();
 		mysql_close($conx);
@@ -69,29 +70,48 @@ function addNutrition($titreNutrition, $contenuNutrition)
 }
 
 //Modifie une fiche nutrition
-function editNutrition($idNutrition, $titreNutrition, $contenuNutrition)
+function editNutrition($idNutrition, $titreNutrition, $contenuNutrition, $idCategorieNutrition)
 {
 	//Récupération des variables
 	$Erreurs = array();
 	$id = getMySqlString($idNutrition, 0);
 	$titre = getMySqlString($titreNutrition);
 	$contenu = getMySqlString($contenuNutrition);
+	$idCategorie = getMySqlString($idCategorieNutrition);
 	
 	//Test des erreurs
 	if(!$idNutrition || intval($idNutrition) <= 0) $Erreurs[] = "Pas de fiche nutrition à modifier!";
-	if(!$titreNutrition || !$contenuNutrition) $Erreurs[] = "Veuillez remplir tous les champs obligatoires (*).";
+	if(!$titreNutrition || !$contenuNutrition || !$idCategorieNutrition) $Erreurs[] = "Veuillez remplir tous les champs obligatoires (*).";
 	
 	//Mise à jour de la base
 	if(!$Erreurs)
 	{
 		$req = "UPDATE fichenutrition SET
 				titre = $titre,
-				contenu = $contenu
+				contenu = $contenu,
+				idCategorieNutrition = $idCategorie 
 				WHERE idFicheNutrition = $id";
 		$conx = connexion();
 		mysql_query($req, $conx) or $Erreurs[] = "<u>Erreur SQL (editNutrition)</u>: ".mysql_error();
 		mysql_close($conx);
 	}
+
+	return $Erreurs;
+}
+
+//Supprime une fiche de nutrition
+function delNutrition($idNutrition)
+{
+	//Récupération des variables
+	$Erreurs = array();
+	
+	$id = getMySqlString($idNutrition);
+	
+	$req = "DELETE FROM fichenutrition
+				WHERE idFIcheNutrition = $id";
+	$conx = connexion();
+	mysql_query($req, $conx) or $Erreurs[] = "<u>Erreur SQL (delNutrition)</u>: ".mysql_error();
+	mysql_close($conx);
 
 	return $Erreurs;
 }

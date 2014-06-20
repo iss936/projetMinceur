@@ -6,6 +6,7 @@ if(isset($lesNutritions))
 			<tr>
 				<th> <a href='index.php?uc=admin&action=frmAddNutrition'><img src='".$_CONFIG['DIR_Image']."imgAdd.png' title='Ajouter une fiche nutrition'></a> </th>
 				<th>Titre</th>
+				<th>Catégorie</th>
 				<th>Date d'ajout</th>
 				<th></th>
 			</tr>"; 
@@ -15,17 +16,21 @@ if(isset($lesNutritions))
 		//Variables
 		$idNutrition = $uneNutrition['idFicheNutrition'];
 		$titre = $uneNutrition['titre'];
+		$idCategorie = $uneNutrition['idCategorieNutrition'];
+		$uneCategorie = getUneCategorie($idCategorie);
+		$libelle = $uneCategorie['libelleCategorie'];
 		$dateAjout = $uneNutrition['dateAjout'];
 		// - Image et lien
 		$urlFiche = "index.php?uc=admin&action=frmModifNutrition&idNutrition=$idNutrition";
 		$paramTD = "onClick=document.location.href='index.php?uc=admin&action=frmModifNutrition&idNutrition=$idNutrition' title=\"Cliquez ici pour voir la fiche nutrition\"";
 		$imgEdit = "<a href='$urlFiche'><img src='".$_CONFIG['DIR_Image']."imgEdit.png' title=\"Voir la fiche nutrition\"></a>";
-		$imgSuppr = "<a onClick=confirmDelUtilisateur($idNutrition);><img src='".$_CONFIG['DIR_Image']."imgTrash.png' title=\"Supprimer la fiche nutrition\"></a>";
+		$imgSuppr = "<a onClick=confirmDelNutrition($idNutrition);><img src='".$_CONFIG['DIR_Image']."imgTrash.png' title=\"Supprimer la fiche nutrition\"></a>";
 		
 		//Lignes
 		echo "<tr class='ligneTableau'>
 			<td width='16'> $imgEdit </td>
 			<td $paramTD> $titre </td>
+			<td $paramTD> $libelle </td>
 			<td $paramTD> $dateAjout </td>
 			<td width='16'> $imgSuppr </td>
 		</tr>";

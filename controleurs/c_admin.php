@@ -26,6 +26,8 @@ switch($action)
 			$uneNutrition = getUneNutrition($idNutrition);
 			$titreNutrition = $uneNutrition['titre'];
 			$contenu = $uneNutrition['contenu'];
+			$idCategorie = $uneNutrition['idCategorieNutrition'];
+			$lesCategories = getLesCategories();
 			$titre = "Modification d'une fiche de nutrition";
 			$urlFrm = "index.php?uc=admin&action=vdModifNutrition&idNutrition=$idNutrition";
 			include $_CONFIG['DIR_View']."v_headTitre.php";
@@ -45,7 +47,8 @@ switch($action)
 			$idNutrition = getRequest('idNutrition');
 			$titreNutrition = getRequest('titreNutrition');
 			$contenu = getRequest('contenu');
-			$msgErreurs = editNutrition($idNutrition, $titreNutrition, $contenu);
+			$idCategorie = getRequest('idCategorie');
+			$msgErreurs = editNutrition($idNutrition, $titreNutrition, $contenu, $idCategorie);
 			$titre = "Modification d'une fiche de nutrition";
 			$urlFrm = "index.php?uc=admin&action=vdModifNutrition&idNutrition=$idNutrition";
 			
@@ -78,6 +81,7 @@ switch($action)
 		{
 			$titreNutrition = null;
 			$contenu = null;
+			$idCategorie = null;
 			$titre = "Ajout d'une fiche de nutrition";
 			$urlFrm = "index.php?uc=admin&action=vdAddNutrition";
 			include $_CONFIG['DIR_View']."v_headTitre.php";
@@ -96,7 +100,8 @@ switch($action)
 		{
 			$titreNutrition = getRequest('titreNutrition');
 			$contenu = getRequest('contenu');
-			$msgErreurs = addNutrition($titreNutrition, $contenu);
+			$idCategorie = getRequest('idCategorie');
+			$msgErreurs = addNutrition($titreNutrition, $contenu, $idCategorie);
 			$titre = "Ajout d'une fiche de nutrition";
 			$urlFrm = "index.php?uc=admin&action=vdAddNutrition";
 			
@@ -112,6 +117,33 @@ switch($action)
 			else
 			{
 				$msgConfirmation[] = "Fiche nutrition ajoutée avec succès!";
+				include $_CONFIG['DIR_View']."v_msgConfirmation.php";
+				redirection(2, "index.php?uc=admin&action=lstNutrition", "Redirection vers la liste des fiches de nutrition ...", "POINT");
+			}
+		}
+		else
+		{
+			$msgErreurs[] = "Vous n'êtes pas autorisé à accéder à cette page!";
+			include $_CONFIG['DIR_View']."v_msgErreurs.php";
+		}
+		break;
+	}
+	case 'delNutrition':
+	{
+		if(estAdmin())
+		{
+			$idNutrition = getRequest('idNutrition');
+			$msgErreurs = delNutrition($idNutrition);
+			
+			//Message d'erreurs ou de confirmation
+			if($msgErreurs)
+			{
+				include $_CONFIG['DIR_View']."v_msgErreurs.php";
+				include $_CONFIG['DIR_View']."v_lstNutrition.php";
+			}
+			else
+			{
+				$msgConfirmation[] = "Fiche nutrition supprimée avec succès!";
 				include $_CONFIG['DIR_View']."v_msgConfirmation.php";
 				redirection(2, "index.php?uc=admin&action=lstNutrition", "Redirection vers la liste des fiches de nutrition ...", "POINT");
 			}
