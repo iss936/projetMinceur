@@ -7,7 +7,9 @@ switch($action)
 		if(estAdmin())
 		{
 			$titre = "Gestion des fiches de nutrition";
-			$lesNutritions = getLesNutritions();
+			$idCategorie = getRequest('idCategorie', null);
+			$lesNutritions = getLesNutritions($idCategorie);
+			$lesCategories = getLesCategories();
 			include $_CONFIG['DIR_View']."v_headTitre.php";
 			include $_CONFIG['DIR_View']."v_lstNutrition.php";
 		}
@@ -157,21 +159,15 @@ switch($action)
 	}
 	case 'espaceGestionExercice':
 	{
-		if(estConnecte())
+		if(estAdmin())
 		{
-
 			$titre = "Gestion des exercices";
+			$idPartieCorps = getRequest('idPartieCorps', null);
+			$lesExercices = getLesExercices($idPartieCorps);
+			$lesPartiesCorps = getLesPartiesCorps();
 			include $_CONFIG['DIR_View']."v_headTitre.php";
-			/*$bodyParts = getLesPartiesCorps();
 			
-			include $_CONFIG['DIR_View']."exercices/v_filtreExercice.php";*/
-
-		
-    			/*$bodyPart = $_POST['bodyParts'];
-				$idBodyPart = getIdPartieCorps($bodyPart);*/
-				//$lesExercices = getLesExercices($idBodyPart[0]);
-				$lesExercices = getLesExercices();
-				include $_CONFIG['DIR_View']."exercices/v_espaceGestionExercice.php";
+			include $_CONFIG['DIR_View']."exercices/v_espaceGestionExercice.php";
 				
 		}
 		else include $_CONFIG['DIR_View']."i_retourConnexion.php";
@@ -183,7 +179,7 @@ switch($action)
 			$idExercice =$_GET['idExercice'];
 		else
 			$idExercice = "";
-		if(estConnecte())
+		if(estAdmin())
 		{
 			if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     			$msgErreurs= array();

@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <div align="left">
-<a href="index.php?uc=admin&action=espaceGestionExercice"> << gérer les exercices </a>
+<a href="index.php?uc=admin&action=espaceGestionExercice"> << Gestion des exercices </a>
 </div>
 <br />
 <?php  if(isset($unExercice)) 
@@ -30,11 +30,11 @@
     	<td><textarea name="resume" maxlength="200" cols="30" rows="5" ><?php if(isset($unExercice)){echo $unExercice['resume'];}?></textarea></td>
     </tr>
     <tr>
-        <td>* image du résumé</td>
+        <td>* Image du résumé</td>
         <td ><input type = "file" name="imageResume" value=""/> </td>
     </tr>
     <tr>
-    	<td><b>* contenu de l'exercice</b>(maximum 3 image)</td>
+    	<td><b>* Contenu de l'exercice</b>(maximum 3 image)</td>
     	<td><textarea name="contenu" id="contenu" rows="10" cols="50"><?php if(isset($unExercice)){echo $unExercice['description'];}?></textarea> <script>
                 var pathckf = '/modules/plugins/ckeditor';
                 var editor = CKEDITOR.replace('contenu',
@@ -53,13 +53,13 @@
             </script></td>
     </tr>
 <tr>
-	<td>vidéo de l'exercice</td>
-	<td>saisissez un lien youtube<input type ="text" name="videoExerciceY" value="<?php if(isset($unExercice)){echo $unExercice['video'];}?>"/></td>
+	<td>Vidéo de l'exercice</td>
+	<td>Saisissez un lien Youtube<input type ="text" name="videoExerciceY" value="<?php if(isset($unExercice)){echo $unExercice['video'];}?>"/></td>
 </tr>
 
     <tr>
-    	<td><input type="submit" name = "enregistrer" value="enregistrer"/></td>
-    	<td><input type="reset" name = "Annuler" value="annuler"/></td>
+    	<td colspan="2"><input type="submit" name = "enregistrer" value="Enregistrer" class="btnImage" style="background-image: url(<?php echo $_CONFIG['DIR_Image']; ?>btnSave.png);"/> &nbsp;
+						<input type="reset" name = "Annuler" value="Annuler" class="btnImage" style="background-image: url(<?php echo $_CONFIG['DIR_Image']; ?>btnCancel.png);"/></td>
     </tr>
 </table>
 </form>

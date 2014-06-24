@@ -1,1 +1,1 @@
-<p><?php echo $uneNutrition['contenu'] ?></p>
+<div style="text-align: justify"><?php echo $uneNutrition['contenu'] ?></div>

@@ -59,7 +59,6 @@ function updateExercice($idExercice, $contenuExercice,$titre,$resume,$imageResum
 	{
 		$req = "UPDATE ficheexercice SET
 				description = $contenu,
-				dateAjout = $date,
 				titre = $titre,
 				resume = $resume,
 				imageResume = $imageResume,
@@ -71,7 +70,6 @@ function updateExercice($idExercice, $contenuExercice,$titre,$resume,$imageResum
 	{
 		$req = "UPDATE ficheexercice SET
 				description = $contenu,
-				dateAjout = $date,
 				titre = $titre,
 				resume = $resume,
 				imageResume = $imageResume,
