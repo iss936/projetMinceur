@@ -40,17 +40,17 @@ if(isset($lesExercices))
 		$urlFiche = "index.php?uc=admin&action=frmModifExercice&idExercice=$idExercice";
 		$paramTD = "onClick=document.location.href='index.php?uc=admin&action=frmModifExercice&idExercice=$idExercice' title=\"Cliquez ici pour voir la fiche exercice\"";
 		$imgEdit = "<a href='$urlFiche'><img src='".$_CONFIG['DIR_Image']."imgEdit.png' title=\"Voir la fiche exercice\"></a>";
-		$imgSuppr = "<a onClick=confirmDelUtilisateur($idExercice);><img src='".$_CONFIG['DIR_Image']."imgTrash.png' title=\"Supprimer la fiche exercice\"></a>";
-		
+		$imgSuppr = "<a onclick='confirmDelExercice($idExercice)'><img src='".$_CONFIG['DIR_Image']."imgTrash.png' title=\"Supprimer la fiche exercice\"></a>";
+		 
 		//Lignes
 		echo "<tr class='ligneTableau'>
-			<td width='16'> $imgEdit </td>
-			<td $paramTD> $titre </td>
-			<td $paramTD> $resume </td>
-			<td $paramTD> $libelle </td>
-			<td $paramTD> $dateAjout </td>
-			<td width='16'> $imgSuppr </td>
-		</tr>";
+				<td width='16'> $imgEdit </td>
+				<td $paramTD> $titre </td>
+				<td $paramTD> $resume </td>
+				<td $paramTD> $libelle </td>
+				<td $paramTD> $dateAjout </td>
+				<td width='16'> $imgSuppr </td>
+			</tr>";
 	}
 	echo "</table><br>";
 }

@@ -173,6 +173,25 @@ switch($action)
 		else include $_CONFIG['DIR_View']."i_retourConnexion.php";
 		break;
 	}
+	case 'deleteExercice':
+	{
+		$idExercice = $_GET['idExercice'];
+		if(estAdmin())
+		{
+			if(getFicheProgrammeExercice($idExercice) != null)
+				delExerciceProg($idExercice);
+			delExercice($idExercice);
+			
+			$titre = "Gestion des exercices";
+			$lesExercices = getLesExercices();
+			include $_CONFIG['DIR_View']."v_headTitre.php";
+			$msgConfirmation[] = "Article supprimé";
+			include $_CONFIG['DIR_View']."v_msgConfirmation.php";
+			include $_CONFIG['DIR_View']."exercices/v_espaceGestionExercice.php";
+		}
+		else include $_CONFIG['DIR_View']."i_retourConnexion.php";
+		break;
+	}
 	case 'frmModifExercice':
 	{
 		if(isset($_GET['idExercice']))
@@ -228,6 +247,7 @@ switch($action)
 						$bodyParts = getLesPartiesCorps();
 						include $_CONFIG['DIR_View']."v_headTitre.php";
 						$msgConfirmation[] = "Article bien enregistré";
+						include $_CONFIG['DIR_View']."v_msgConfirmation.php";
 						include $_CONFIG['DIR_View']."exercices/v_frmModifExercice.php";
 					}
 					else //modification du formulaire
@@ -238,10 +258,11 @@ switch($action)
 						$bodyParts = getLesPartiesCorps();
 						include $_CONFIG['DIR_View']."v_headTitre.php";
 						$msgConfirmation[] = "Article bien modifié";
+						include $_CONFIG['DIR_View']."v_msgConfirmation.php";
 						include $_CONFIG['DIR_View']."exercices/v_espaceGestionExercice.php";
 					}
 					
-					include $_CONFIG['DIR_View']."v_msgConfirmation.php";
+					
 					
 					
 				}

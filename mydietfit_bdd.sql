@@ -92,6 +92,7 @@ CREATE TABLE IF NOT EXISTS `ficheexercice` (
   `image1` varchar(100) NOT NULL DEFAULT '',
   `image2` varchar(100) NOT NULL DEFAULT '',
   `image3` varchar(100) NOT NULL DEFAULT '',
+  `imageResume` varchar(100) NOT NULL DEFAULT '',
   PRIMARY KEY (`idFicheExercice`),
   KEY `FK_ficheexercice_1` (`idPartieCorps`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=30 ;
