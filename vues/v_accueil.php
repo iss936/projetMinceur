@@ -11,10 +11,19 @@
 </div>
 <div style="float: right; width: 33%">
 	<div style="margin-bottom: 20px">
-		<h1>Derniers articles</h1>
+		<table>
+		<tr BGCOLOR="#32CAED">
+		<td colspan="2"><h1>Derniers articles</h1></td>
+		</tr>
+		
+		
+		<tr>
 		<?php foreach($les5Exercices as $unExercice) { ?>
-			<p><a href="index.php?uc=exercice&action=v_exercice&idExercice=<?php echo $unExercice['idFicheExercice'] ?>"><?php echo $unExercice['titre'] ?></a></p>
+			<td><font color="grey" ><?php echo date("d/m",strtotime($unExercice['dateAjout']))?></td>
+			<td><a href="index.php?uc=exercice&action=v_exercice&idExercice=<?php echo $unExercice['idFicheExercice'] ?>"><?php echo $unExercice['titre'] ?></a></td></tr>
 		<?php } ?>
+		
+		</table>
 	</div>
 	<div style="margin-bottom: 20px">
 		<!--<h1>Réseaux sociaux</h1>-->
