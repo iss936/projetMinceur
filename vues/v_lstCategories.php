@@ -9,11 +9,6 @@ if(isset($lesCategories))
 		$idCategorie = $uneCategorie['idCategorie'];
 		$libelle = $uneCategorie['libelleCategorie'];
 		//Lignes
-		echo "	<a href='index.php?uc=nutrition&action=categorie&idCategorie=$idCategorie'>
-					<fieldset>
-						<legend>$libelle</legend>
-					</fieldset>
-				</a>
-				<br>";
+		echo "<li><a href='index.php?uc=nutrition&action=categorie&idCategorie=$idCategorie'>$libelle</a></li>";
 	}
 }

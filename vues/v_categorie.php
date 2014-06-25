@@ -1,14 +1,14 @@
 <?php
 if($lesNutritions)
 {
+	echo "<ul>";
 	foreach ($lesNutritions as $uneNutrition)
 	{
 		$unTitre = $uneNutrition['titre'];
 		$unId = $uneNutrition['idFicheNutrition'];
-		echo "	<fieldset>
-					<legend><a href='index.php?uc=nutrition&action=v_nutrition&idNutrition=$unId'>$unTitre</a></legend>
-				</fieldset>";
+		echo "	<li><a href='index.php?uc=nutrition&action=v_nutrition&idNutrition=$unId'>$unTitre</a></li>";
 	}
+	echo "</ul>";
 } 
 else
 {
