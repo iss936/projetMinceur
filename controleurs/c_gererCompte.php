@@ -61,7 +61,6 @@ switch($action)
 			$titre = "Modification du compte";
 			$urlFrm = 'index.php?uc=identif&action=vdModifCompte';
 			$idUtilisateur = $_SESSION['idUtilisateur'];
-			$modifEnseignement = false;
 			$user = getUnUtilisateur($idUtilisateur);
 			$prenomUtilisateur = $user['prenom'];
 			$nomUtilisateur = $user['nom'];

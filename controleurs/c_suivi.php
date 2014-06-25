@@ -43,7 +43,7 @@ switch($action)
 			}
 			else
 			{
-				$msgConfirmation[] = "Fiche suivi ajouté avec succès!";
+				$msgConfirmation[] = "Fiche suivi ajoutée avec succès!";
 				include $_CONFIG['DIR_View']."v_msgConfirmation.php";
 				redirection(2, "index.php?uc=identif&action=frmConnexion", "Redirection vers l'accueil ...", "POINT");
 			}
