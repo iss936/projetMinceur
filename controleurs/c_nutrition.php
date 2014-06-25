@@ -1,4 +1,5 @@
 <?php
+include $_CONFIG['DIR_View']."v_filArianeNutrition.php";
 //Aiguillage en fonction de l'action choisie
 switch($action)
 {

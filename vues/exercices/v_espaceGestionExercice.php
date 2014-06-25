@@ -24,6 +24,7 @@ if(isset($lesExercices))
 				<th>Partie du corps</th>
 				<th>Date d'ajout</th>
 				<th></th>
+				<th></th>
 			</tr>"; 
 
 	foreach($lesExercices as $unExercice)
@@ -38,8 +39,9 @@ if(isset($lesExercices))
 		$libelle = $unePartieCorps['libelle'];
 		// - Image et lien
 		$urlFiche = "index.php?uc=admin&action=frmModifExercice&idExercice=$idExercice";
-		$paramTD = "onClick=document.location.href='index.php?uc=admin&action=frmModifExercice&idExercice=$idExercice' title=\"Cliquez ici pour voir la fiche exercice\"";
+		$paramTD = "onClick=document.location.href='index.php?uc=admin&action=frmModifExercice&idExercice=$idExercice' title=\"Cliquez ici pour modifier la fiche exercice\"";
 		$imgEdit = "<a href='$urlFiche'><img src='".$_CONFIG['DIR_Image']."imgEdit.png' title=\"Voir la fiche exercice\"></a>";
+		$imgVoir = "<a href='index.php?uc=exercice&action=v_exercice&idExercice=$idExercice'><img src='$_CONFIG[DIR_Image]btnSearch.png' title=\"Voir la fiche exercice\"></a>";
 		$imgSuppr = "<a onclick='confirmDelExercice($idExercice)'><img src='".$_CONFIG['DIR_Image']."imgTrash.png' title=\"Supprimer la fiche exercice\"></a>";
 		 
 		//Lignes
@@ -49,6 +51,7 @@ if(isset($lesExercices))
 				<td $paramTD> $resume </td>
 				<td $paramTD> $libelle </td>
 				<td $paramTD> $dateAjout </td>
+				<td $paramTD> $imgVoir </td>
 				<td width='16'> $imgSuppr </td>
 			</tr>";
 	}
