@@ -28,7 +28,7 @@ if(!$display) echo "<img src='".$_CONFIG['DIR_Image']."imgDown.png'> <a href='#'
 										<option <?php if($rayon==15) echo "selected" ?>>15</option>
 										<option <?php if($rayon==20) echo "selected" ?>>20</option>
 									</select> km </legend>
-		<input type="text" name="adresse" id="address" value="<?php echo $adresse ?>" size='50'> ou <input type="button" value="Se localiser" onclick="getLocation()">
+		<input type="text" name="adresse" id="address" value="<?php echo $adresse ?>" size='50'><!-- ou <input type="button" value="Se localiser" onclick="getLocation()">-->
 		<br> <br>
 		
 	<?php foreach($lesTypesSalles as $unTypeSalle) { ?>
