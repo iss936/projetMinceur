@@ -24,5 +24,16 @@
 	</div>
 	<div style="margin-bottom: 20px">
 		<h1>Pub</h1>
+		<li id="ad300x250" class="adblock"> 
+		<script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+		<!-- homme -->
+		<ins class="adsbygoogle"
+			style="display:inline-block;width:300px;height:250px"
+			data-ad-client="ca-pub-8869699117199259"
+			data-ad-slot="7561605500"></ins>
+		<script>
+			(adsbygoogle = window.adsbygoogle || []).push({});
+		</script>
+		</li>
 	</div>
 </div>
