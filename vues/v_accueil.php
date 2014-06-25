@@ -18,6 +18,9 @@
 	</div>
 	<div style="margin-bottom: 20px">
 		<h1>Réseaux sociaux</h1>
+		
+		<iframe src="//www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2Fpages%2FMydietfit%2F1448820132054161%3Fref_type%3Dbookmark&amp;width&amp;height=290&amp;colorscheme=light&amp;show_faces=true&amp;header=true&amp;stream=false&amp;show_border=true" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:290px;" allowTransparency="true"></iframe>
+		
 	</div>
 	<div style="margin-bottom: 20px">
 		<h1>Pub</h1>
