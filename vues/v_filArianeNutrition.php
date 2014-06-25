@@ -18,7 +18,9 @@ if($action == "v_nutrition") {
 	$uneNutrition = getUneNutrition($idNutrition);
 	$idCategorie = $uneNutrition['idCategorieNutrition'];
 	$uneCategorie = getUneCategorie($idCategorie);
-	echo $home." > ".$niveau1." > ".
+	$libelle = $uneCategorie['libelleCategorie'];
+	$categorie = "<a href='index.php?uc=nutrition&action=categorie&idCategorie=$idCategorie'> $libelle </a>";
+	echo $home." > ".$niveau1." > ".$categorie;
 }
 
 echo "</div><br>";
